@@ -16,6 +16,7 @@ class App extends Component {
     let newCells = [];
     for(let i=0;i<15;i+=1){
       newCells.push('hello');
+      
     }
     console.log(newCells);
   }
