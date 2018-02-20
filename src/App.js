@@ -10,7 +10,14 @@ class App extends Component {
     //binds
   }
   componentDidMount(){
-    console.log('hello');
+    this.gameStart();
+  }
+  gameStart(){
+    let newCells = [];
+    for(let i=0;i<15;i+=1){
+      newCells.push('hello');
+    }
+    console.log(newCells);
   }
   render() {
     return (
