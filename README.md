@@ -1,3 +1,26 @@
+Fifteen
+
+What I need:
+
+- a 4x4 grid with cells numbered 1-15
+- one blank cell
+- the ability for cells to swap places with the empty cell onClick if they are adjacent
+- ability for game to tell when player has won
+
+[00] [01] [02] [03]
+[04] [05] [06] [07]
+[08] [09] [10] [11]
+[12] [13] [14] [15]
+
+-based upon above grid, it appears that we can index the grid,
+and onClick check to see if emptyCell is in either the index
+of currentCell - 1, + 1, -4, or +4.
+if these conditions are met, swapCell
+- winCondition can be checked by seeing if all cells = index+1 and assign the empty cell the value of 16(hidden)
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
