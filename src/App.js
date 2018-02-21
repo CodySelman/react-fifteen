@@ -25,7 +25,7 @@ class App extends Component {
   }
   render() {
     const {cells} = this.state;
-    const CellGrid = cells.map((cell, index) => <Cell key={index}/>)
+    const CellGrid = cells.map((cell, index) => <Cell key={index} value={cell.value}/>)
     return (
       <div>
         <h1 className='text-center'>React Fifteen</h1>
