@@ -15,20 +15,23 @@ class App extends Component {
   }
   gameStart(){
     let newCells = [];
-    for(let i=0;i<15;i+=1){
-      newCells.push(Cell);
+    for(let i=0;i<16;i+=1){
+      let cell = {value: i};
+      newCells.push(cell);
     }
     this.setState({
       cells: newCells
     });
   }
   render() {
+    const {cells} = this.state;
+    const CellGrid = cells.map((cell, index) => <Cell key={index}/>)
     return (
       <div>
         <h1 className='text-center'>React Fifteen</h1>
         <div className='container'>
           <div className='row'>
-          {this.state.cells}
+            {CellGrid}
           </div>
         </div>
       </div>
