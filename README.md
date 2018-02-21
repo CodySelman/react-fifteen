@@ -2,9 +2,7 @@ Fifteen
 
 2/20 5:30PM
 
-where I left off: 
-just created empty cells array in state and empty componentDidMount function.
-Need to create function to instantiate cell grid and run that function in componentDidMount
+
 
 What I need:
 

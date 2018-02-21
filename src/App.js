@@ -23,9 +23,12 @@ class App extends Component {
       cells: newCells
     });
   }
+  handleClick(index){
+    console.log('clicked');
+  }
   render() {
     const {cells} = this.state;
-    const CellGrid = cells.map((cell, index) => <Cell key={index} value={cell.value}/>)
+    const CellGrid = cells.map((cell, index) => <Cell key={index} value={cell.value} onClick={()=>this.handleClick(index)}/>)
     return (
       <div>
         <h1 className='text-center'>React Fifteen</h1>
