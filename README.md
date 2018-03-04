@@ -6,21 +6,18 @@ Fifteen
 
 What I need:
 
-- a 4x4 grid with cells numbered 1-15
-- one blank cell
-- the ability for cells to swap places with the empty cell onClick if they are adjacent
-- ability for game to tell when player has won
+- method for randomizing grid
+- method for ensuring puzzle is solvable
+- method for checking win condition
+- move counter
+- timer
 
-[00] [01] [02] [03]
-[04] [05] [06] [07]
-[08] [09] [10] [11]
-[12] [13] [14] [15]
+stretch goals:
 
--based upon above grid, it appears that we can index the grid,
-and onClick check to see if emptyCell is in either the index
-of currentCell - 1, + 1, -4, or +4.
-if these conditions are met, swapCell
-- winCondition can be checked by seeing if all cells = index+1 and assign the empty cell the value of 16(hidden)
+- new project that starts with 3x3 grid and gets 1x1 bigger after every solution
+  (3x3 then 4x4 then 5x5 etc up to a reasonable point)
+- 15-puzzle or above idea but with pictures pulled from an api instead of numbers
+- similar puzzle that uses 'gravity'
 
 
 

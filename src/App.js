@@ -8,7 +8,6 @@ class App extends Component {
     this.state = {
       cells: []
     };
-    //binds
   }
   componentDidMount() {
     this.gameStart();
@@ -106,7 +105,6 @@ class App extends Component {
     const { cells } = this.state;
     const CellGrid = cells.map((cell, index) =>
       <Cell key={index}
-        index={cell.index}
         value={cell.value}
         onClick={() => this.handleClick(index)}
       />

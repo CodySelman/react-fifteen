@@ -11,3 +11,7 @@
     color: white;
     border: none;
 }
+
+button:focus {
+    outline: 0;
+}
