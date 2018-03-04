@@ -26,23 +26,60 @@ class App extends Component {
   handleClick(index) {
     //if there is a cell above, below, left, or right of clicked cell, with value 0, swapCell
     const cells = this.state.cells;
-    console.log(cells);
-    if( 
-        (cells[index - 1] && cells[index - 1].value === 0) || 
-        (cells[index - 4] && cells[index - 4].value === 0) ||
-        (cells[index + 1] && cells[index + 1].value === 0) ||
-        (cells[index + 4] && cells[index + 4].value === 0)
-      ){
-      const clickedCell = this.state.cells[index];
-      const first = this.state.cells.slice(0, index);
-      const last = this.state.cells.slice(index + 1);
-      const newCells = [
-        ...first,
-        {clickedCell, value: 0},
-        ...last
-      ];
-      this.setState({'cells': newCells});
+    if(cells[index - 1] && cells[index - 1].value === 0){
+      console.log('handleClick - slideLeft');
+      this.slideLeft(index);
+    } else if (cells[index - 4] && cells[index - 4].value === 0){
+      console.log('handleClick - slideUp');
+      this.slideUp(index);
     }
+    //     (cells[index - 4] && cells[index - 4].value === 0) ||
+    //     (cells[index + 1] && cells[index + 1].value === 0) ||
+    //     (cells[index + 4] && cells[index + 4].value === 0)
+    //   {
+      // const clickedCell = this.state.cells[index];
+      // const first = this.state.cells.slice(0, index);
+      // const last = this.state.cells.slice(index + 1);
+      // const newCells = [
+      //   ...first,
+      //   {clickedCell, value: 0},
+      //   ...last
+      // ];
+      // this.setState({'cells': newCells});
+    // }
+  }
+  slideUp(index){
+    console.log('slideUp' + index);
+    const first = this.state.cells.slice(0, index - 4);
+    const blankCell = this.state.cells[index - 4];
+    const between = this.state.cells.slice(index - 3, index);
+    const clickedCell = this.state.cells[index];
+    const last = this.state.cells.slice(index + 1);
+    const newCells = [
+      ...first,
+      {blankCell, value: this.state.cells[index].value},
+      ...between,
+      {clickedCell, value: 0},
+      ...last
+    ];
+    this.setState({'cells': newCells});
+  }
+  slideDown(){}
+  slideRight(){}
+  slideLeft(index){
+    console.log('slideLeft ' + index);
+
+    const clickedCell = this.state.cells[index];
+    const blankCell = this.state.cells[index -1];
+    const first = this.state.cells.slice(0, index -1);
+    const last = this.state.cells.slice(index + 1);
+    const newCells = [
+      ...first,
+      {blankCell, value: this.state.cells[index].value},
+      {clickedCell, value: 0},
+      ...last
+    ];
+    this.setState({'cells': newCells});
   }
   render() {
     const { cells } = this.state;
