@@ -37,7 +37,7 @@ class App extends Component {
       this.slideRight(index);
     } else if (cells[index + 4] && cells[index + 4].value === 0){
       console.log('handleClick - slideDown');
-      this.slideDown();
+      this.slideDown(index);
     }
   }
   slideUp(index){
@@ -57,7 +57,20 @@ class App extends Component {
     this.setState({'cells': newCells});
   }
   slideDown(index){
-
+    console.log('slideDown' + index);
+    const first = this.state.cells.slice(0, index);
+    const clickedCell = this.state.cells[index];
+    const between = this.state.cells.slice(index + 1, index + 4);
+    const blankCell = this.state.cells[index + 4];
+    const last = this.state.cells.slice(index + 5);
+    const newCells = [
+      ...first,
+      {clickedCell, value: 0},
+      ...between,
+      {blankCell, value: this.state.cells[index].value},
+      ...last
+    ];
+    this.setState({'cells': newCells});
   }
   slideRight(index){
     console.log('slideRight ' + index);
