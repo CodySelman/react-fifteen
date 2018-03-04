@@ -1,0 +1,7 @@
+.Cell--cell {
+    width: 21%;
+    min-width: 50px;
+    height: 21%;
+    min-height: 50px;
+    margin: 1%;
+}

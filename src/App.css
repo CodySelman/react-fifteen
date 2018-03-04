@@ -1,1 +1,12 @@
+.App--CellGrid-container {
+    width: 250px;
+    height: 250px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-self: center;
+    margin: auto;
+}
 
+.App--heading {
+    text-align: center;
+}
