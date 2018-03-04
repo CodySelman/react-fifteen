@@ -32,21 +32,13 @@ class App extends Component {
     } else if (cells[index - 4] && cells[index - 4].value === 0){
       console.log('handleClick - slideUp');
       this.slideUp(index);
+    } else if (cells[index + 1] && cells[index + 1].value === 0){
+      console.log('handleClick - slideRight');
+      this.slideRight(index);
+    } else if (cells[index + 4] && cells[index + 4].value === 0){
+      console.log('handleClick - slideDown');
+      this.slideDown();
     }
-    //     (cells[index - 4] && cells[index - 4].value === 0) ||
-    //     (cells[index + 1] && cells[index + 1].value === 0) ||
-    //     (cells[index + 4] && cells[index + 4].value === 0)
-    //   {
-      // const clickedCell = this.state.cells[index];
-      // const first = this.state.cells.slice(0, index);
-      // const last = this.state.cells.slice(index + 1);
-      // const newCells = [
-      //   ...first,
-      //   {clickedCell, value: 0},
-      //   ...last
-      // ];
-      // this.setState({'cells': newCells});
-    // }
   }
   slideUp(index){
     console.log('slideUp' + index);
@@ -64,8 +56,24 @@ class App extends Component {
     ];
     this.setState({'cells': newCells});
   }
-  slideDown(){}
-  slideRight(){}
+  slideDown(index){
+
+  }
+  slideRight(index){
+    console.log('slideRight ' + index);
+
+    const first = this.state.cells.slice(0, index);
+    const clickedCell = this.state.cells[index];
+    const blankCell = this.state.cells[index + 1];
+    const last = this.state.cells.slice(index + 2);
+    const newCells = [
+      ...first,
+      {clickedCell, value: 0},
+      {blankCell, value: this.state.cells[index].value},
+      ...last
+    ];
+    this.setState({'cells': newCells});
+  }
   slideLeft(index){
     console.log('slideLeft ' + index);
 
