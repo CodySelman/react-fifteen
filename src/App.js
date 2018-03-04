@@ -16,7 +16,7 @@ class App extends Component {
   gameStart() {
     let newCells = [];
     for (let i = 0; i < 16; i += 1) {
-      let cell = { value: i };
+      let cell = { value: i, index: i };
       newCells.push(cell);
     }
     this.setState({
@@ -24,13 +24,23 @@ class App extends Component {
     });
   }
   handleClick(index) {
-    console.log(index);
+    //if there is a cell in index-1, +1, -4 or +4, with value 0, swapCell
+    const cells = this.state.cells;
+    console.log(cells);
+    if( 
+        (cells[index - 1] && cells[index - 1].value === 0) || 
+        (cells[index - 4] && cells[index - 4].value === 0) ||
+        (cells[index + 1] && cells[index + 1].value === 0) ||
+        (cells[index + 4] && cells[index + 4].value === 0)
+      ){
+      console.log('swap cell');
+    }
   }
   render() {
     const { cells } = this.state;
     const CellGrid = cells.map((cell, index) =>
       <Cell key={index}
-        index={index}
+        index={cell.index}
         value={cell.value}
         onClick={() => this.handleClick(index)}
       />
