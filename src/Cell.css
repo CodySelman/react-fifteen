@@ -5,3 +5,9 @@
     min-height: 50px;
     margin: 1%;
 }
+
+.Cell--cell-blank {
+    background-color: white;
+    color: white;
+    border: none;
+}

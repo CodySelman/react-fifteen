@@ -30,6 +30,7 @@ class App extends Component {
     const { cells } = this.state;
     const CellGrid = cells.map((cell, index) =>
       <Cell key={index}
+        index={index}
         value={cell.value}
         onClick={() => this.handleClick(index)}
       />
@@ -37,10 +38,8 @@ class App extends Component {
     return (
       <div>
         <h1 className='App--heading'>React Fifteen</h1>
-        <div>
-          <div className='App--CellGrid-container'>
-            {CellGrid}
-          </div>
+        <div className='App--CellGrid-container'>
+          {CellGrid}
         </div>
       </div>
     );

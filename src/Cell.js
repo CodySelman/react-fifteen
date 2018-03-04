@@ -3,7 +3,9 @@ import './Cell.css';
 
 const Cell = props => {
     return(
-            <button className="Cell--cell" onClick={props.onClick}>{props.value}</button>
+        <button className={props.index === 0 ? 'Cell--cell-blank Cell--cell' : "Cell--cell"} 
+            onClick={props.onClick}>{props.value}
+        </button>
     );
 };
 
