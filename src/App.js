@@ -24,7 +24,7 @@ class App extends Component {
     });
   }
   handleClick(index) {
-    //if there is a cell in index-1, +1, -4 or +4, with value 0, swapCell
+    //if there is a cell above, below, left, or right of clicked cell, with value 0, swapCell
     const cells = this.state.cells;
     console.log(cells);
     if( 
@@ -33,7 +33,15 @@ class App extends Component {
         (cells[index + 1] && cells[index + 1].value === 0) ||
         (cells[index + 4] && cells[index + 4].value === 0)
       ){
-      console.log('swap cell');
+      const clickedCell = this.state.cells[index];
+      const first = this.state.cells.slice(0, index);
+      const last = this.state.cells.slice(index + 1);
+      const newCells = [
+        ...first,
+        {clickedCell, value: 0},
+        ...last
+      ];
+      this.setState({'cells': newCells});
     }
   }
   render() {
