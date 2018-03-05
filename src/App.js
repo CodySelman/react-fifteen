@@ -114,7 +114,7 @@ class App extends Component {
     )
     return (
       <div>
-        <h1 className='App--heading'>React Fifteen</h1>
+        <h1 className='App--heading'>Fifteen</h1>
         <div className='App--CellGrid-container'>
           {CellGrid}
         </div>
