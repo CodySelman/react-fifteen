@@ -14,8 +14,8 @@ class App extends Component {
   }
   gameStart() {
     let newCells = [];
-    for (let i = 0; i < 16; i += 1) {
-      let cell = { value: i, index: i };
+    for (let i = 1; i < 17; i += 1) {
+      let cell = { value: i };
       newCells.push(cell);
     }
     this.setState({

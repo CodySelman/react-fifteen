@@ -4,7 +4,7 @@ import './Cell.css';
 const Cell = props => {
     return(
         <button className=
-                {props.value === 0 ? 
+                {props.value === 16 ? 
                 "Cell--cell Cell--cell-blank" : 
                 'Cell--cell'}
                 onClick={props.onClick}>
