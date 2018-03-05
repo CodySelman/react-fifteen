@@ -8,7 +8,7 @@ const Cell = props => {
                 "Cell--cell Cell--cell-blank" : 
                 'Cell--cell'}
                 onClick={props.onClick}>
-            {props.value}
+            {props.value === 16 ? '' : props.value}
         </button>
     );
 };

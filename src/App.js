@@ -25,16 +25,16 @@ class App extends Component {
   handleClick(index) {
     //if there is a cell above, below, left, or right of clicked cell, with value 0, swapCell
     const cells = this.state.cells;
-    if(cells[index - 1] && cells[index - 1].value === 0){
+    if(cells[index - 1] && cells[index - 1].value === 16){
       console.log('handleClick - slideLeft');
       this.slideLeft(index);
-    } else if (cells[index - 4] && cells[index - 4].value === 0){
+    } else if (cells[index - 4] && cells[index - 4].value === 16){
       console.log('handleClick - slideUp');
       this.slideUp(index);
-    } else if (cells[index + 1] && cells[index + 1].value === 0){
+    } else if (cells[index + 1] && cells[index + 1].value === 16){
       console.log('handleClick - slideRight');
       this.slideRight(index);
-    } else if (cells[index + 4] && cells[index + 4].value === 0){
+    } else if (cells[index + 4] && cells[index + 4].value === 16){
       console.log('handleClick - slideDown');
       this.slideDown(index);
     }
@@ -50,7 +50,7 @@ class App extends Component {
       ...first,
       {blankCell, value: this.state.cells[index].value},
       ...between,
-      {clickedCell, value: 0},
+      {clickedCell, value: 16},
       ...last
     ];
     this.setState({'cells': newCells});
@@ -64,7 +64,7 @@ class App extends Component {
     const last = this.state.cells.slice(index + 5);
     const newCells = [
       ...first,
-      {clickedCell, value: 0},
+      {clickedCell, value: 16},
       ...between,
       {blankCell, value: this.state.cells[index].value},
       ...last
@@ -80,7 +80,7 @@ class App extends Component {
     const last = this.state.cells.slice(index + 2);
     const newCells = [
       ...first,
-      {clickedCell, value: 0},
+      {clickedCell, value: 16},
       {blankCell, value: this.state.cells[index].value},
       ...last
     ];
@@ -96,10 +96,13 @@ class App extends Component {
     const newCells = [
       ...first,
       {blankCell, value: this.state.cells[index].value},
-      {clickedCell, value: 0},
+      {clickedCell, value: 16},
       ...last
     ];
     this.setState({'cells': newCells});
+  }
+  randomizeGrid(){
+
   }
   render() {
     const { cells } = this.state;
