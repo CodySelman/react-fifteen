@@ -6,9 +6,11 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      cells: []
+      cells: [],
+      winText: ''
     };
     this.randomizeGrid = this.randomizeGrid.bind(this);
+    this.winCheck = this.winCheck.bind(this);
   }
   componentDidMount() {
     this.gameStart();
@@ -97,7 +99,7 @@ class App extends Component {
     let randomCellArray = this.state.cells;
     let emptyCellIndex = randomCellArray.findIndex(item => item.value === 16);
     for( let i = 0; i < 250; i += 1){
-      let randomSlide = Math.floor(Math.random() * 4);
+      const randomSlide = Math.floor(Math.random() * 4);
       if (randomSlide === 0 && (emptyCellIndex % 4 !== 3) && randomCellArray[emptyCellIndex + 1]){
         const temp = randomCellArray[emptyCellIndex];
         randomCellArray[emptyCellIndex] = randomCellArray[emptyCellIndex + 1]
@@ -121,8 +123,17 @@ class App extends Component {
       }
     } 
     this.setState({
-      cells: randomCellArray
-    })
+      cells: randomCellArray,
+      winText: ''
+    });
+  }
+  winCheck(){
+    const winCheckArray = this.state.cells.map(cell => cell.value - 1);
+    if (winCheckArray.every((index, element) => index === element)){
+      this.setState({
+        winText: 'You Win!'
+      });
+    }
   }
   render() {
     const { cells } = this.state;
@@ -138,7 +149,9 @@ class App extends Component {
         <div className='App--CellGrid-container'>
           {CellGrid}
           <button onClick={this.randomizeGrid}>Randomize</button>
+          <button onClick={this.winCheck}>Win check</button>
         </div>
+        {this.state.winText}
       </div>
     );
   }
