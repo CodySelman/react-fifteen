@@ -136,6 +136,9 @@ class App extends Component {
       });
     }
   }
+  changeGridSize(e){
+    console.log(e)
+  }
   render() {
     const { cells } = this.state;
     const CellGrid = cells.map((cell, index) =>
@@ -148,14 +151,17 @@ class App extends Component {
       <div>
         <h1 className='App--heading'>Fifteen</h1>
         <div className='App--CellGrid-container'>
+
           {CellGrid}
+
           <div className='App--margin-top-3'>
             <button onClick={this.randomizeGrid}>Randomize</button>
             <button onClick={this.winCheck}>Win check</button>
           </div>
+
           <div className='App--margin-top-3'>
             <label>Grid Size</label>
-            <input type="number" min='2'/>
+            <input onChange={(e) => this.changeGridSize(e.target.value)} value={this.state.gridSize} type="number" min='2'/>
           </div>
           
         </div>
