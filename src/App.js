@@ -17,14 +17,14 @@ class App extends Component {
     this.gameStart();
   }
   gameStart() {
-    let newCells = [];
-    for (let i = 1; i < 17; i += 1) {
+    const newCells = [];
+    const gridSize = Math.pow(this.state.gridSize, 2);
+    for (let i = 1; i < gridSize + 1; i += 1) {
       let cell = { value: i };
       newCells.push(cell);
     }
     this.setState({
-      cells: newCells,
-      random: 0
+      cells: newCells
     });
   }
   handleClick(index) {
@@ -151,7 +151,7 @@ class App extends Component {
   changeGridSize(e) {
     this.setState({
       gridSize: e.target.value
-    })
+    }, function() {this.gameStart()})
   }
   render() {
     const { cells } = this.state;
