@@ -6,6 +6,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+      gridSize: 2,
       cells: [],
       winText: ''
     };
@@ -148,8 +149,15 @@ class App extends Component {
         <h1 className='App--heading'>Fifteen</h1>
         <div className='App--CellGrid-container'>
           {CellGrid}
-          <button onClick={this.randomizeGrid}>Randomize</button>
-          <button onClick={this.winCheck}>Win check</button>
+          <div className='App--margin-top-3'>
+            <button onClick={this.randomizeGrid}>Randomize</button>
+            <button onClick={this.winCheck}>Win check</button>
+          </div>
+          <div className='App--margin-top-3'>
+            <label>Grid Size</label>
+            <input type="number" min='2'/>
+          </div>
+          
         </div>
         {this.state.winText}
       </div>

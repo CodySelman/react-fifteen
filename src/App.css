@@ -10,3 +10,7 @@
 .App--heading {
     text-align: center;
 }
+
+.App--margin-top-3 {
+    margin-top: 3rem;
+}
