@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
+import CellGrid from './CellGrid.js';
 import Cell from "./Cell.js";
 
 class App extends Component {
@@ -156,7 +157,7 @@ class App extends Component {
   }
   render() {
     const { cells } = this.state;
-    const CellGrid = cells.map((cell, index) => (
+    const CellGrid1 = cells.map((cell, index) => (
       <Cell
         key={index}
         value={cell.value}
@@ -168,7 +169,8 @@ class App extends Component {
       <div>
         <h1 className="App--heading">Fifteen</h1>
         <div className="App--CellGrid-container">
-          {CellGrid}
+          {CellGrid1}
+          
 
           <div className="App--margin-top-3">
             <button onClick={this.randomizeGrid}>Randomize</button>
@@ -185,6 +187,11 @@ class App extends Component {
             />
           </div>
         </div>
+        <CellGrid 
+          cells={this.state.cells}
+          handleClick={this.state.handleClick}
+          gridSize={this.state.gridSize}  
+        />
         {this.state.winText}
       </div>
     );
