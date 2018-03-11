@@ -7,14 +7,15 @@ const Cell = props => {
         width: size,
         height: size
     }
+    const blankCell = Math.pow(props.gridSize, 2);
     return(
         <button className=
-                {props.value === 16 ? 
+                {props.value === blankCell ? 
                 "Cell--cell Cell--cell-blank" : 
                 'Cell--cell'}
                 onClick={props.onClick}
                 style={style}>
-            {props.value === 16 ? '' : props.value}
+            {props.value === blankCell ? '' : props.value}
         </button>
     );
 };
