@@ -160,6 +160,7 @@ class App extends Component {
         key={index}
         value={cell.value}
         onClick={() => this.handleClick(index)}
+        gridSize={this.state.gridSize}
       />
     ));
     return (
