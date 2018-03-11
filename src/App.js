@@ -30,17 +30,18 @@ class App extends Component {
   handleClick(index) {
     //if there is a cell above, below, left, or right of clicked cell, with value 0, swapCell
     const cells = this.state.cells;
-    if (cells[index - 1] && index % 4 !== 0 && cells[index - 1].value === 16) {
+    const blankCellValue = Math.pow(this.state.gridSize, 2);
+    if (cells[index - 1] && index % 4 !== 0 && cells[index - 1].value === blankCellValue) {
       this.slideLeft(index);
-    } else if (cells[index - 4] && cells[index - 4].value === 16) {
+    } else if (cells[index - 4] && cells[index - 4].value === blankCellValue) {
       this.slideUp(index);
     } else if (
       cells[index + 1] &&
       index % 4 !== 3 &&
-      cells[index + 1].value === 16
+      cells[index + 1].value === blankCellValue
     ) {
       this.slideRight(index);
-    } else if (cells[index + 4] && cells[index + 4].value === 16) {
+    } else if (cells[index + 4] && cells[index + 4].value === blankCellValue) {
       this.slideDown(index);
     }
   }
