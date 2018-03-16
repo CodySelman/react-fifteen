@@ -104,7 +104,9 @@ class App extends Component {
   }
   randomizeGrid() {
     let randomCellArray = this.state.cells;
-    let emptyCellIndex = randomCellArray.findIndex(item => item.value === 16);
+    let emptyCellIndex = randomCellArray.findIndex(
+      item => item.value === Math.pow(this.state.gridSize, 2)
+    );
     for (let i = 0; i < 250; i += 1) {
       const randomSlide = Math.floor(Math.random() * 4);
       if (
