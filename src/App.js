@@ -189,7 +189,7 @@ class App extends Component {
         </div>
         <CellGrid 
           cells={this.state.cells}
-          handleClick={this.state.handleClick}
+          handleClick={this.handleClick}
           gridSize={this.state.gridSize}  
         />
         {this.state.winText}
