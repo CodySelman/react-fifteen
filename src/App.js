@@ -152,7 +152,7 @@ class App extends Component {
   }
   changeGridSize(e) {
     this.setState({
-      gridSize: e.target.value
+      gridSize: +e.target.value
     }, function() {this.gameStart()})
   }
   render() {
