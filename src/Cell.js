@@ -1,4 +1,5 @@
 import React from 'react';
+import Proptypes from 'prop-types';
 import './Cell.css';
 
 const Cell = props => {
@@ -19,5 +20,11 @@ const Cell = props => {
         </button>
     );
 };
+
+Cell.Proptypes = {
+    value: Proptypes.number.isRequired,
+    onClick: Proptypes.func.isRequired,
+    gridSize: Proptypes.number.isRequired
+}
 
 export default Cell;
