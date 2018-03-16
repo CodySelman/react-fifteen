@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
 import CellGrid from './CellGrid.js';
-import Cell from "./Cell.js";
 
 class App extends Component {
   constructor() {
@@ -13,6 +12,7 @@ class App extends Component {
     };
     this.randomizeGrid = this.randomizeGrid.bind(this);
     this.winCheck = this.winCheck.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
   componentDidMount() {
     this.gameStart();
@@ -156,22 +156,15 @@ class App extends Component {
     }, function() {this.gameStart()})
   }
   render() {
-    const { cells } = this.state;
-    const CellGrid1 = cells.map((cell, index) => (
-      <Cell
-        key={index}
-        value={cell.value}
-        onClick={() => this.handleClick(index)}
-        gridSize={this.state.gridSize}
-      />
-    ));
     return (
       <div>
         <h1 className="App--heading">Fifteen</h1>
         <div className="App--CellGrid-container">
-          {CellGrid1}
-          
-
+          <CellGrid 
+            cells={this.state.cells}
+            handleClick={this.handleClick}
+            gridSize={this.state.gridSize}  
+          />
           <div className="App--margin-top-3">
             <button onClick={this.randomizeGrid}>Randomize</button>
             <button onClick={this.winCheck}>Win check</button>
@@ -187,11 +180,7 @@ class App extends Component {
             />
           </div>
         </div>
-        <CellGrid 
-          cells={this.state.cells}
-          handleClick={this.handleClick}
-          gridSize={this.state.gridSize}  
-        />
+        
         {this.state.winText}
       </div>
     );

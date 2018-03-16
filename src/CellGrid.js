@@ -1,11 +1,21 @@
 import React from 'react';
 import Proptypes from 'prop-types';
+import Cell from './Cell.js';
 import './CellGrid.css';
 
 const CellGrid = props => {
-    console.log(props)
+    const cellGrid = props.cells.map((cell, index) => (
+       <Cell 
+        key={index}
+        value={cell.value}
+        onClick={() => props.handleClick(index)}
+        gridSize={props.gridSize}
+       />
+    ));
     return (
-        <h1>hello</h1>
+        <div>
+            {cellGrid}
+        </div>
     );
 };
 
