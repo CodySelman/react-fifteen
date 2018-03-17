@@ -2,7 +2,7 @@ const express = require('express');
 const axios = require('axios');
 
 require('dotenv').config();
-const{API_KEY}=process.env;
+const{PIXABAY_API_KEY}=process.env;
 console.log(API_KEY);
 
 const serverApp = express();
@@ -12,9 +12,7 @@ serverApp.get('picture/', function(request, response){
     const url = 'url here';
     axios.get(url)
         .then(res => {
-            response.json({
-                response.json(res.data);
-            })
+            response.json(res.data)
         })
         .catch(err => {
             response.json({
