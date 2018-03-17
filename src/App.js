@@ -32,6 +32,7 @@ class App extends Component {
     //if there is a cell above, below, left, or right of clicked cell, with value 0, swapCell
     const cells = this.state.cells;
     const blankCellValue = Math.pow(this.state.gridSize, 2);
+    const gridSize = this.state.gridSize;
     if (cells[index - 1] && index % 4 !== 0 && cells[index - 1].value === blankCellValue) {
       this.slideLeft(index);
     } else if (cells[index - 4] && cells[index - 4].value === blankCellValue) {
@@ -42,7 +43,7 @@ class App extends Component {
       cells[index + 1].value === blankCellValue
     ) {
       this.slideRight(index);
-    } else if (cells[index + 4] && cells[index + 4].value === blankCellValue) {
+    } else if (cells[index + gridSize] && cells[index + gridSize].value === blankCellValue) {
       this.slideDown(index);
     }
   }
@@ -62,14 +63,16 @@ class App extends Component {
     this.setState({ cells: newCells });
   }
   slideDown(index) {
+    const gridSize = this.state.gridSize;
+    const blankCellValue = Math.pow(this.state.gridSize, 2);
     const first = this.state.cells.slice(0, index);
     const clickedCell = this.state.cells[index];
-    const between = this.state.cells.slice(index + 1, index + 4);
-    const blankCell = this.state.cells[index + 4];
-    const last = this.state.cells.slice(index + 5);
+    const between = this.state.cells.slice(index + 1, index + gridSize);
+    const blankCell = this.state.cells[index + gridSize];
+    const last = this.state.cells.slice(index + gridSize + 1);
     const newCells = [
       ...first,
-      { clickedCell, value: 16 },
+      { clickedCell, value: blankCellValue },
       ...between,
       { blankCell, value: this.state.cells[index].value },
       ...last
