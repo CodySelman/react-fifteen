@@ -33,13 +33,13 @@ class App extends Component {
     const cells = this.state.cells;
     const blankCellValue = Math.pow(this.state.gridSize, 2);
     const gridSize = this.state.gridSize;
-    if (cells[index - 1] && index % 4 !== 0 && cells[index - 1].value === blankCellValue) {
+    if (cells[index - 1] && index % gridSize !== 0 && cells[index - 1].value === blankCellValue) {
       this.slideLeft(index);
     } else if (cells[index - gridSize] && cells[index - gridSize].value === blankCellValue) {
       this.slideUp(index);
     } else if (
       cells[index + 1] &&
-      index % 4 !== 3 &&
+      index % gridSize !== gridSize - 1 &&
       cells[index + 1].value === blankCellValue
     ) {
       this.slideRight(index);
@@ -82,19 +82,21 @@ class App extends Component {
     this.setState({ cells: newCells });
   }
   slideRight(index) {
+    const blankCellValue = Math.pow(this.state.gridSize, 2);
     const first = this.state.cells.slice(0, index);
     const clickedCell = this.state.cells[index];
     const blankCell = this.state.cells[index + 1];
     const last = this.state.cells.slice(index + 2);
     const newCells = [
       ...first,
-      { clickedCell, value: 16 },
+      { clickedCell, value: blankCellValue },
       { blankCell, value: this.state.cells[index].value },
       ...last
     ];
     this.setState({ cells: newCells });
   }
   slideLeft(index) {
+    const blankCellValue = Math.pow(this.state.gridSize, 2);
     const clickedCell = this.state.cells[index];
     const blankCell = this.state.cells[index - 1];
     const first = this.state.cells.slice(0, index - 1);
@@ -102,7 +104,7 @@ class App extends Component {
     const newCells = [
       ...first,
       { blankCell, value: this.state.cells[index].value },
-      { clickedCell, value: 16 },
+      { clickedCell, value: blankCellValue },
       ...last
     ];
     this.setState({ cells: newCells });
