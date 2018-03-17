@@ -1,21 +1,21 @@
 Fifteen
 
+3/17
+Updated goals:
+
+Express server that can pull json files from pixabay api is functioning. Before delving into extracting actual images from the api, I think it would be wise to create methods for cutting up images and placing them on the puzzle pieces. After that problem is solved, I will need to tackle my method of photo extraction, be it random or whatever else. It is likely also that the photos will need to be reformatted to fit the square grid. It is also conceivable that I may want to rewrite my methods to have the puzzle rectangular rather than square, and portrait/landscape depending upon the users device.
+
+
 2/20 5:30PM
 
 
 
 What I need:
 
-- method for randomizing grid
-- method for ensuring puzzle is solvable
-- method for checking win condition
-- move counter
 - timer
 
 stretch goals:
 
-- new project that starts with 3x3 grid and gets 1x1 bigger after every solution
-  (3x3 then 4x4 then 5x5 etc up to a reasonable point)
 - 15-puzzle or above idea but with pictures pulled from an api instead of numbers
 - similar puzzle that uses 'gravity'
 
