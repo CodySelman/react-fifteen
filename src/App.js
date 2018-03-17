@@ -161,28 +161,30 @@ class App extends Component {
     return (
       <div>
         <h1 className="App--heading">Fifteen</h1>
-        <div className="App--CellGrid-container">
+
+        <div>
           <CellGrid 
             cells={this.state.cells}
             handleClick={this.handleClick}
             gridSize={this.state.gridSize}  
           />
-          <div className="App--margin-top-3">
-            <button onClick={this.randomizeGrid}>Randomize</button>
-            <button onClick={this.winCheck}>Win check</button>
-          </div>
-
-          <div className="App--margin-top-3">
-            <label>Grid Size</label>
-            <input
-              onChange={e => this.changeGridSize(e)}
-              value={this.state.gridSize}
-              type="number"
-              min="2"
-            />
-          </div>
         </div>
-        
+
+        <div className="App--margin-top-3">
+          <button onClick={this.randomizeGrid}>Randomize</button>
+          <button onClick={this.winCheck}>Win check</button>
+        </div>
+
+        <div className="App--margin-top-3">
+          <label>Grid Size</label>
+          <input
+            onChange={e => this.changeGridSize(e)}
+            value={this.state.gridSize}
+            type="number"
+            min="2"
+          />
+        </div>
+
         {this.state.winText}
       </div>
     );

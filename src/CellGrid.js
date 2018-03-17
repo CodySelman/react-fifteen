@@ -13,7 +13,7 @@ const CellGrid = props => {
        />
     ));
     return (
-        <div>
+        <div className='CellGrid--container'>
             {cellGrid}
         </div>
     );

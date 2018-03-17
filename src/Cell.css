@@ -1,7 +1,5 @@
 .Cell--cell {
-    min-width: 50px;
-    min-height: 50px;
-    margin: 1%;
+    box-sizing: border-box;
 }
 
 .Cell--cell-blank {
