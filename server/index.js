@@ -3,7 +3,6 @@ const axios = require('axios');
 
 require('dotenv').config();
 const{PIXABAY_API_KEY}=process.env;
-console.log(API_KEY);
 
 const serverApp = express();
 const port = process.env.PORT || 5000;
