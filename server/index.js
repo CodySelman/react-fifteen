@@ -7,8 +7,8 @@ const{PIXABAY_API_KEY}=process.env;
 const serverApp = express();
 const port = process.env.PORT || 5000;
 
-serverApp.get('picture/', function(request, response){
-    const url = 'url here';
+serverApp.get('/picture', function(request, response){
+    const url = `https://pixabay.com/api/?key=${PIXABAY_API_KEY}&q=yellow+flowers&image_ty`;
     axios.get(url)
         .then(res => {
             response.json(res.data)

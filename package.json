@@ -21,6 +21,7 @@
     "serve": "concurrently 'nodemon server/index.js' 'cd client && npm start'",
     "dev": "nodemon server/index.js"
   },
+  "proxy": "http://localhost:5000",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CodySelman/react-fifteen.git"
