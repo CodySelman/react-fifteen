@@ -39,7 +39,7 @@ class App extends Component {
     const gridSize = this.state.gridSize;
     if (cells[index - 1] && index % sizeCol !== 0 && cells[index - 1].value === blankCellValue) {
       this.slideLeft(index);
-    } else if (cells[index - gridSize] && cells[index - gridSize].value === blankCellValue) {
+    } else if (cells[index - sizeCol] && cells[index - sizeCol].value === blankCellValue) {
       this.slideUp(index);
     } else if (
       cells[index + 1] &&
@@ -52,11 +52,11 @@ class App extends Component {
     }
   }
   slideUp(index) {
-    const gridSize = this.state.gridSize;
-    const blankCellValue = this.state.sizeRow * this.state.sizeCol;
-    const first = this.state.cells.slice(0, index - gridSize);
-    const blankCell = this.state.cells[index - gridSize];
-    const between = this.state.cells.slice(index - gridSize + 1, index);
+    const sizeCol = this.state.sizeCol;
+    const blankCellValue = this.state.sizeRow * sizeCol;
+    const first = this.state.cells.slice(0, index - sizeCol);
+    const blankCell = this.state.cells[index - sizeCol];
+    const between = this.state.cells.slice(index - sizeCol + 1, index);
     const clickedCell = this.state.cells[index];
     const last = this.state.cells.slice(index + 1);
     const newCells = [
