@@ -7,6 +7,8 @@ class App extends Component {
     super();
     this.state = {
       gridSize: 3,
+      sizeRow: 3,
+      sizeCol: 3,
       cells: [],
       winText: ""
     };
@@ -191,6 +193,12 @@ class App extends Component {
             type="number"
             min="2"
           />
+          <br />
+          <label>Number of rows</label>
+          <input type="number" value={this.state.sizeRow} min='2' />
+          <br />
+          <label>Number of Columns</label>
+          <input type='number' value={this.state.sizeCol} min='2' />
         </div>
 
         {this.state.winText}
