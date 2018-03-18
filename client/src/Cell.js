@@ -3,18 +3,21 @@ import Proptypes from "prop-types";
 import "./Cell.css";
 
 const Cell = props => {
-  const gridSize = props.gridSize;
-  const size = 100 / gridSize;
-  const blankCellValue = Math.pow(gridSize, 2);
-  const columnNum = (props.value - 1) % gridSize;
-  const rowNum = Math.floor((props.value - 1) / gridSize);
+  const sizeRow = props.sizeRow;
+  const sizeCol = props.sizeCol;
+  const width = 100 / sizeCol;
+    const height = 100 / sizeRow;
+  const blankCellValue = sizeRow * sizeCol;
+
+  const columnNum = (props.value - 1) % sizeCol;
+  const rowNum = Math.floor((props.value - 1) / sizeCol);
   //hard coding some values temporarily like image size 500
-  const left = columnNum * -500 / gridSize;
-  const top = rowNum * -500 / gridSize;
+  const left = columnNum * -500 / sizeCol;
+  const top = rowNum * -500 / sizeRow;
 
   const style = {
-    width: size + "%",
-    height: size + "%",
+    width: width + "%",
+    height: height + "%",
     background:
       props.value === blankCellValue
         ? ""
@@ -38,7 +41,8 @@ const Cell = props => {
 Cell.Proptypes = {
   value: Proptypes.number.isRequired,
   onClick: Proptypes.func.isRequired,
-  gridSize: Proptypes.number.isRequired
+  sizeRow: Proptypes.number.isRequired,
+  sizeCol: Proptypes.number.isRequired
 };
 
 export default Cell;

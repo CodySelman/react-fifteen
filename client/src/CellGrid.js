@@ -9,7 +9,8 @@ const CellGrid = props => {
         key={index}
         value={cell.value}
         onClick={() => props.handleClick(index)}
-        gridSize={props.gridSize}
+        sizeRow={props.sizeRow}
+        sizeCol={props.sizeCol}
        />
     ));
     return (
@@ -22,7 +23,8 @@ const CellGrid = props => {
 CellGrid.propTypes = {
     cells: Proptypes.array.isRequired,
     handleClick: Proptypes.func.isRequired,
-    gridSize: Proptypes.number.isRequired
+    sizeRow: Proptypes.number.isRequired,
+    sizeCol: Proptypes.number.isRequired
 }
 
 export default CellGrid;
