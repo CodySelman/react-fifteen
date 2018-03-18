@@ -47,7 +47,7 @@ class App extends Component {
       cells[index + 1].value === blankCellValue
     ) {
       this.slideRight(index);
-    } else if (cells[index + gridSize] && cells[index + gridSize].value === blankCellValue) {
+    } else if (cells[index + sizeCol] && cells[index + sizeCol].value === blankCellValue) {
       this.slideDown(index);
     }
   }
@@ -69,13 +69,13 @@ class App extends Component {
     this.setState({ cells: newCells });
   }
   slideDown(index) {
-    const gridSize = this.state.gridSize;
-    const blankCellValue = this.state.sizeRow * this.state.sizeCol;
+    const sizeCol = this.state.sizeCol;
+    const blankCellValue = this.state.sizeRow * sizeCol;
     const first = this.state.cells.slice(0, index);
     const clickedCell = this.state.cells[index];
-    const between = this.state.cells.slice(index + 1, index + gridSize);
-    const blankCell = this.state.cells[index + gridSize];
-    const last = this.state.cells.slice(index + gridSize + 1);
+    const between = this.state.cells.slice(index + 1, index + sizeCol);
+    const blankCell = this.state.cells[index + sizeCol];
+    const last = this.state.cells.slice(index + sizeCol + 1);
     const newCells = [
       ...first,
       { clickedCell, value: blankCellValue },
