@@ -3,9 +3,17 @@ import Proptypes from "prop-types";
 import "./Cell.css";
 
 const Cell = props => {
+    // old values
   const gridSize = props.gridSize;
   const size = 100 / gridSize;
-  const blankCellValue = Math.pow(gridSize, 2);
+
+  //new vvalues
+  const sizeRow = props.sizeRow;
+  const sizeCol = props.sizeCol;
+  const width = 100 / sizeCol;
+    const height = 100 / sizeRow;
+
+  const blankCellValue = sizeRow * sizeCol;
   const columnNum = (props.value - 1) % gridSize;
   const rowNum = Math.floor((props.value - 1) / gridSize);
   //hard coding some values temporarily like image size 500
@@ -13,8 +21,8 @@ const Cell = props => {
   const top = rowNum * -500 / gridSize;
 
   const style = {
-    width: size + "%",
-    height: size + "%",
+    width: width + "%",
+    height: height + "%",
     background:
       props.value === blankCellValue
         ? ""
