@@ -1,5 +1,21 @@
 Fifteen
 
+3/17 - 2
+Update:
+
+Puzzle is now column/row independent. Basic logic for splitting photo as background of pieces is laid down.
+
+The next step is to make the puzzle dynamic based upon different picture sizes.
+
+After that is complete, the method of determining which photos will be pulled from the pixabay api needs to be established.
+
+Currently I think I may pursue random photos based upon some search criteria.
+
+Some other features I'm considering adding are:
+  -timer
+  -move counter
+  -scoreboard
+
 3/17
 Updated goals:
 
