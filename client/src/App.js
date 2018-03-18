@@ -34,7 +34,7 @@ class App extends Component {
     //if there is a cell above, below, left, or right of clicked cell, with value 0, swapCell
     const cells = this.state.cells;
     const sizeRow = this.state.sizeRow;
-    const sizeCol = this.state/sizeCol;
+    const sizeCol = this.state.sizeCol;
     const blankCellValue = sizeRow * sizeCol;
     const gridSize = this.state.gridSize;
     if (cells[index - 1] && index % gridSize !== 0 && cells[index - 1].value === blankCellValue) {
@@ -43,7 +43,7 @@ class App extends Component {
       this.slideUp(index);
     } else if (
       cells[index + 1] &&
-      index % gridSize !== gridSize - 1 &&
+      index % sizeCol !== sizeCol - 1 &&
       cells[index + 1].value === blankCellValue
     ) {
       this.slideRight(index);
@@ -117,7 +117,7 @@ class App extends Component {
     const gridSize = this.state.gridSize;
     let randomCellArray = this.state.cells;
     let emptyCellIndex = randomCellArray.findIndex(
-      item => item.value === Math.pow(this.state.gridSize, 2)
+      item => item.value === this.state.sizeRow * this.state.sizeCol
     );
     for (let i = 0; i < gridSize * 100; i += 1) {
       const randomSlide = Math.floor(Math.random() * 4);
