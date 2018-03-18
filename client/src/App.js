@@ -122,16 +122,17 @@ class App extends Component {
     this.setState({ cells: newCells });
   }
   randomizeGrid() {
-    const gridSize = this.state.gridSize;
+    const sizeCol = this.state.sizeCol;
+    const gridSize = sizeCol * this.state.sizeRow;
     let randomCellArray = this.state.cells;
     let emptyCellIndex = randomCellArray.findIndex(
-      item => item.value === this.state.sizeRow * this.state.sizeCol
+      item => item.value === gridSize
     );
     for (let i = 0; i < gridSize * 100; i += 1) {
       const randomSlide = Math.floor(Math.random() * 4);
       if (
         randomSlide === 0 &&
-        emptyCellIndex % gridSize !== gridSize - 1 &&
+        emptyCellIndex % sizeCol !== sizeCol - 1 &&
         randomCellArray[emptyCellIndex + 1]
       ) {
         const temp = randomCellArray[emptyCellIndex];
@@ -140,16 +141,16 @@ class App extends Component {
         emptyCellIndex += 1;
       } else if (
         randomSlide === 1 &&
-        this.state.cells[emptyCellIndex + gridSize]
+        this.state.cells[emptyCellIndex + sizeCol]
       ) {
         const temp = randomCellArray[emptyCellIndex];
         randomCellArray[emptyCellIndex] =
-          randomCellArray[emptyCellIndex + gridSize];
-        randomCellArray[emptyCellIndex + gridSize] = temp;
-        emptyCellIndex += gridSize;
+          randomCellArray[emptyCellIndex + sizeCol];
+        randomCellArray[emptyCellIndex + sizeCol] = temp;
+        emptyCellIndex += sizeCol;
       } else if (
         randomSlide === 2 &&
-        emptyCellIndex % gridSize !== 0 &&
+        emptyCellIndex % sizeCol !== 0 &&
         this.state.cells[emptyCellIndex - 1]
       ) {
         const temp = randomCellArray[emptyCellIndex];
@@ -158,13 +159,13 @@ class App extends Component {
         emptyCellIndex -= 1;
       } else if (
         randomSlide === 3 &&
-        this.state.cells[emptyCellIndex - gridSize]
+        this.state.cells[emptyCellIndex - sizeCol]
       ) {
         const temp = randomCellArray[emptyCellIndex];
         randomCellArray[emptyCellIndex] =
-          randomCellArray[emptyCellIndex - gridSize];
-        randomCellArray[emptyCellIndex - gridSize] = temp;
-        emptyCellIndex -= gridSize;
+          randomCellArray[emptyCellIndex - sizeCol];
+        randomCellArray[emptyCellIndex - sizeCol] = temp;
+        emptyCellIndex -= sizeCol;
       }
     }
     this.setState({
