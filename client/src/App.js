@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-import CellGrid from './CellGrid.js';
+import CellGrid from "./CellGrid.js";
 
 class App extends Component {
   constructor() {
@@ -33,13 +33,18 @@ class App extends Component {
   handleClick(index) {
     //if there is a cell above, below, left, or right of clicked cell, with value 0, swapCell
     const cells = this.state.cells;
-    const sizeRow = this.state.sizeRow;
     const sizeCol = this.state.sizeCol;
-    const blankCellValue = sizeRow * sizeCol;
-    const gridSize = this.state.gridSize;
-    if (cells[index - 1] && index % sizeCol !== 0 && cells[index - 1].value === blankCellValue) {
+    const blankCellValue = this.state.sizeRow * sizeCol;
+    if (
+      cells[index - 1] &&
+      index % sizeCol !== 0 &&
+      cells[index - 1].value === blankCellValue
+    ) {
       this.slideLeft(index);
-    } else if (cells[index - sizeCol] && cells[index - sizeCol].value === blankCellValue) {
+    } else if (
+      cells[index - sizeCol] &&
+      cells[index - sizeCol].value === blankCellValue
+    ) {
       this.slideUp(index);
     } else if (
       cells[index + 1] &&
@@ -47,7 +52,10 @@ class App extends Component {
       cells[index + 1].value === blankCellValue
     ) {
       this.slideRight(index);
-    } else if (cells[index + sizeCol] && cells[index + sizeCol].value === blankCellValue) {
+    } else if (
+      cells[index + sizeCol] &&
+      cells[index + sizeCol].value === blankCellValue
+    ) {
       this.slideDown(index);
     }
   }
@@ -130,9 +138,13 @@ class App extends Component {
         randomCellArray[emptyCellIndex] = randomCellArray[emptyCellIndex + 1];
         randomCellArray[emptyCellIndex + 1] = temp;
         emptyCellIndex += 1;
-      } else if (randomSlide === 1 && this.state.cells[emptyCellIndex + gridSize]) {
+      } else if (
+        randomSlide === 1 &&
+        this.state.cells[emptyCellIndex + gridSize]
+      ) {
         const temp = randomCellArray[emptyCellIndex];
-        randomCellArray[emptyCellIndex] = randomCellArray[emptyCellIndex + gridSize];
+        randomCellArray[emptyCellIndex] =
+          randomCellArray[emptyCellIndex + gridSize];
         randomCellArray[emptyCellIndex + gridSize] = temp;
         emptyCellIndex += gridSize;
       } else if (
@@ -144,9 +156,13 @@ class App extends Component {
         randomCellArray[emptyCellIndex] = randomCellArray[emptyCellIndex - 1];
         randomCellArray[emptyCellIndex - 1] = temp;
         emptyCellIndex -= 1;
-      } else if (randomSlide === 3 && this.state.cells[emptyCellIndex - gridSize]) {
+      } else if (
+        randomSlide === 3 &&
+        this.state.cells[emptyCellIndex - gridSize]
+      ) {
         const temp = randomCellArray[emptyCellIndex];
-        randomCellArray[emptyCellIndex] = randomCellArray[emptyCellIndex - gridSize];
+        randomCellArray[emptyCellIndex] =
+          randomCellArray[emptyCellIndex - gridSize];
         randomCellArray[emptyCellIndex - gridSize] = temp;
         emptyCellIndex -= gridSize;
       }
@@ -164,20 +180,25 @@ class App extends Component {
       });
     }
   }
-  changeGridSize(e) {
-    this.setState({
-      gridSize: +e.target.value
-    }, function() {this.gameStart()})
+  changeSizeRow(e) {
+    this.setState(
+      {
+        sizeRow: +e.target.value
+      },
+      function() {
+        this.gameStart();
+      }
+    );
   }
-  changeSizeRow(e){
-    this.setState({
-      sizeRow: +e.target.value
-    }, function() {this.gameStart()})
-  }
-  changeSizeCol(e){
-    this.setState({
-      sizeCol: +e.target.value
-    }, function() {this.gameStart()})
+  changeSizeCol(e) {
+    this.setState(
+      {
+        sizeCol: +e.target.value
+      },
+      function() {
+        this.gameStart();
+      }
+    );
   }
   render() {
     return (
@@ -185,9 +206,9 @@ class App extends Component {
         <h1 className="App--heading">Fifteen</h1>
 
         <div>
-          <CellGrid 
+          <CellGrid
             cells={this.state.cells}
-            handleClick={this.handleClick} 
+            handleClick={this.handleClick}
             sizeRow={this.state.sizeRow}
             sizeCol={this.state.sizeCol}
           />
@@ -199,19 +220,22 @@ class App extends Component {
         </div>
 
         <div className="App--margin-top-3">
-          <label>Grid Size</label>
+          <br />
+          <label>Number of rows</label>
           <input
-            onChange={e => this.changeGridSize(e)}
-            value={this.state.gridSize}
+            onChange={e => this.changeSizeRow(e)}
             type="number"
+            value={this.state.sizeRow}
             min="2"
           />
           <br />
-          <label>Number of rows</label>
-          <input onChange={e => this.changeSizeRow(e)} type="number" value={this.state.sizeRow} min='2' />
-          <br />
           <label>Number of Columns</label>
-          <input onChange={e => this.changeSizeCol(e)} type='number' value={this.state.sizeCol} min='2' />
+          <input
+            onChange={e => this.changeSizeCol(e)}
+            type="number"
+            value={this.state.sizeCol}
+            min="2"
+          />
         </div>
 
         {this.state.winText}
