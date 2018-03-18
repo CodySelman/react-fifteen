@@ -33,7 +33,9 @@ class App extends Component {
   handleClick(index) {
     //if there is a cell above, below, left, or right of clicked cell, with value 0, swapCell
     const cells = this.state.cells;
-    const blankCellValue = Math.pow(this.state.gridSize, 2);
+    const sizeRow = this.state.sizeRow;
+    const sizeCol = this.state/sizeCol;
+    const blankCellValue = sizeRow * sizeCol;
     const gridSize = this.state.gridSize;
     if (cells[index - 1] && index % gridSize !== 0 && cells[index - 1].value === blankCellValue) {
       this.slideLeft(index);
@@ -51,7 +53,7 @@ class App extends Component {
   }
   slideUp(index) {
     const gridSize = this.state.gridSize;
-    const blankCellValue = Math.pow(this.state.gridSize, 2);
+    const blankCellValue = this.state.sizeRow * this.state.sizeCol;
     const first = this.state.cells.slice(0, index - gridSize);
     const blankCell = this.state.cells[index - gridSize];
     const between = this.state.cells.slice(index - gridSize + 1, index);
@@ -68,7 +70,7 @@ class App extends Component {
   }
   slideDown(index) {
     const gridSize = this.state.gridSize;
-    const blankCellValue = Math.pow(this.state.gridSize, 2);
+    const blankCellValue = this.state.sizeRow * this.state.sizeCol;
     const first = this.state.cells.slice(0, index);
     const clickedCell = this.state.cells[index];
     const between = this.state.cells.slice(index + 1, index + gridSize);
@@ -84,7 +86,7 @@ class App extends Component {
     this.setState({ cells: newCells });
   }
   slideRight(index) {
-    const blankCellValue = Math.pow(this.state.gridSize, 2);
+    const blankCellValue = this.state.sizeRow * this.state.sizeCol;
     const first = this.state.cells.slice(0, index);
     const clickedCell = this.state.cells[index];
     const blankCell = this.state.cells[index + 1];
@@ -98,7 +100,7 @@ class App extends Component {
     this.setState({ cells: newCells });
   }
   slideLeft(index) {
-    const blankCellValue = Math.pow(this.state.gridSize, 2);
+    const blankCellValue = this.state.sizeRow * this.state.sizeCol;
     const clickedCell = this.state.cells[index];
     const blankCell = this.state.cells[index - 1];
     const first = this.state.cells.slice(0, index - 1);
