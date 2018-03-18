@@ -6,7 +6,6 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      gridSize: 3,
       sizeRow: 3,
       sizeCol: 3,
       cells: [],
