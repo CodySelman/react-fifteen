@@ -37,7 +37,7 @@ class App extends Component {
     const sizeCol = this.state.sizeCol;
     const blankCellValue = sizeRow * sizeCol;
     const gridSize = this.state.gridSize;
-    if (cells[index - 1] && index % gridSize !== 0 && cells[index - 1].value === blankCellValue) {
+    if (cells[index - 1] && index % sizeCol !== 0 && cells[index - 1].value === blankCellValue) {
       this.slideLeft(index);
     } else if (cells[index - gridSize] && cells[index - gridSize].value === blankCellValue) {
       this.slideUp(index);
