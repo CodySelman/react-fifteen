@@ -167,6 +167,16 @@ class App extends Component {
       gridSize: +e.target.value
     }, function() {this.gameStart()})
   }
+  changeSizeRow(e){
+    this.setState({
+      sizeRow: +e.target.value
+    }, function() {this.gameStart()})
+  }
+  changeSizeCol(e){
+    this.setState({
+      sizeCol: +e.target.value
+    }, function() {this.gameStart()})
+  }
   render() {
     return (
       <div>
@@ -195,10 +205,10 @@ class App extends Component {
           />
           <br />
           <label>Number of rows</label>
-          <input type="number" value={this.state.sizeRow} min='2' />
+          <input onChange={e => this.changeSizeRow(e)} type="number" value={this.state.sizeRow} min='2' />
           <br />
           <label>Number of Columns</label>
-          <input type='number' value={this.state.sizeCol} min='2' />
+          <input onChange={e => this.changeSizeCol(e)} type='number' value={this.state.sizeCol} min='2' />
         </div>
 
         {this.state.winText}
