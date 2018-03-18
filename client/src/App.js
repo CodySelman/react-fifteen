@@ -185,8 +185,7 @@ class App extends Component {
         <div>
           <CellGrid 
             cells={this.state.cells}
-            handleClick={this.handleClick}
-            gridSize={this.state.gridSize}  
+            handleClick={this.handleClick} 
             sizeRow={this.state.sizeRow}
             sizeCol={this.state.sizeCol}
           />
