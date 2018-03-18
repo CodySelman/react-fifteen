@@ -21,7 +21,7 @@ class App extends Component {
   }
   gameStart() {
     const newCells = [];
-    const gridSize = Math.pow(this.state.gridSize, 2);
+    const gridSize = this.state.sizeCol * this.state.sizeRow;
     for (let i = 1; i < gridSize + 1; i += 1) {
       let cell = { value: i };
       newCells.push(cell);
