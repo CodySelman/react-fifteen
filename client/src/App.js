@@ -187,6 +187,8 @@ class App extends Component {
             cells={this.state.cells}
             handleClick={this.handleClick}
             gridSize={this.state.gridSize}  
+            sizeRow={this.state.sizeRow}
+            sizeCol={this.state.sizeCol}
           />
         </div>
 

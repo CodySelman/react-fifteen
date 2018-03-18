@@ -38,7 +38,9 @@ const Cell = props => {
 Cell.Proptypes = {
   value: Proptypes.number.isRequired,
   onClick: Proptypes.func.isRequired,
-  gridSize: Proptypes.number.isRequired
+  gridSize: Proptypes.number.isRequired,
+  sizeRow: Proptypes.number.isRequired,
+  sizeCol: Proptypes.number.isRequired
 };
 
 export default Cell;
