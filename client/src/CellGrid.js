@@ -14,8 +14,12 @@ const CellGrid = props => {
         currentImage={props.currentImage}
        />
     ));
+    const style = {
+        width: props.currentImage.width + 'px',
+        height: props.currentImage.height + 'px'
+    };
     return (
-        <div className='CellGrid--container'>
+        <div className='CellGrid--container' style={style}>
             {cellGrid}
         </div>
     );
