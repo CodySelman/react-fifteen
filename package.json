@@ -19,7 +19,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "concurrently 'nodemon server/index.js' 'cd client && npm start'",
-    "dev": "nodemon server/index.js"
+    "dev": "nodemon server/index.js",
+    "prod": "cd client && npm run build && cd .. && node server",
+    "heroku-postbuild": "cd client/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "proxy": "http://localhost:5000",
   "repository": {
