@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "./App.css";
 import CellGrid from "./CellGrid.js";
 
+import {getImageUrls} from './services/imageUrls.js';
+
 class App extends Component {
   constructor() {
     super();
@@ -9,7 +11,8 @@ class App extends Component {
       sizeRow: 3,
       sizeCol: 3,
       cells: [],
-      winText: ""
+      winText: "",
+      imageUrls: ''
     };
     this.randomizeGrid = this.randomizeGrid.bind(this);
     this.winCheck = this.winCheck.bind(this);
@@ -200,6 +203,19 @@ class App extends Component {
       }
     );
   }
+  getImages(){
+    getImageUrls()
+      .then(response => {
+        const imageUrls = response.data;
+        console.log(imageUrls);
+        this.setState({
+          imageUrls: imageUrls
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
   render() {
     return (
       <div>
@@ -237,7 +253,7 @@ class App extends Component {
             min="2"
           />
         </div>
-
+        <button onClick={this.getImages()}>get images</button>
         {this.state.winText}
       </div>
     );

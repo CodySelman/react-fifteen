@@ -7,15 +7,15 @@ const{PIXABAY_API_KEY}=process.env;
 const serverApp = express();
 const port = process.env.PORT || 5000;
 
-serverApp.get('/picture', function(request, response){
-    const url = `https://pixabay.com/api/?key=${PIXABAY_API_KEY}&q=yellow+flowers&image_ty`;
+serverApp.get('/images', function(request, response){
+    const url = `https://pixabay.com/api/?key=${PIXABAY_API_KEY}&editors_choice=true%safesearch=true`;
     axios.get(url)
         .then(res => {
-            response.json(res.data)
+            response.status(200).json(res.data)
         })
         .catch(err => {
-            response.json({
-                msg: 'Axios get broken'
+            response.status(500).json({
+                msg: 'Image data failed to load.'
             })
         });
 })
