@@ -12,11 +12,18 @@ class App extends Component {
       sizeCol: 3,
       cells: [],
       winText: "",
-      imageUrls: ''
+      imageUrls: '',
+      currentImage: {
+        url: 'https://lmcdesign-rj6zcy7b8ypu79snuv.netdna-ssl.com/wp-content/uploads/2016/01/Shrek_Tile-1-500x500.jpg',
+        height: 500,
+        width: 500
+      }
     };
     this.randomizeGrid = this.randomizeGrid.bind(this);
     this.winCheck = this.winCheck.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.getImages = this.getImages.bind(this);
+    this.changeImage = this.changeImage.bind(this);
   }
   componentDidMount() {
     this.gameStart();
@@ -216,6 +223,22 @@ class App extends Component {
         console.log(error);
       });
   }
+  changeImage(){
+    const imageUrls = this.state.imageUrls;
+    const newImageIndex = Math.floor( Math.random() * imageUrls.hits.length );
+    const newImageData = imageUrls.hits[newImageIndex];
+    const newImageUrl = newImageData.webformatURL;
+    const newImageWidth = newImageData.webformatWidth;
+    const newImageHeight = newImageData.webformatHeight;
+    const newImage = {
+      url: newImageUrl,
+      width: newImageWidth,
+      height: newImageHeight
+    };
+    this.setState({
+      currentImage: newImage
+    });
+  }
   render() {
     return (
       <div>
@@ -253,7 +276,8 @@ class App extends Component {
             min="2"
           />
         </div>
-        <button onClick={this.getImages()}>get images</button>
+        <button onClick={this.getImages}>get images</button>
+        <button onClick={this.changeImage}>change image</button>
         {this.state.winText}
       </div>
     );
