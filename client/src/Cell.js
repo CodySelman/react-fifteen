@@ -6,14 +6,19 @@ const Cell = props => {
   const sizeRow = props.sizeRow;
   const sizeCol = props.sizeCol;
   const width = 100 / sizeCol;
-    const height = 100 / sizeRow;
+  const height = 100 / sizeRow;
   const blankCellValue = sizeRow * sizeCol;
+
+  const imageUrl = props.currentImage.url;
+  const imageWidth = props.currentImage.width;
+  const imageHeight = props.currentImage.height;
+  
 
   const columnNum = (props.value - 1) % sizeCol;
   const rowNum = Math.floor((props.value - 1) / sizeCol);
   //hard coding some values temporarily like image size 500
-  const left = columnNum * -500 / sizeCol;
-  const top = rowNum * -500 / sizeRow;
+  const left = columnNum * -imageWidth / sizeCol;
+  const top = rowNum * -imageHeight / sizeRow;
 
   const style = {
     width: width + "%",
@@ -21,7 +26,7 @@ const Cell = props => {
     background:
       props.value === blankCellValue
         ? ""
-        : `url(https://lmcdesign-rj6zcy7b8ypu79snuv.netdna-ssl.com/wp-content/uploads/2016/01/Shrek_Tile-1-500x500.jpg) ${left}px ${top}px`
+        : `url(${imageUrl}) ${left}px ${top}px`
   };
   return (
     <button
@@ -42,7 +47,8 @@ Cell.Proptypes = {
   value: Proptypes.number.isRequired,
   onClick: Proptypes.func.isRequired,
   sizeRow: Proptypes.number.isRequired,
-  sizeCol: Proptypes.number.isRequired
+  sizeCol: Proptypes.number.isRequired,
+  currentImage: Proptypes.object.isRequired
 };
 
 export default Cell;

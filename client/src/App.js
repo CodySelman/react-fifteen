@@ -250,6 +250,7 @@ class App extends Component {
             handleClick={this.handleClick}
             sizeRow={this.state.sizeRow}
             sizeCol={this.state.sizeCol}
+            currentImage={this.state.currentImage}
           />
         </div>
 

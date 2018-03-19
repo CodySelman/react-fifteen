@@ -11,6 +11,7 @@ const CellGrid = props => {
         onClick={() => props.handleClick(index)}
         sizeRow={props.sizeRow}
         sizeCol={props.sizeCol}
+        currentImage={props.currentImage}
        />
     ));
     return (
@@ -24,7 +25,8 @@ CellGrid.propTypes = {
     cells: Proptypes.array.isRequired,
     handleClick: Proptypes.func.isRequired,
     sizeRow: Proptypes.number.isRequired,
-    sizeCol: Proptypes.number.isRequired
+    sizeCol: Proptypes.number.isRequired,
+    currentImage: Proptypes.object.isRequired
 }
 
 export default CellGrid;
