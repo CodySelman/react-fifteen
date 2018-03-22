@@ -13,7 +13,7 @@ class App extends Component {
       cells: [],
       winText: "",
       imageUrls: '',
-      searchTerm: 'kitten',
+      searchTerm: '',
       currentImage: {
         url: 'https://lmcdesign-rj6zcy7b8ypu79snuv.netdna-ssl.com/wp-content/uploads/2016/01/Shrek_Tile-1-500x500.jpg',
         height: 500,
@@ -240,6 +240,11 @@ class App extends Component {
       currentImage: newImage
     });
   }
+  changeSearchTerm(newTerm){
+    this.setState({
+      searchTerm: newTerm
+    });
+  }
   render() {
     return (
       <div>
@@ -248,10 +253,10 @@ class App extends Component {
         <div>
           <h2>Choose a Category:</h2>
           <div>
-            <button>Puppies</button>
-            <button>Kittens</button>
-            <button>Snails</button>
-            <button>Sculptures</button>
+            <button onClick={()=>this.changeSearchTerm('Puppies')}>Puppies</button>
+            <button onClick={()=>this.changeSearchTerm('Kittens')}>Kittens</button>
+            <button onClick={()=>this.changeSearchTerm('Snails')}>Snails</button>
+            <button onClick={()=>this.changeSearchTerm('Sculptures')}>Sculptures</button>
           </div>
         </div>
 
