@@ -246,6 +246,16 @@ class App extends Component {
         <h1 className="App--heading">Fifteen</h1>
 
         <div>
+          <h2>Choose a Category:</h2>
+          <div>
+            <button>Puppies</button>
+            <button>Kittens</button>
+            <button>Snails</button>
+            <button>Sculptures</button>
+          </div>
+        </div>
+
+        <div>
           <CellGrid
             cells={this.state.cells}
             handleClick={this.handleClick}
