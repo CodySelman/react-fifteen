@@ -11,8 +11,9 @@ const port = process.env.PORT || 5000;
 //middleware
 serverApp.use(express.static('client/build'));
 
-serverApp.get('/images', function(request, response){
-    const url = `https://pixabay.com/api/?key=${PIXABAY_API_KEY}&editors_choice=true%safesearch=true`;
+serverApp.get('/images/:searchTerm', function(request, response){
+    const { searchTerm } = request.params;
+    const url = `https://pixabay.com/api/?key=${PIXABAY_API_KEY}&safesearch=true&q=${searchTerm}`;
     axios.get(url)
         .then(res => {
             response.status(200).json(res.data)
