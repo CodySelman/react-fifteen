@@ -38,7 +38,6 @@ const Cell = props => {
       onClick={props.onClick}
       style={style}
     >
-      {props.value === blankCellValue ? "" : props.value}
     </button>
   );
 };
