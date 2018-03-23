@@ -266,7 +266,6 @@ class App extends Component {
           </div>
         :
           <div>
-            <h2>Choose a Category:</h2>
             <CategoryGrid 
               categories={this.state.categories}
               chooseCategory={this.chooseCategory}

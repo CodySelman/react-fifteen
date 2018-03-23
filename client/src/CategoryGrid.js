@@ -1,5 +1,6 @@
 import React from 'react';
 import Proptypes from 'prop-types';
+import './CategoryGrid.css';
 import CategoryButton from './CategoryButton.js';
 
 const CategoryGrid = props => {
@@ -12,7 +13,7 @@ const CategoryGrid = props => {
     ));
 
     return (
-        <div>
+        <div className='CategoryGrid--container'>
             {categoryGrid}
         </div>
     )
