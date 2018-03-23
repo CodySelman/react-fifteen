@@ -4,7 +4,11 @@ import CategoryButton from './CategoryButton.js';
 
 const CategoryGrid = props => {
     const categoryGrid = props.categories.map((category, index) => (
-        <CategoryButton />
+        <CategoryButton 
+            key={index}
+            category={category}
+            chooseCategory={props.chooseCategory}
+        />
     ));
 
     return (
