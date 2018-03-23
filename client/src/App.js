@@ -253,10 +253,18 @@ class App extends Component {
         <div>
           <h2>Choose a Category:</h2>
           <div>
-            <button onClick={()=>this.changeSearchTerm('Puppies')}>Puppies</button>
-            <button onClick={()=>this.changeSearchTerm('Kittens')}>Kittens</button>
-            <button onClick={()=>this.changeSearchTerm('Snails')}>Snails</button>
-            <button onClick={()=>this.changeSearchTerm('Sculptures')}>Sculptures</button>
+            <button onClick={()=>this.changeSearchTerm('puppy')}>Puppies</button>
+            <button onClick={()=>this.changeSearchTerm('kitten')}>Kittens</button>
+            <button onClick={()=>this.changeSearchTerm('dog')}>Dogs</button>
+            <button onClick={()=>this.changeSearchTerm('cat')}>Cats</button>
+            <button onClick={()=>this.changeSearchTerm('snail')}>Snails</button>
+            <button onClick={()=>this.changeSearchTerm('bugs')}>Bugs</button>
+            <button onClick={()=>this.changeSearchTerm('birds')}>Birds</button>
+            <button onClick={()=>this.changeSearchTerm('dinosaur')}>Dinosaurs</button>
+            <button onClick={()=>this.changeSearchTerm('sculpture')}>Sculptures</button>
+            <button onClick={()=>this.changeSearchTerm('fine+art+painting')}>Paintings</button>
+            <button onClick={()=>this.changeSearchTerm('architecture')}>Architecture</button>
+            <button onClick={()=>this.changeSearchTerm('sailboats')}>Sailboats</button>
           </div>
         </div>
 
