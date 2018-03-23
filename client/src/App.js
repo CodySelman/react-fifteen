@@ -266,7 +266,10 @@ class App extends Component {
         :
           <div>
             <h2>Choose a Category:</h2>
-            <CategoryGrid />
+            <CategoryGrid 
+              categories={this.state.categories}
+              chooseCategory={this.chooseCategory}
+            />
             <div>
               <button onClick={()=>this.chooseCategory('puppy')}>Puppies</button>
               <button onClick={()=>this.chooseCategory('kitten')}>Kittens</button>
