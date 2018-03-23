@@ -14,6 +14,7 @@ class App extends Component {
       winText: "",
       imageUrls: '',
       searchTerm: '',
+      isCategoryChosen: false,
       currentImage: {
         url: 'https://lmcdesign-rj6zcy7b8ypu79snuv.netdna-ssl.com/wp-content/uploads/2016/01/Shrek_Tile-1-500x500.jpg',
         height: 500,
@@ -243,41 +244,52 @@ class App extends Component {
   changeSearchTerm(newTerm){
     this.setState({
       searchTerm: newTerm
-    });
+    }, this.setState({
+      isCategoryChosen: true
+    }));
   }
   render() {
     return (
       <div>
         <h1 className="App--heading">Fifteen</h1>
 
-        <div>
-          <h2>Choose a Category:</h2>
+        {this.state.isCategoryChosen 
+        ? 
           <div>
-            <button onClick={()=>this.changeSearchTerm('puppy')}>Puppies</button>
-            <button onClick={()=>this.changeSearchTerm('kitten')}>Kittens</button>
-            <button onClick={()=>this.changeSearchTerm('dog')}>Dogs</button>
-            <button onClick={()=>this.changeSearchTerm('cat')}>Cats</button>
-            <button onClick={()=>this.changeSearchTerm('snail')}>Snails</button>
-            <button onClick={()=>this.changeSearchTerm('bugs')}>Bugs</button>
-            <button onClick={()=>this.changeSearchTerm('birds')}>Birds</button>
-            <button onClick={()=>this.changeSearchTerm('dinosaur')}>Dinosaurs</button>
-            <button onClick={()=>this.changeSearchTerm('sculpture')}>Sculptures</button>
-            <button onClick={()=>this.changeSearchTerm('fine+art+painting')}>Paintings</button>
-            <button onClick={()=>this.changeSearchTerm('architecture')}>Architecture</button>
-            <button onClick={()=>this.changeSearchTerm('sailboats')}>Sailboats</button>
+            <CellGrid
+              cells={this.state.cells}
+              handleClick={this.handleClick}
+              sizeRow={this.state.sizeRow}
+              sizeCol={this.state.sizeCol}
+              currentImage={this.state.currentImage}
+            />
           </div>
-        </div>
+        :
+          <div>
+            <h2>Choose a Category:</h2>
+            <div>
+              <button onClick={()=>this.changeSearchTerm('puppy')}>Puppies</button>
+              <button onClick={()=>this.changeSearchTerm('kitten')}>Kittens</button>
+              <button onClick={()=>this.changeSearchTerm('dog')}>Dogs</button>
+              <button onClick={()=>this.changeSearchTerm('cat')}>Cats</button>
+              <button onClick={()=>this.changeSearchTerm('snail')}>Snails</button>
+              <button onClick={()=>this.changeSearchTerm('bugs')}>Bugs</button>
+              <button onClick={()=>this.changeSearchTerm('birds')}>Birds</button>
+              <button onClick={()=>this.changeSearchTerm('dinosaur')}>Dinosaurs</button>
+              <button onClick={()=>this.changeSearchTerm('sculpture')}>Sculptures</button>
+              <button onClick={()=>this.changeSearchTerm('fine+art+painting')}>Paintings</button>
+              <button onClick={()=>this.changeSearchTerm('architecture')}>Architecture</button>
+              <button onClick={()=>this.changeSearchTerm('sailboats')}>Sailboats</button>
+            </div>
+          </div>
+        }
+        
+        
+        
+        
 
-        <div>
-          <CellGrid
-            cells={this.state.cells}
-            handleClick={this.handleClick}
-            sizeRow={this.state.sizeRow}
-            sizeCol={this.state.sizeCol}
-            currentImage={this.state.currentImage}
-          />
-        </div>
-
+        
+        {/* Debug tools */}
         <div className="App--margin-top-3">
           <button onClick={this.randomizeGrid}>Randomize</button>
           <button onClick={this.winCheck}>Win check</button>
