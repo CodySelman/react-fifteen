@@ -14,7 +14,7 @@ class App extends Component {
       cells: [],
       winText: "",
       imageUrls: '',
-      categories: ['puppies', 'kittens', 'dogs', 'cats', 'snails', 'bugs', 'birds', 'dinosaurs', 'sculptures', 'paintings', 'architecture', 'sailboats'],
+      categories: ['Puppies', 'Kittens', 'Dogs', 'Cats', 'Snails', 'Bugs', 'Birds', 'Dinosaurs', 'Sculptures', 'Paintings', 'Architecture', 'Sailboats'],
       isCategoryChosen: false,
       currentImage: {
         url: 'https://lmcdesign-rj6zcy7b8ypu79snuv.netdna-ssl.com/wp-content/uploads/2016/01/Shrek_Tile-1-500x500.jpg',
@@ -27,6 +27,7 @@ class App extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.getImages = this.getImages.bind(this);
     this.changeImage = this.changeImage.bind(this);
+    this.chooseCategory = this.chooseCategory.bind(this);
   }
   componentDidMount() {
     this.gameStart();
@@ -270,20 +271,6 @@ class App extends Component {
               categories={this.state.categories}
               chooseCategory={this.chooseCategory}
             />
-            <div>
-              <button onClick={()=>this.chooseCategory('puppy')}>Puppies</button>
-              <button onClick={()=>this.chooseCategory('kitten')}>Kittens</button>
-              <button onClick={()=>this.chooseCategory('dog')}>Dogs</button>
-              <button onClick={()=>this.chooseCategory('cat')}>Cats</button>
-              <button onClick={()=>this.chooseCategory('snail')}>Snails</button>
-              <button onClick={()=>this.chooseCategory('bugs')}>Bugs</button>
-              <button onClick={()=>this.chooseCategory('birds')}>Birds</button>
-              <button onClick={()=>this.chooseCategory('dinosaur')}>Dinosaurs</button>
-              <button onClick={()=>this.chooseCategory('sculpture')}>Sculptures</button>
-              <button onClick={()=>this.chooseCategory('fine+art+painting')}>Paintings</button>
-              <button onClick={()=>this.chooseCategory('architecture')}>Architecture</button>
-              <button onClick={()=>this.chooseCategory('sailboats')}>Sailboats</button>
-            </div>
           </div>
         }
         

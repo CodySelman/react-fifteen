@@ -3,14 +3,13 @@ import Proptypes from 'prop-types';
 
 const CategoryButton = props => {
     return (
-        <div>
-            hey there
-        </div>
+        <button onClick={() => props.chooseCategory(props.category)}>{props.category}</button>
     )
 }
 
-CategoryButton.Proptypes = {
-
+CategoryButton.propTypes = {
+    category: Proptypes.string.isRequired,
+    chooseCategory: Proptypes.func.isRequired
 }
 
 export default CategoryButton;
