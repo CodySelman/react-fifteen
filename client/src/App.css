@@ -1,13 +1,18 @@
+html, body {
+    width: 100%;
+    background-color: grey;
+}
+
 .App--CellGrid-container {
-    width: 250px;
-    height: 250px;
+    width: 100%;
     display: flex;
-    justify-self: center;
-    margin: auto;
+    justify-content: center;
+    align-content: center;
 }
 
 .App--heading {
     text-align: center;
+    font-size: 6rem;
 }
 
 .App--margin-top-3 {

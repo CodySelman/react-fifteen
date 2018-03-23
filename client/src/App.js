@@ -251,11 +251,11 @@ class App extends Component {
   render() {
     return (
       <div>
-        <h1 className="App--heading">Fifteen</h1>
+        <h1 className="App--heading">PixaPuzzler</h1>
 
         {this.state.isCategoryChosen 
         ? 
-          <div>
+          <div className='App--CellGrid-container'>
             <CellGrid
               cells={this.state.cells}
               handleClick={this.handleClick}
