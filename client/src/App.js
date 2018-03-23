@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import CellGrid from "./CellGrid.js";
+import CategoryGrid from './CategoryGrid.js';
 
 import {getImageUrls} from './services/imageUrls.js';
 
@@ -13,6 +14,7 @@ class App extends Component {
       cells: [],
       winText: "",
       imageUrls: '',
+      categories: ['puppies', 'kittens', 'dogs', 'cats', 'snails', 'bugs', 'birds', 'dinosaurs', 'sculptures', 'paintings', 'architecture', 'sailboats'],
       isCategoryChosen: false,
       currentImage: {
         url: 'https://lmcdesign-rj6zcy7b8ypu79snuv.netdna-ssl.com/wp-content/uploads/2016/01/Shrek_Tile-1-500x500.jpg',
@@ -264,6 +266,7 @@ class App extends Component {
         :
           <div>
             <h2>Choose a Category:</h2>
+            <CategoryGrid />
             <div>
               <button onClick={()=>this.chooseCategory('puppy')}>Puppies</button>
               <button onClick={()=>this.chooseCategory('kitten')}>Kittens</button>
