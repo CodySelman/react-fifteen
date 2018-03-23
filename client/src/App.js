@@ -87,7 +87,7 @@ class App extends Component {
       { clickedCell, value: blankCellValue },
       ...last
     ];
-    this.setState({ cells: newCells });
+    this.setState({ cells: newCells }, this.winCheck);
   }
   slideDown(index) {
     const sizeCol = this.state.sizeCol;
@@ -104,7 +104,7 @@ class App extends Component {
       { blankCell, value: this.state.cells[index].value },
       ...last
     ];
-    this.setState({ cells: newCells });
+    this.setState({ cells: newCells }, this.winCheck);
   }
   slideRight(index) {
     const blankCellValue = this.state.sizeRow * this.state.sizeCol;
@@ -118,7 +118,7 @@ class App extends Component {
       { blankCell, value: this.state.cells[index].value },
       ...last
     ];
-    this.setState({ cells: newCells });
+    this.setState({ cells: newCells }, this.winCheck);
   }
   slideLeft(index) {
     const blankCellValue = this.state.sizeRow * this.state.sizeCol;
@@ -132,7 +132,7 @@ class App extends Component {
       { clickedCell, value: blankCellValue },
       ...last
     ];
-    this.setState({ cells: newCells });
+    this.setState({ cells: newCells }, this.winCheck);
   }
   randomizeGrid() {
     const sizeCol = this.state.sizeCol;
