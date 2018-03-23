@@ -13,7 +13,6 @@ class App extends Component {
       cells: [],
       winText: "",
       imageUrls: '',
-      searchTerm: '',
       isCategoryChosen: false,
       currentImage: {
         url: 'https://lmcdesign-rj6zcy7b8ypu79snuv.netdna-ssl.com/wp-content/uploads/2016/01/Shrek_Tile-1-500x500.jpg',
@@ -212,14 +211,13 @@ class App extends Component {
       }
     );
   }
-  getImages(){
-    getImageUrls(this.state.searchTerm)
+  getImages(searchTerm){
+    getImageUrls(searchTerm)
       .then(response => {
         const imageUrls = response.data;
-        console.log(imageUrls);
         this.setState({
           imageUrls: imageUrls
-        });
+        }, this.changeImage);
       })
       .catch(error => {
         console.log(error);
@@ -241,12 +239,11 @@ class App extends Component {
       currentImage: newImage
     });
   }
-  changeSearchTerm(newTerm){
-    this.setState({
-      searchTerm: newTerm
-    }, this.setState({
-      isCategoryChosen: true
-    }));
+  chooseCategory(searchTerm){
+    Promise.resolve()
+      .then(this.getImages(searchTerm))
+      .then(this.setState({isCategoryChosen: true}))
+      .catch(err => console.log(err))
   }
   render() {
     return (
@@ -268,18 +265,18 @@ class App extends Component {
           <div>
             <h2>Choose a Category:</h2>
             <div>
-              <button onClick={()=>this.changeSearchTerm('puppy')}>Puppies</button>
-              <button onClick={()=>this.changeSearchTerm('kitten')}>Kittens</button>
-              <button onClick={()=>this.changeSearchTerm('dog')}>Dogs</button>
-              <button onClick={()=>this.changeSearchTerm('cat')}>Cats</button>
-              <button onClick={()=>this.changeSearchTerm('snail')}>Snails</button>
-              <button onClick={()=>this.changeSearchTerm('bugs')}>Bugs</button>
-              <button onClick={()=>this.changeSearchTerm('birds')}>Birds</button>
-              <button onClick={()=>this.changeSearchTerm('dinosaur')}>Dinosaurs</button>
-              <button onClick={()=>this.changeSearchTerm('sculpture')}>Sculptures</button>
-              <button onClick={()=>this.changeSearchTerm('fine+art+painting')}>Paintings</button>
-              <button onClick={()=>this.changeSearchTerm('architecture')}>Architecture</button>
-              <button onClick={()=>this.changeSearchTerm('sailboats')}>Sailboats</button>
+              <button onClick={()=>this.chooseCategory('puppy')}>Puppies</button>
+              <button onClick={()=>this.chooseCategory('kitten')}>Kittens</button>
+              <button onClick={()=>this.chooseCategory('dog')}>Dogs</button>
+              <button onClick={()=>this.chooseCategory('cat')}>Cats</button>
+              <button onClick={()=>this.chooseCategory('snail')}>Snails</button>
+              <button onClick={()=>this.chooseCategory('bugs')}>Bugs</button>
+              <button onClick={()=>this.chooseCategory('birds')}>Birds</button>
+              <button onClick={()=>this.chooseCategory('dinosaur')}>Dinosaurs</button>
+              <button onClick={()=>this.chooseCategory('sculpture')}>Sculptures</button>
+              <button onClick={()=>this.chooseCategory('fine+art+painting')}>Paintings</button>
+              <button onClick={()=>this.chooseCategory('architecture')}>Architecture</button>
+              <button onClick={()=>this.chooseCategory('sailboats')}>Sailboats</button>
             </div>
           </div>
         }
