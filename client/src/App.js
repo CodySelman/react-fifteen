@@ -9,7 +9,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      sizeRow: 3,
+      sizeRow: 2,
       sizeCol: 3,
       cells: [],
       winText: "",

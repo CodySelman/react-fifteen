@@ -16,7 +16,6 @@ const Cell = props => {
 
   const columnNum = (props.value - 1) % sizeCol;
   const rowNum = Math.floor((props.value - 1) / sizeCol);
-  //hard coding some values temporarily like image size 500
   const left = columnNum * -imageWidth / sizeCol;
   const top = rowNum * -imageHeight / sizeRow;
 
