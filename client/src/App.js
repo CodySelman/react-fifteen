@@ -28,6 +28,7 @@ class App extends Component {
     this.getImages = this.getImages.bind(this);
     this.changeImage = this.changeImage.bind(this);
     this.chooseCategory = this.chooseCategory.bind(this);
+    this.increaseDifficulty = this.increaseDifficulty.bind(this);
   }
   componentDidMount() {
     this.gameStart();
@@ -194,26 +195,6 @@ class App extends Component {
       });
     }
   }
-  changeSizeRow(e) {
-    this.setState(
-      {
-        sizeRow: +e.target.value
-      },
-      function() {
-        this.gameStart();
-      }
-    );
-  }
-  changeSizeCol(e) {
-    this.setState(
-      {
-        sizeCol: +e.target.value
-      },
-      function() {
-        this.gameStart();
-      }
-    );
-  }
   getImages(searchTerm){
     getImageUrls(searchTerm)
       .then(response => {
@@ -248,6 +229,17 @@ class App extends Component {
       .then(this.setState({isCategoryChosen: true}))
       .catch(err => console.log(err))
   }
+  increaseDifficulty(){
+    if(this.state.sizeCol > this.state.sizeRow){ 
+      this.setState({
+        sizeRow: this.state.sizeRow + 1
+      }, this.gameStart)
+    } else {
+      this.setState({
+        sizeCol: this.state.sizeCol + 1
+      }, this.gameStart)
+    }
+  }
   render() {
     return (
       <div>
@@ -272,38 +264,16 @@ class App extends Component {
             />
           </div>
         }
-        
-        
-        
-        
-
-        
+              
         {/* Debug tools */}
         <div className="App--margin-top-3">
           <button onClick={this.randomizeGrid}>Randomize</button>
           <button onClick={this.winCheck}>Win check</button>
         </div>
 
-        <div className="App--margin-top-3">
-          <br />
-          <label>Number of rows</label>
-          <input
-            onChange={e => this.changeSizeRow(e)}
-            type="number"
-            value={this.state.sizeRow}
-            min="2"
-          />
-          <br />
-          <label>Number of Columns</label>
-          <input
-            onChange={e => this.changeSizeCol(e)}
-            type="number"
-            value={this.state.sizeCol}
-            min="2"
-          />
-        </div>
         <button onClick={this.getImages}>get images</button>
         <button onClick={this.changeImage}>change image</button>
+        <button onClick={this.increaseDifficulty}>increase difficulty</button>
         {this.state.winText}
       </div>
     );
