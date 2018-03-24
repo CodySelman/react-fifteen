@@ -13,6 +13,7 @@ class App extends Component {
       sizeCol: 3,
       cells: [],
       winText: "",
+      hasStarted: false,
       imageUrls: '',
       categories: ['Puppies', 'Kittens', 'Dogs', 'Cats', 'Snails', 'Bugs', 'Birds', 'Dinosaurs', 'Sculptures', 'Paintings', 'Architecture', 'Sailboats'],
       isCategoryChosen: false,
@@ -49,7 +50,12 @@ class App extends Component {
     const cells = this.state.cells;
     const sizeCol = this.state.sizeCol;
     const blankCellValue = this.state.sizeRow * sizeCol;
-    if (
+    if (this.state.hasStarted === false) {
+      this.randomizeGrid();
+      this.setState({
+        hasStarted: true
+      })
+    } else if (
       cells[index - 1] &&
       index % sizeCol !== 0 &&
       cells[index - 1].value === blankCellValue
@@ -267,7 +273,6 @@ class App extends Component {
               
         {/* Debug tools */}
         <div className="App--margin-top-3">
-          <button onClick={this.randomizeGrid}>Randomize</button>
           <button onClick={this.winCheck}>Win check</button>
         </div>
 
