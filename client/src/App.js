@@ -28,7 +28,7 @@ class App extends Component {
     this.getImages = this.getImages.bind(this);
     this.changeImage = this.changeImage.bind(this);
     this.chooseCategory = this.chooseCategory.bind(this);
-    this.increaseDifficulty = this.increaseDifficulty.bind(this);
+    this.changeDifficulty = this.changeDifficulty.bind(this);
   }
   componentDidMount() {
     this.gameStart();
@@ -229,7 +229,7 @@ class App extends Component {
       .then(this.setState({isCategoryChosen: true}))
       .catch(err => console.log(err))
   }
-  increaseDifficulty(){
+  changeDifficulty(){
     if(this.state.sizeCol > this.state.sizeRow){ 
       this.setState({
         sizeRow: this.state.sizeRow + 1
@@ -271,9 +271,8 @@ class App extends Component {
           <button onClick={this.winCheck}>Win check</button>
         </div>
 
-        <button onClick={this.getImages}>get images</button>
         <button onClick={this.changeImage}>change image</button>
-        <button onClick={this.increaseDifficulty}>increase difficulty</button>
+        <button onClick={this.changeDifficulty}>increase difficulty</button>
         {this.state.winText}
       </div>
     );
