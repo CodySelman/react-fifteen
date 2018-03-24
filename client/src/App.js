@@ -17,7 +17,7 @@ class App extends Component {
       categories: ['Puppies', 'Kittens', 'Dogs', 'Cats', 'Snails', 'Bugs', 'Birds', 'Dinosaurs', 'Sculptures', 'Paintings', 'Architecture', 'Sailboats'],
       isCategoryChosen: false,
       currentImage: {
-        url: 'https://lmcdesign-rj6zcy7b8ypu79snuv.netdna-ssl.com/wp-content/uploads/2016/01/Shrek_Tile-1-500x500.jpg',
+        url: '',
         height: 500,
         width: 500
       }
