@@ -19,7 +19,7 @@ const CellGrid = props => {
         height: props.currentImage.height + 'px'
     };
     return (
-        <div className='CellGrid--container' style={style}>
+        <div className='CellGrid--container fadeIn' style={style}>
             {cellGrid}
             <button onClick={props.changeImage}>Change Image</button>
         </div>

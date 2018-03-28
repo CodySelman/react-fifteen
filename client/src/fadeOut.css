@@ -1,0 +1,13 @@
+.fadeOut {
+    animation-duration: 1s;
+    animation-name: fadeOut;
+    animation-timing-function: ease-in;
+}
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
