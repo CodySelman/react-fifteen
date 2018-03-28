@@ -21,6 +21,7 @@ const CellGrid = props => {
     return (
         <div className='CellGrid--container' style={style}>
             {cellGrid}
+            <button onClick={props.changeImage}>Change Image</button>
         </div>
     );
 };
@@ -30,7 +31,8 @@ CellGrid.propTypes = {
     handleClick: Proptypes.func.isRequired,
     sizeRow: Proptypes.number.isRequired,
     sizeCol: Proptypes.number.isRequired,
-    currentImage: Proptypes.object.isRequired
+    currentImage: Proptypes.object.isRequired,
+    changeImage: Proptypes.func.isRequired
 }
 
 export default CellGrid;

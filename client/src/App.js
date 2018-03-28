@@ -260,6 +260,7 @@ class App extends Component {
               sizeRow={this.state.sizeRow}
               sizeCol={this.state.sizeCol}
               currentImage={this.state.currentImage}
+              changeImage={this.changeImage}
             />
           </div>
         :
@@ -273,7 +274,6 @@ class App extends Component {
               
         {/* Debug tools */}
 
-        <button onClick={this.changeImage}>change image</button>
         {this.state.winText}
       </div>
     );
