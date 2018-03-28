@@ -2,4 +2,14 @@
     width: 20%;
     height: 6rem;
     margin: 2.5%;
+    border-radius: 10px;
+    box-shadow: 0 0.5rem 1rem 0 rgba(0,0,0,0.2), 0 0.5rem 1.25rem 0 rgba(0,0,0,0.19);
+    background-color: rgba(211,211,211);
+    font-weight: bold;
+    color: rgba(75,75,75);
+    font-size: 1.25rem;
+    transition: 0.3s;
+}
+.CategoryButton--button:hover {
+    background-color: white;
 }
