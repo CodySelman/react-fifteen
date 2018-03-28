@@ -1,6 +1,6 @@
 html, body {
     width: 100%;
-    background-color: grey;
+    background-color: rgb(211, 211, 211);
 }
 
 .App--CellGrid-container {
@@ -13,6 +13,7 @@ html, body {
 .App--heading {
     text-align: center;
     font-size: 6rem;
+    color: rgb(75, 75, 75);
 }
 
 .App--margin-top-3 {

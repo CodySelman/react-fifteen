@@ -1,12 +1,17 @@
 .Cell--cell {
     box-sizing: border-box;
+    border-radius: 15px;
 }
-
+.Cell--cell:hover {
+    border: 1px solid black;
+}
 .Cell--cell-blank {
-    background-color: grey;
+    background-color: rgb(75, 75, 75);
     border: none;
 }
-
+.Cell--cell-blank:hover {
+    border: none;
+}
 button:focus {
     outline: 0;
 }
