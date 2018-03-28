@@ -265,16 +265,13 @@ class App extends Component {
             />
           </div>
         :
-          <div>
+          <div className='App--CellGrid-container'>
             <CategoryGrid 
               categories={this.state.categories}
               chooseCategory={this.chooseCategory}
             />
           </div>
         }
-              
-        {/* Debug tools */}
-
         {this.state.winText}
       </div>
     );

@@ -1,5 +1,6 @@
 .Heading--container {
     display: flex;
+    justify-content: center;
 }
 .Heading--heading {
     text-align: center;
