@@ -1,0 +1,8 @@
+.Heading--container {
+    display: flex;
+}
+.Heading--heading {
+    text-align: center;
+    font-size: 6rem;
+    color: rgb(75, 75, 75);
+}

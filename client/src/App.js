@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import CellGrid from "./CellGrid.js";
 import CategoryGrid from './CategoryGrid.js';
+import Heading from './Heading.js';
 
 import {getImageUrls} from './services/imageUrls.js';
 
@@ -249,7 +250,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <h1 className="App--heading">PixaPuzzler</h1>
+        <Heading />
 
         {this.state.isCategoryChosen 
         ? 
