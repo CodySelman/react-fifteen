@@ -272,12 +272,8 @@ class App extends Component {
         }
               
         {/* Debug tools */}
-        <div className="App--margin-top-3">
-          <button onClick={this.winCheck}>Win check</button>
-        </div>
 
         <button onClick={this.changeImage}>change image</button>
-        <button onClick={this.changeDifficulty}>increase difficulty</button>
         {this.state.winText}
       </div>
     );
