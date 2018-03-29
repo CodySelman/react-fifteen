@@ -3,6 +3,7 @@ import "./App.css";
 import CellGrid from "./CellGrid.js";
 import CategoryGrid from './CategoryGrid.js';
 import Heading from './Heading.js';
+import Loader from './Loader.js';
 
 import {getImageUrls} from './services/imageUrls.js';
 
