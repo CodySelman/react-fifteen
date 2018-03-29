@@ -1,5 +1,13 @@
 Fifteen
 
+
+3/28
+Currently attempting to polish the project before adding any additional features. I would like to have the CellGrid component not render until the puzzle image is loaded. Then I would like to create some kind of animation for when the puzzle is solved. Perhaps more polishing after that. Then make the project responsive across devices.
+After that I would possibly like to add these features:
+-Score and timer
+-High scores stored on server
+Super stretch goal: Logging in functionality, in-game currency earned from solving puzzles and used to unlock new puzzles.
+
 3/17 - 2
 Update:
 
