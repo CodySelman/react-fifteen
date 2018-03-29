@@ -22,7 +22,8 @@ class App extends Component {
         url: '',
         height: 500,
         width: 500
-      }
+      },
+      isLoading: false
     };
     this.randomizeGrid = this.randomizeGrid.bind(this);
     this.winCheck = this.winCheck.bind(this);
@@ -209,6 +210,7 @@ class App extends Component {
           imageUrls: imageUrls
         }, this.changeImage);
       })
+      .then(this.setState({isLoading: true}))
       .catch(error => {
         console.log(error);
       });
@@ -266,6 +268,7 @@ class App extends Component {
             <CategoryGrid 
               categories={this.state.categories}
               getImages={this.getImages}
+              isLoading={this.state.isLoading}
             />
           </div>
         }

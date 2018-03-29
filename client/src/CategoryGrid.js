@@ -10,11 +10,15 @@ const CategoryGrid = props => {
             key={index}
             category={category}
             getImages={props.getImages}
+            isLoading={props.isLoading}
         />
     ));
 
     return (
-        <div className='CategoryGrid--container fadeIn'>
+        <div className={props.isLoading 
+            ? 'CategoryGrid--container fadeOut' 
+            : 'CategoryGrid--container fadeIn'}
+        >
             {categoryGrid}
         </div>
     )
@@ -22,7 +26,8 @@ const CategoryGrid = props => {
 
 CategoryGrid.propTypes = {
     categories: Proptypes.array.isRequired,
-    getImages: Proptypes.func.isRequired 
+    getImages: Proptypes.func.isRequired,
+    isLoading: Proptypes.bool.isRequired
 }
 
 export default CategoryGrid;

@@ -1,7 +1,8 @@
 .fadeOut {
-    animation-duration: 1s;
+    animation-duration: 0.75s;
     animation-name: fadeOut;
     animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
 }
 @keyframes fadeOut {
     from {
