@@ -232,7 +232,8 @@ class App extends Component {
       };
       this.setState({
         currentImage: newImage
-      }, this.setState({isCategoryChosen: true}));
+      }, this.setState({isCategoryChosen: true},
+          this.setState({isLoading: false})));
     }
     img.src = newImageUrl;
   }
@@ -251,28 +252,32 @@ class App extends Component {
     return (
       <div>
         <Heading />
+        <div className='App--CellGrid-container'>
+          {this.state.isLoading
+          ?
+            <Loader />
+          : '' 
+          }
+          {this.state.isCategoryChosen 
+          ? 
+              <CellGrid
+                cells={this.state.cells}
+                handleClick={this.handleClick}
+                sizeRow={this.state.sizeRow}
+                sizeCol={this.state.sizeCol}
+                currentImage={this.state.currentImage}
+                changeImage={this.changeImage}
+              />
+          :
+              <CategoryGrid 
+                categories={this.state.categories}
+                getImages={this.getImages}
+                isLoading={this.state.isLoading}
+              />
+          }
 
-        {this.state.isCategoryChosen 
-        ? 
-          <div className='App--CellGrid-container'>
-            <CellGrid
-              cells={this.state.cells}
-              handleClick={this.handleClick}
-              sizeRow={this.state.sizeRow}
-              sizeCol={this.state.sizeCol}
-              currentImage={this.state.currentImage}
-              changeImage={this.changeImage}
-            />
-          </div>
-        :
-          <div className='App--CellGrid-container'>
-            <CategoryGrid 
-              categories={this.state.categories}
-              getImages={this.getImages}
-              isLoading={this.state.isLoading}
-            />
-          </div>
-        }
+        </div>
+        
         {this.state.winText}
       </div>
     );
