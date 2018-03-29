@@ -9,7 +9,7 @@ const CategoryGrid = props => {
         <CategoryButton 
             key={index}
             category={category}
-            chooseCategory={props.chooseCategory}
+            getImages={props.getImages}
         />
     ));
 
@@ -22,7 +22,7 @@ const CategoryGrid = props => {
 
 CategoryGrid.propTypes = {
     categories: Proptypes.array.isRequired,
-    chooseCategory: Proptypes.func.isRequired 
+    getImages: Proptypes.func.isRequired 
 }
 
 export default CategoryGrid;

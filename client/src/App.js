@@ -29,7 +29,6 @@ class App extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.getImages = this.getImages.bind(this);
     this.changeImage = this.changeImage.bind(this);
-    this.chooseCategory = this.chooseCategory.bind(this);
     this.changeDifficulty = this.changeDifficulty.bind(this);
   }
   componentDidMount() {
@@ -230,15 +229,9 @@ class App extends Component {
       };
       this.setState({
         currentImage: newImage
-      });
+      }, this.setState({isCategoryChosen: true}));
     }
     img.src = newImageUrl;
-  }
-  chooseCategory(searchTerm){
-    Promise.resolve()
-      .then(this.getImages(searchTerm))
-      .then(this.setState({isCategoryChosen: true}))
-      .catch(err => console.log(err))
   }
   changeDifficulty(){
     if(this.state.sizeCol > this.state.sizeRow){ 
@@ -272,7 +265,7 @@ class App extends Component {
           <div className='App--CellGrid-container'>
             <CategoryGrid 
               categories={this.state.categories}
-              chooseCategory={this.chooseCategory}
+              getImages={this.getImages}
             />
           </div>
         }

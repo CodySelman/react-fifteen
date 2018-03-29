@@ -4,13 +4,13 @@ import './CategoryButton.css';
 
 const CategoryButton = props => {
     return (
-        <button className='CategoryButton--button' onClick={() => props.chooseCategory(props.category)}>{props.category}</button>
+        <button className='CategoryButton--button' onClick={() => props.getImages(props.category)}>{props.category}</button>
     )
 }
 
 CategoryButton.propTypes = {
     category: Proptypes.string.isRequired,
-    chooseCategory: Proptypes.func.isRequired
+    getImages: Proptypes.func.isRequired
 }
 
 export default CategoryButton;
