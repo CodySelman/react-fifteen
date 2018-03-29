@@ -221,14 +221,18 @@ class App extends Component {
     const newImageUrl = newImageData.webformatURL;
     const newImageWidth = newImageData.webformatWidth;
     const newImageHeight = newImageData.webformatHeight;
-    const newImage = {
-      url: newImageUrl,
-      width: newImageWidth,
-      height: newImageHeight
-    };
-    this.setState({
-      currentImage: newImage
-    });
+    const img = new Image();
+    img.onload = () => {
+      const newImage = {
+        url: newImageUrl,
+        width: newImageWidth,
+        height: newImageHeight
+      };
+      this.setState({
+        currentImage: newImage
+      });
+    }
+    img.src = newImageUrl;
   }
   chooseCategory(searchTerm){
     Promise.resolve()
