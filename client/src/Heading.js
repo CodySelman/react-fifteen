@@ -8,12 +8,14 @@ const Heading = props => {
             <h1>PixaPuzzler</h1>
             <button>New Game</button>
             <button onClick={props.changeImage}>New Image</button>
+            <p>Score: {props.score}</p>
         </div>
     );
 };
 
 Heading.propTypes = {
-    changeImage: Proptypes.func.isRequired
+    changeImage: Proptypes.func.isRequired,
+    score: Proptypes.number.isRequired
 }
 
 export default Heading;

@@ -38,7 +38,8 @@ class App extends Component {
         width: 500
       },
       isLoading: false,
-      viewingFullImage: false
+      viewingFullImage: false,
+      score: 0
     };
     this.randomizeGrid = this.randomizeGrid.bind(this);
     this.winCheck = this.winCheck.bind(this);
@@ -279,6 +280,7 @@ class App extends Component {
   finishLevel() {
     Promise.resolve()
       .then(this.setState({ isSolved: true }))
+      .then(this.setState({score: this.state.score + 1}))
       .then(this.setState({ isLoading: true }))
       .then(this.changeImage())
       .then(this.setState({hasStarted: false}))
@@ -288,7 +290,10 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Heading changeImage={this.changeImage} />
+        <Heading 
+          changeImage={this.changeImage}
+          score={this.state.score} 
+        />
         <div className="App--CellGrid-container">
           {this.state.isLoading ? <Loader /> : ""}
           {this.state.isCategoryChosen ? (

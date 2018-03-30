@@ -18,8 +18,19 @@
     border-radius: 10px;
     margin: 0.5rem;
     box-shadow: 0 0.5rem 1rem 0 rgba(0,0,0,0.2), 0 0.5rem 1.25rem 0 rgba(0,0,0,0.19);
-    
 }
 .heading button:hover {
     background-color: rgb(100,100,100);
+}
+.heading p {
+    text-align: center;
+    background-color: rgb(125,125,125);
+    color: rgb(211,211,211);
+    font-weight: bold;
+    font-size: 1.25rem;
+    height: 3rem;
+    width: 8rem;
+    border-radius: 10px;
+    margin: 0.5rem;
+    box-shadow: 0 0.5rem 1rem 0 rgba(0,0,0,0.2), 0 0.5rem 1.25rem 0 rgba(0,0,0,0.19);
 }
