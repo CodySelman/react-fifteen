@@ -37,7 +37,8 @@ class App extends Component {
         height: 500,
         width: 500
       },
-      isLoading: false
+      isLoading: false,
+      viewingFullImage: false
     };
     this.randomizeGrid = this.randomizeGrid.bind(this);
     this.winCheck = this.winCheck.bind(this);
@@ -297,6 +298,7 @@ class App extends Component {
               sizeCol={this.state.sizeCol}
               currentImage={this.state.currentImage}
               changeImage={this.changeImage}
+              viewingFullImage={this.state.viewingFullImage}
             />
           ) : (
             <CategoryGrid
@@ -306,6 +308,7 @@ class App extends Component {
             />
           )}
           <button onClick={this.finishLevel}>Finish Level</button>
+          <button onClick={() => this.setState({viewingFullImage: !this.state.viewingFullImage})}>View Full Image</button>
         </div>
       </div>
     );

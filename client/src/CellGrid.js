@@ -21,6 +21,10 @@ const CellGrid = props => {
     return (
         <div className='CellGrid--container fadeIn' style={style}>
             {cellGrid}
+            {props.viewingFullImage ? 
+                <img  className='CellGrid-fullImage' style={style} src={props.currentImage.url} alt="Current Puzzle Image" />
+                : ''
+            }
         </div>
     );
 };
@@ -30,7 +34,8 @@ CellGrid.propTypes = {
     handleClick: Proptypes.func.isRequired,
     sizeRow: Proptypes.number.isRequired,
     sizeCol: Proptypes.number.isRequired,
-    currentImage: Proptypes.object.isRequired
+    currentImage: Proptypes.object.isRequired,
+    viewingFullImage: Proptypes.bool.isRequired
 }
 
 export default CellGrid;
