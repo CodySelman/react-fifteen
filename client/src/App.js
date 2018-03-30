@@ -14,7 +14,7 @@ class App extends Component {
       sizeRow: 2,
       sizeCol: 3,
       cells: [],
-      winText: "",
+      isSolved: false,
       hasStarted: false,
       imageUrls: '',
       categories: ['Puppies', 'Kittens', 'Dogs', 'Cats', 'Snails', 'Bugs', 'Birds', 'Dinosaurs', 'Sculptures', 'Paintings', 'Architecture', 'Sailboats'],
@@ -191,15 +191,14 @@ class App extends Component {
       }
     }
     this.setState({
-      cells: randomCellArray,
-      winText: ""
+      cells: randomCellArray
     });
   }
   winCheck() {
     const winCheckArray = this.state.cells.map(cell => cell.value - 1);
     if (winCheckArray.every((index, element) => index === element)) {
       this.setState({
-        winText: "You Win!"
+        isSolved: true
       });
     }
   }
@@ -279,7 +278,6 @@ class App extends Component {
           }
 
         </div>
-        {this.state.winText}
       </div>
     );
   }
