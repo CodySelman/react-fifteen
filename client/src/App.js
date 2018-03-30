@@ -281,6 +281,7 @@ class App extends Component {
       .then(this.setState({ isSolved: true }))
       .then(this.setState({ isLoading: true }))
       .then(this.changeImage())
+      .then(this.setState({hasStarted: false}))
       .then(this.changeDifficulty())
       .catch(err => console.log(err));
   }
@@ -308,7 +309,9 @@ class App extends Component {
             />
           )}
           <button onClick={this.finishLevel}>Finish Level</button>
-          <button onClick={() => this.setState({viewingFullImage: !this.state.viewingFullImage})}>View Full Image</button>
+          <button onMouseEnter={() => this.setState({viewingFullImage: true})} 
+            onMouseLeave={() => this.setState({viewingFullImage: false})}
+          >View Full Image</button>
         </div>
       </div>
     );
