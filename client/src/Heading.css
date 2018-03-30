@@ -6,7 +6,7 @@
 .heading h1 {
     text-align: center;
     font-size: 6rem;
-    color: rgb(75, 75, 75);
+    color: rgb(75, 75, 75);    
 }
 .heading button {
     background-color: rgb(75,75,75);
@@ -17,6 +17,8 @@
     height: 3rem;
     border-radius: 10px;
     margin: 0.5rem;
+    box-shadow: 0 0.5rem 1rem 0 rgba(0,0,0,0.2), 0 0.5rem 1.25rem 0 rgba(0,0,0,0.19);
+    
 }
 .heading button:hover {
     background-color: rgb(100,100,100);
