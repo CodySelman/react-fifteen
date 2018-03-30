@@ -21,7 +21,6 @@ const CellGrid = props => {
     return (
         <div className='CellGrid--container fadeIn' style={style}>
             {cellGrid}
-            <button onClick={props.changeImage}>Change Image</button>
         </div>
     );
 };
@@ -31,8 +30,7 @@ CellGrid.propTypes = {
     handleClick: Proptypes.func.isRequired,
     sizeRow: Proptypes.number.isRequired,
     sizeCol: Proptypes.number.isRequired,
-    currentImage: Proptypes.object.isRequired,
-    changeImage: Proptypes.func.isRequired
+    currentImage: Proptypes.object.isRequired
 }
 
 export default CellGrid;

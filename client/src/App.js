@@ -251,7 +251,9 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Heading />
+        <Heading 
+          changeImage={this.changeImage}
+        />
         <div className='App--CellGrid-container'>
           {this.state.isLoading
           ?

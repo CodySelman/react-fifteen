@@ -1,4 +1,5 @@
 import React from 'react';
+import Proptypes from 'prop-types';
 import './Heading.css';
 
 const Heading = props => {
@@ -6,9 +7,13 @@ const Heading = props => {
         <div className='heading fadeIn'>
             <h1>PixaPuzzler</h1>
             <button>New Game</button>
-            <button>New Image</button>
+            <button onClick={props.changeImage}>New Image</button>
         </div>
     );
 };
+
+Heading.propTypes = {
+    changeImage: Proptypes.func.isRequired
+}
 
 export default Heading;
