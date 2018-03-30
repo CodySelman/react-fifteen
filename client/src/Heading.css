@@ -1,9 +1,23 @@
-.Heading--container {
+.heading {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
-.Heading--heading {
+.heading h1 {
     text-align: center;
     font-size: 6rem;
     color: rgb(75, 75, 75);
+}
+.heading button {
+    background-color: rgb(75,75,75);
+    color: rgb(211,211,211);
+    font-weight: bold;
+    font-size: 1.25rem;
+    transition: 0.3s;
+    height: 3rem;
+    border-radius: 10px;
+    margin: 0.5rem;
+}
+.heading button:hover {
+    background-color: rgb(100,100,100);
 }
