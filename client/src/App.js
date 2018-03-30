@@ -308,11 +308,14 @@ class App extends Component {
               isLoading={this.state.isLoading}
             />
           )}
-          <button onClick={this.finishLevel}>Finish Level</button>
-          <button onMouseEnter={() => this.setState({viewingFullImage: true})} 
-            onMouseLeave={() => this.setState({viewingFullImage: false})}
-          >View Full Image</button>
         </div>
+
+        <div className='App-bottomButtonContainer'>
+            <button onClick={this.finishLevel}>Finish Level</button>
+            <button onMouseEnter={() => this.setState({viewingFullImage: true})} 
+              onMouseLeave={() => this.setState({viewingFullImage: false})}
+            >View Full Image</button>
+          </div>
       </div>
     );
   }

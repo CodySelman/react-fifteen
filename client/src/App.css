@@ -8,10 +8,28 @@ html, body {
     display: flex;
     justify-content: center;
     align-content: center;
-    min-width: 640px;
-    min-height: 480px;
 }
 
 .App--margin-top-3 {
     margin-top: 3rem;
+}
+.App-bottomButtonContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+.App-bottomButtonContainer button {
+    background-color: rgb(75,75,75);
+    color: rgb(211,211,211);
+    font-weight: bold;
+    font-size: 1.25rem;
+    transition: 0.3s;
+    height: 3rem;
+    border-radius: 10px;
+    margin: 0.5rem;
+    box-shadow: 0 0.5rem 1rem 0 rgba(0,0,0,0.2), 0 0.5rem 1.25rem 0 rgba(0,0,0,0.19);
+}
+.App-bottomButtonContainer button:hover{
+    background-color: rgb(100,100,100);
 }
