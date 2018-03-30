@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import "./App.css";
 import CellGrid from "./CellGrid.js";
-import CategoryGrid from './CategoryGrid.js';
-import Heading from './Heading.js';
-import Loader from './Loader.js';
+import CategoryGrid from "./CategoryGrid.js";
+import Heading from "./Heading.js";
+import Loader from "./Loader.js";
 
-import {getImageUrls} from './services/imageUrls.js';
+import { getImageUrls } from "./services/imageUrls.js";
 
 class App extends Component {
   constructor() {
@@ -16,11 +16,24 @@ class App extends Component {
       cells: [],
       isSolved: false,
       hasStarted: false,
-      imageUrls: '',
-      categories: ['Puppies', 'Kittens', 'Dogs', 'Cats', 'Snails', 'Bugs', 'Birds', 'Dinosaurs', 'Sculptures', 'Paintings', 'Architecture', 'Sailboats'],
+      imageUrls: "",
+      categories: [
+        "Puppies",
+        "Kittens",
+        "Dogs",
+        "Cats",
+        "Snails",
+        "Bugs",
+        "Birds",
+        "Dinosaurs",
+        "Sculptures",
+        "Paintings",
+        "Architecture",
+        "Sailboats"
+      ],
       isCategoryChosen: false,
       currentImage: {
-        url: '',
+        url: "",
         height: 500,
         width: 500
       },
@@ -32,6 +45,7 @@ class App extends Component {
     this.getImages = this.getImages.bind(this);
     this.changeImage = this.changeImage.bind(this);
     this.changeDifficulty = this.changeDifficulty.bind(this);
+    this.finishLevel = this.finishLevel.bind(this);
   }
   componentDidMount() {
     this.gameStart();
@@ -56,7 +70,7 @@ class App extends Component {
       this.randomizeGrid();
       this.setState({
         hasStarted: true
-      })
+      });
     } else if (
       cells[index - 1] &&
       index % sizeCol !== 0 &&
@@ -202,22 +216,25 @@ class App extends Component {
       });
     }
   }
-  getImages(searchTerm){
+  getImages(searchTerm) {
     getImageUrls(searchTerm)
       .then(response => {
         const imageUrls = response.data;
-        this.setState({
-          imageUrls: imageUrls
-        }, this.changeImage);
+        this.setState(
+          {
+            imageUrls: imageUrls
+          },
+          this.changeImage
+        );
       })
-      .then(this.setState({isLoading: true}))
+      .then(this.setState({ isLoading: true }))
       .catch(error => {
         console.log(error);
       });
   }
-  changeImage(){
+  changeImage() {
     const imageUrls = this.state.imageUrls;
-    const newImageIndex = Math.floor( Math.random() * imageUrls.hits.length );
+    const newImageIndex = Math.floor(Math.random() * imageUrls.hits.length);
     const newImageData = imageUrls.hits[newImageIndex];
     const newImageUrl = newImageData.webformatURL;
     const newImageWidth = newImageData.webformatWidth;
@@ -229,54 +246,66 @@ class App extends Component {
         width: newImageWidth,
         height: newImageHeight
       };
-      this.setState({
-        currentImage: newImage
-      }, this.setState({isCategoryChosen: true},
-          this.setState({isLoading: false})));
-    }
+      this.setState(
+        {
+          currentImage: newImage
+        },
+        this.setState(
+          { isCategoryChosen: true },
+          this.setState({ isLoading: false })
+        )
+      );
+    };
     img.src = newImageUrl;
   }
-  changeDifficulty(){
-    if(this.state.sizeCol > this.state.sizeRow){ 
-      this.setState({
-        sizeRow: this.state.sizeRow + 1
-      }, this.gameStart)
+  changeDifficulty() {
+    if (this.state.sizeCol > this.state.sizeRow) {
+      this.setState(
+        {
+          sizeRow: this.state.sizeRow + 1
+        },
+        this.gameStart
+      );
     } else {
-      this.setState({
-        sizeCol: this.state.sizeCol + 1
-      }, this.gameStart)
+      this.setState(
+        {
+          sizeCol: this.state.sizeCol + 1
+        },
+        this.gameStart
+      );
     }
+  }
+  finishLevel() {
+    Promise.resolve()
+      .then(this.setState({ isSolved: true }))
+      .then(this.setState({ isLoading: true }))
+      .then(this.changeImage())
+      .then(this.changeDifficulty())
+      .catch(err => console.log(err));
   }
   render() {
     return (
       <div>
-        <Heading 
-          changeImage={this.changeImage}
-        />
-        <div className='App--CellGrid-container'>
-          {this.state.isLoading
-          ?
-            <Loader />
-          : '' 
-          }
-          {this.state.isCategoryChosen 
-          ? 
-              <CellGrid
-                cells={this.state.cells}
-                handleClick={this.handleClick}
-                sizeRow={this.state.sizeRow}
-                sizeCol={this.state.sizeCol}
-                currentImage={this.state.currentImage}
-                changeImage={this.changeImage}
-              />
-          :
-              <CategoryGrid 
-                categories={this.state.categories}
-                getImages={this.getImages}
-                isLoading={this.state.isLoading}
-              />
-          }
-
+        <Heading changeImage={this.changeImage} />
+        <div className="App--CellGrid-container">
+          {this.state.isLoading ? <Loader /> : ""}
+          {this.state.isCategoryChosen ? (
+            <CellGrid
+              cells={this.state.cells}
+              handleClick={this.handleClick}
+              sizeRow={this.state.sizeRow}
+              sizeCol={this.state.sizeCol}
+              currentImage={this.state.currentImage}
+              changeImage={this.changeImage}
+            />
+          ) : (
+            <CategoryGrid
+              categories={this.state.categories}
+              getImages={this.getImages}
+              isLoading={this.state.isLoading}
+            />
+          )}
+          <button onClick={this.finishLevel}>Finish Level</button>
         </div>
       </div>
     );
