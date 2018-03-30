@@ -8,6 +8,8 @@ html, body {
     display: flex;
     justify-content: center;
     align-content: center;
+    min-width: 640px;
+    min-height: 480px;
 }
 
 .App--margin-top-3 {

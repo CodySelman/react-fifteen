@@ -4,7 +4,9 @@
     border-radius: 50%;
     width: 5rem;
     height: 5rem;
-    animation: spin 1.5s linear infinite;
+    animation: spin 1.5s linear infinite, fadeIn 1s;
+    align-self: center;
+    position: absolute;
 }
 
 @keyframes spin {
