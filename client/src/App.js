@@ -11,8 +11,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      sizeRow: 4,
-      sizeCol: 4,
+      sizeRow: 2,
+      sizeCol: 2,
       cells: [],
       isSolved: false,
       hasStarted: false,
@@ -120,7 +120,7 @@ class App extends Component {
       {selectedCell, value: selectedCell.value},
       ...last
     ];
-    this.setState({cells: newCells});
+    this.setState({cells: newCells}, this.winCheck);
   }
   slideDown(index){
     const selectedCellIndex = this.state.selectedCell;
@@ -136,7 +136,7 @@ class App extends Component {
       {swapCell, value: swapCell.value},
       ...last
     ];
-    this.setState({cells: newCells});
+    this.setState({cells: newCells}, this.winCheck);
   }
   slideLeft(index){
     const swapCell = this.state.cells[index];
@@ -149,7 +149,7 @@ class App extends Component {
       {selectedCell, value: this.state.cells[index - 1].value},
       ...last
     ];
-    this.setState({cells: newCells});
+    this.setState({cells: newCells}, this.winCheck);
   }
   slideRight(index){
     const swapCell = this.state.cells[index];
@@ -162,10 +162,20 @@ class App extends Component {
       {swapCell, value: this.state.cells[index].value},
       ...last
     ];
-    this.setState({cells: newCells});
+    this.setState({cells: newCells}, this.winCheck);
   }
   randomizeGrid(){
-    console.log('randomizeGrid');
+    //Fisher-Yates Shuffle
+    const cells = [...this.state.cells];
+    let currentIndex = cells.length, temporaryValue, randomIndex;
+    while(0 !== currentIndex){
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      temporaryValue = cells[currentIndex];
+      cells[currentIndex] = cells[randomIndex];
+      cells[randomIndex] = temporaryValue;
+    }
+    this.setState({cells: cells})
   }
   winCheck() {
     const winCheckArray = this.state.cells.map(cell => cell.value - 1);
