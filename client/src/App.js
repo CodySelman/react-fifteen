@@ -48,6 +48,7 @@ class App extends Component {
     this.changeImage = this.changeImage.bind(this);
     this.changeDifficulty = this.changeDifficulty.bind(this);
     this.nextLevel = this.nextLevel.bind(this);
+    this.newGame = this.newGame.bind(this);
   }
   componentDidMount() {
     this.gameStart();
@@ -289,12 +290,33 @@ class App extends Component {
       .then(this.changeDifficulty())
       .catch(err => console.log(err));
   }
+  newGame(){
+    this.setState({
+      ...this.state,
+      sizeRow: 2,
+      sizeCol: 2,
+      cells: [],
+      isSolved: false,
+      hasStarted: false,
+      imageUrls: "",
+      isCategoryChosen: false,
+      currentImage: {
+        url: "",
+        height: 500,
+        width: 500
+      },
+      isLoading: false,
+      viewingFullImage: false,
+      score: 0
+    }, this.gameStart)
+  }
   render() {
     return (
       <div>
         <Heading 
           changeImage={this.changeImage}
-          score={this.state.score} 
+          score={this.state.score}
+          newGame={this.newGame}
         />
         <div className="App--CellGrid-container">
           {this.state.isLoading ? <Loader /> : ""}

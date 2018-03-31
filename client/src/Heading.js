@@ -6,7 +6,7 @@ const Heading = props => {
     return(
         <div className='heading fadeIn'>
             <h1>PixaPuzzler</h1>
-            <button>New Game</button>
+            <button onClick={props.newGame}>New Game</button>
             <button onClick={props.changeImage}>New Image</button>
             <p>Score: {props.score}</p>
         </div>
@@ -15,7 +15,8 @@ const Heading = props => {
 
 Heading.propTypes = {
     changeImage: Proptypes.func.isRequired,
-    score: Proptypes.number.isRequired
+    score: Proptypes.number.isRequired,
+    newGame: Proptypes.func.isRequired
 }
 
 export default Heading;
