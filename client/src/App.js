@@ -83,6 +83,19 @@ class App extends Component {
         (index - 1) === this.state.selectedCell
       ) {
         this.slideLeft(index);
+      } else if (
+        cells[index + 1] &&
+        (index + 1) === this.state.selectedCell
+      ) {
+        this.slideRight(index);
+      } else if (
+        cells[index - sizeCol]
+      ) {
+        this.slideUp(index);
+      } else if (
+        cells[index + sizeCol]
+      ) {
+        this.slideDown(index);
       }
       this.setState({selectedCell: null});
     }
