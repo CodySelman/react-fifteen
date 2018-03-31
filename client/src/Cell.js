@@ -7,7 +7,6 @@ const Cell = props => {
   const sizeCol = props.sizeCol;
   const width = 100 / sizeCol;
   const height = 100 / sizeRow;
-  const blankCellValue = sizeRow * sizeCol;
 
   const imageUrl = props.currentImage.url;
   const imageWidth = props.currentImage.width;

@@ -23,7 +23,7 @@ const CellGrid = props => {
         <div className='CellGrid--container fadeIn' style={style}>
             {cellGrid}
             {props.viewingFullImage ? 
-                <img  className='CellGrid-fullImage' style={style} src={props.currentImage.url} alt="Current Puzzle Image" />
+                <img  className='CellGrid-fullImage' style={style} src={props.currentImage.url} alt="Puzzle Solution" />
                 : ''
             }
         </div>
