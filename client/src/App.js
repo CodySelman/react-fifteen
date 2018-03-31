@@ -122,6 +122,17 @@ class App extends Component {
   }
   slideRight(index){
     console.log('slideRight');
+    const swapCell = this.state.cells[index];
+    const selectedCell = this.state.cells[this.state.selectedCell];
+    const first = this.state.cells.slice(0, index);
+    const last = this.state.cells.slice(index + 2);
+    const newCells = [
+      ...first,
+      {selectedCell, value: this.state.cells[index + 1].value},
+      {swapCell, value: this.state.cells[index].value},
+      ...last
+    ];
+    this.setState({cells: newCells});
   }
   randomizeGrid(){
     console.log('randomizeGrid');
