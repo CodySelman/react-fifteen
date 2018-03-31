@@ -108,6 +108,17 @@ class App extends Component {
   }
   slideLeft(index){
     console.log('slideLeft');
+    const swapCell = this.state.cells[index];
+    const selectedCell = this.state.cells[this.state.selectedCell];
+    const first = this.state.cells.slice(0, index - 1);
+    const last = this.state.cells.slice(index + 1);
+    const newCells = [
+      ...first,
+      {swapCell, value: this.state.cells[index].value},
+      {selectedCell, value: this.state.cells[index - 1].value},
+      ...last
+    ];
+    this.setState({cells: newCells});
   }
   slideRight(index){
     console.log('slideRight');
