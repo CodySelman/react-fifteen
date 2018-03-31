@@ -47,7 +47,7 @@ class App extends Component {
     this.getImages = this.getImages.bind(this);
     this.changeImage = this.changeImage.bind(this);
     this.changeDifficulty = this.changeDifficulty.bind(this);
-    this.finishLevel = this.finishLevel.bind(this);
+    this.nextLevel = this.nextLevel.bind(this);
   }
   componentDidMount() {
     this.gameStart();
@@ -278,13 +278,13 @@ class App extends Component {
       );
     }
   }
-  finishLevel() {
+  nextLevel() {
     Promise.resolve()
-      .then(this.setState({ isSolved: true }))
       .then(this.setState({score: this.state.score + 1}))
       .then(this.setState({ isLoading: true }))
       .then(this.changeImage())
       .then(this.setState({hasStarted: false}))
+      .then(this.setState({viewingFullImage: false}))
       .then(this.changeDifficulty())
       .catch(err => console.log(err));
   }
@@ -317,7 +317,10 @@ class App extends Component {
         </div>
 
         <div className='App-bottomButtonContainer'>
-            <button className='fadeIn' onClick={this.finishLevel}>Finish Level</button>
+            { this.state.isSolved ? 
+              <button className='fadeIn' onClick={this.nextLevel}>Next Level</button>
+              : ''
+            }
             <button className='fadeIn' onMouseEnter={() => this.setState({viewingFullImage: true})} 
               onMouseLeave={() => this.state.isSolved ? '' : this.setState({viewingFullImage: false})}
             >View Full Image</button>
