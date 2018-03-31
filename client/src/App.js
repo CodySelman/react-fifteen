@@ -39,7 +39,8 @@ class App extends Component {
       },
       isLoading: false,
       viewingFullImage: false,
-      score: 0
+      score: 0,
+      selectedCell: null
     };
     this.randomizeGrid = this.randomizeGrid.bind(this);
     this.winCheck = this.winCheck.bind(this);
@@ -64,8 +65,20 @@ class App extends Component {
       cells: newCells
     });
   }
-  handleClick(){
-    console.log('handleClick');
+  handleClick(index){
+    console.log('handleClick' + index);
+    const cells = this.state.cells;
+    const sizeCol = this.state.sizeCol;
+    if (this.state.hasStarted === false){
+      this.randomizeGrid();
+      this.setState({hasStarted: true});
+    } else if (!this.state.selectedCell) {
+      console.log('select cell');
+      this.setState({selectedCell: index}, console.log(this.state.selectedCell));
+    } else if (this.state.selectedCell){
+      console.log('swap cells');
+      this.setState({selectedCell: null});
+    }
   }
   slideUp(){
     console.log('slideUp');
