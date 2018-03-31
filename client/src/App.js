@@ -77,19 +77,26 @@ class App extends Component {
       this.setState({selectedCell: index}, console.log(this.state.selectedCell));
     } else if (this.state.selectedCell){
       console.log('swap cells');
+      //slide left
+      if (
+        cells[index - 1] &&
+        (index - 1) === this.state.selectedCell
+      ) {
+        this.slideLeft(index);
+      }
       this.setState({selectedCell: null});
     }
   }
-  slideUp(){
+  slideUp(index){
     console.log('slideUp');
   }
-  slideDown(){
+  slideDown(index){
     console.log('slideDown');
   }
-  slideLeft(){
+  slideLeft(index){
     console.log('slideLeft');
   }
-  slideRight(){
+  slideRight(index){
     console.log('slideRight');
   }
   randomizeGrid(){
