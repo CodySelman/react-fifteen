@@ -26,7 +26,7 @@ const Cell = props => {
   };
   return (
     <button
-      className="Cell--cell"
+      className={props.value === props.selectedCellValue ? "Cell--cell Cell-selected" : "Cell--cell"}
       onClick={props.onClick}
       style={style}
     >
@@ -39,7 +39,8 @@ Cell.Proptypes = {
   onClick: Proptypes.func.isRequired,
   sizeRow: Proptypes.number.isRequired,
   sizeCol: Proptypes.number.isRequired,
-  currentImage: Proptypes.object.isRequired
+  currentImage: Proptypes.object.isRequired,
+  selectedCellValue: Proptypes.number
 };
 
 export default Cell;

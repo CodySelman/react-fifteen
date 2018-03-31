@@ -12,6 +12,7 @@ const CellGrid = props => {
         sizeRow={props.sizeRow}
         sizeCol={props.sizeCol}
         currentImage={props.currentImage}
+        selectedCellValue={props.selectedCellValue}
        />
     ));
     const style = {
@@ -35,7 +36,8 @@ CellGrid.propTypes = {
     sizeRow: Proptypes.number.isRequired,
     sizeCol: Proptypes.number.isRequired,
     currentImage: Proptypes.object.isRequired,
-    viewingFullImage: Proptypes.bool.isRequired
+    viewingFullImage: Proptypes.bool.isRequired,
+    selectedCellValue: Proptypes.number
 }
 
 export default CellGrid;

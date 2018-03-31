@@ -15,3 +15,9 @@
 button:focus {
     outline: 0;
 }
+.Cell-selected{
+    border-color: red;
+}
+.Cell-selected:hover {
+    border: 2px solid red;
+}

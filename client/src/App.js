@@ -66,17 +66,14 @@ class App extends Component {
     });
   }
   handleClick(index){
-    console.log('handleClick' + index);
     const cells = this.state.cells;
     const sizeCol = this.state.sizeCol;
     if (this.state.hasStarted === false){
       this.randomizeGrid();
       this.setState({hasStarted: true});
     } else if (!this.state.selectedCell) {
-      console.log('select cell');
       this.setState({selectedCell: index}, console.log(this.state.selectedCell));
     } else if (this.state.selectedCell){
-      console.log('swap cells');
       //slide left
       if (
         cells[index - 1] &&
@@ -101,18 +98,12 @@ class App extends Component {
     }
   }
   slideUp(index){
-    console.log('slideUp');
     const selectedCellIndex = this.state.selectedCell;
     const first = this.state.cells.slice( 0, selectedCellIndex);
     const selectedCell = this.state.cells[selectedCellIndex];
     const between = this.state.cells.slice( selectedCellIndex + 1, index);
     const swapCell = this.state.cells[index];
     const last = this.state.cells.slice(index + 1);
-    console.log(first);
-    console.log(swapCell);
-    console.log(between);
-    console.log(selectedCell);
-    console.log(last);
     const newCells = [
       ...first,
       {swapCell, value: swapCell.value},
@@ -126,7 +117,6 @@ class App extends Component {
     console.log('slideDown');
   }
   slideLeft(index){
-    console.log('slideLeft');
     const swapCell = this.state.cells[index];
     const selectedCell = this.state.cells[this.state.selectedCell];
     const first = this.state.cells.slice(0, index - 1);
@@ -140,7 +130,6 @@ class App extends Component {
     this.setState({cells: newCells});
   }
   slideRight(index){
-    console.log('slideRight');
     const swapCell = this.state.cells[index];
     const selectedCell = this.state.cells[this.state.selectedCell];
     const first = this.state.cells.slice(0, index);
@@ -421,6 +410,7 @@ class App extends Component {
               currentImage={this.state.currentImage}
               changeImage={this.changeImage}
               viewingFullImage={this.state.viewingFullImage}
+              selectedCellValue={this.state.cells[this.state.selectedCell] ? this.state.cells[this.state.selectedCell].value : null}
             />
           ) : (
             <CategoryGrid
