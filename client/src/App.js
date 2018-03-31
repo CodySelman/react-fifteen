@@ -12,7 +12,7 @@ class App extends Component {
     super();
     this.state = {
       sizeRow: 2,
-      sizeCol: 3,
+      sizeCol: 2,
       cells: [],
       isSolved: false,
       hasStarted: false,
@@ -214,7 +214,8 @@ class App extends Component {
     const winCheckArray = this.state.cells.map(cell => cell.value - 1);
     if (winCheckArray.every((index, element) => index === element)) {
       this.setState({
-        isSolved: true
+        isSolved: true,
+        viewingFullImage: true,
       });
     }
   }
@@ -316,9 +317,9 @@ class App extends Component {
         </div>
 
         <div className='App-bottomButtonContainer'>
-            <button onClick={this.finishLevel}>Finish Level</button>
-            <button onMouseEnter={() => this.setState({viewingFullImage: true})} 
-              onMouseLeave={() => this.setState({viewingFullImage: false})}
+            <button className='fadeIn' onClick={this.finishLevel}>Finish Level</button>
+            <button className='fadeIn' onMouseEnter={() => this.setState({viewingFullImage: true})} 
+              onMouseLeave={() => this.state.isSolved ? '' : this.setState({viewingFullImage: false})}
             >View Full Image</button>
           </div>
       </div>
