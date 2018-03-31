@@ -1,5 +1,7 @@
 Fifteen
 
+3/30
+A fair amount of polish has been added. There are still some features to add and some polish to add. Some notable things are correctly aligning the full image view with the puzzle and making the app mobile responsive. Watching a few people play the game has given me the idea that i need to branch the game off into an alternative path where rather than using the 15 model, I use a model in which you can swap any two pieces. The puzzle just seems too difficult for most people, and I'd like it to be accessible.
 
 3/28
 Currently attempting to polish the project before adding any additional features. I would like to have the CellGrid component not render until the puzzle image is loaded. Then I would like to create some kind of animation for when the puzzle is solved. Perhaps more polishing after that. Then make the project responsive across devices.
