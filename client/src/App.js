@@ -251,7 +251,8 @@ class App extends Component {
       };
       this.setState(
         {
-          currentImage: newImage
+          currentImage: newImage,
+          isSolved: false
         },
         this.setState(
           { isCategoryChosen: true },
