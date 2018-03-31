@@ -102,6 +102,25 @@ class App extends Component {
   }
   slideUp(index){
     console.log('slideUp');
+    const selectedCellIndex = this.state.selectedCell;
+    const first = this.state.cells.slice( 0, selectedCellIndex);
+    const selectedCell = this.state.cells[selectedCellIndex];
+    const between = this.state.cells.slice( selectedCellIndex + 1, index);
+    const swapCell = this.state.cells[index];
+    const last = this.state.cells.slice(index + 1);
+    console.log(first);
+    console.log(swapCell);
+    console.log(between);
+    console.log(selectedCell);
+    console.log(last);
+    const newCells = [
+      ...first,
+      {swapCell, value: swapCell.value},
+      ...between,
+      {selectedCell, value: selectedCell.value},
+      ...last
+    ];
+    this.setState({cells: newCells});
   }
   slideDown(index){
     console.log('slideDown');
