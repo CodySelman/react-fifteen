@@ -22,18 +22,11 @@ const Cell = props => {
   const style = {
     width: width + "%",
     height: height + "%",
-    background:
-      props.value === blankCellValue
-        ? ""
-        : `url(${imageUrl}) ${left}px ${top}px`
+    background: `url(${imageUrl}) ${left}px ${top}px`
   };
   return (
     <button
-      className={
-        props.value === blankCellValue
-          ? "Cell--cell Cell--cell-blank"
-          : "Cell--cell"
-      }
+      className="Cell--cell"
       onClick={props.onClick}
       style={style}
     >
