@@ -5,10 +5,11 @@ import './Heading.css';
 const Heading = props => {
     return(
         <div className='heading fadeIn'>
-            <h1>PixaPuzzler</h1>
-            <button onClick={props.newGame}>New Game</button>
-            <button onClick={props.changeImage}>New Image</button>
-            <p>Score: {props.score}</p>
+            <h1>mix.img</h1>
+            <div>
+                <p>Score: {props.score}</p>
+                <button onClick={props.newGame}>New Game</button>
+            </div>
         </div>
     );
 };
