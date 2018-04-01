@@ -180,6 +180,7 @@ class App extends Component {
       this.setState({
         isSolved: true,
         viewingFullImage: true,
+        score: this.state.score + 1
       });
     }
   }
@@ -245,7 +246,6 @@ class App extends Component {
   }
   nextLevel() {
     Promise.resolve()
-      .then(this.setState({score: this.state.score + 1}))
       .then(this.setState({ isLoading: true }))
       .then(this.changeImage())
       .then(this.setState({hasStarted: false}))

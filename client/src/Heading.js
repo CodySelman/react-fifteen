@@ -7,8 +7,8 @@ const Heading = props => {
         <div className='heading fadeIn'>
             <h1>mix.img</h1>
             <div>
-                <p>Score: {props.score}</p>
                 <button onClick={props.newGame}>New Game</button>
+                <p>Score: {props.score}</p>
             </div>
         </div>
     );
