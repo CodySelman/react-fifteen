@@ -104,17 +104,17 @@ class App extends Component {
     }
   }
   slideUp(index){
-    const selectedCellIndexIndex = this.state.selectedCellIndex;
-    const first = this.state.cells.slice( 0, selectedCellIndexIndex);
-    const selectedCellIndex = this.state.cells[selectedCellIndexIndex];
-    const between = this.state.cells.slice( selectedCellIndexIndex + 1, index);
+    const selectedCellIndex = this.state.selectedCellIndex;
+    const first = this.state.cells.slice( 0, selectedCellIndex);
+    const selectedCell = this.state.cells[selectedCellIndex];
+    const between = this.state.cells.slice( selectedCellIndex + 1, index);
     const swapCell = this.state.cells[index];
     const last = this.state.cells.slice(index + 1);
     const newCells = [
       ...first,
       {swapCell, value: swapCell.value},
       ...between,
-      {selectedCellIndex, value: selectedCellIndex.value},
+      {selectedCell, value: selectedCell.value},
       ...last
     ];
     this.setState({cells: newCells}, this.winCheck);
@@ -124,10 +124,11 @@ class App extends Component {
     const first = this.state.cells.slice(0, index);
     const swapCell = this.state.cells[index];
     const between = this.state.cells.slice(index + 1, selectedCellIndex);
+    const selectedCell = this.state.cells[selectedCellIndex];
     const last = this.state.cells.slice(selectedCellIndex + 1);
     const newCells = [
       ...first,
-      {selectedCellIndex, value: selectedCellIndex.value},
+      {selectedCell, value: selectedCell.value},
       ...between,
       {swapCell, value: swapCell.value},
       ...last
@@ -136,25 +137,25 @@ class App extends Component {
   }
   slideLeft(index){
     const swapCell = this.state.cells[index];
-    const selectedCellIndex = this.state.cells[this.state.selectedCellIndex];
+    const selectedCell = this.state.cells[this.state.selectedCellIndex];
     const first = this.state.cells.slice(0, index - 1);
     const last = this.state.cells.slice(index + 1);
     const newCells = [
       ...first,
       {swapCell, value: this.state.cells[index].value},
-      {selectedCellIndex, value: this.state.cells[index - 1].value},
+      {selectedCell, value: this.state.cells[index - 1].value},
       ...last
     ];
     this.setState({cells: newCells}, this.winCheck);
   }
   slideRight(index){
     const swapCell = this.state.cells[index];
-    const selectedCellIndex = this.state.cells[this.state.selectedCellIndex];
+    const selectedCell = this.state.cells[this.state.selectedCellIndex];
     const first = this.state.cells.slice(0, index);
     const last = this.state.cells.slice(index + 2);
     const newCells = [
       ...first,
-      {selectedCellIndex, value: this.state.cells[index + 1].value},
+      {selectedCell, value: this.state.cells[index + 1].value},
       {swapCell, value: this.state.cells[index].value},
       ...last
     ];
@@ -291,7 +292,7 @@ class App extends Component {
               currentImage={this.state.currentImage}
               changeImage={this.changeImage}
               viewingFullImage={this.state.viewingFullImage}
-              selectedCellIndexValue={this.state.cells[this.state.selectedCell] ? this.state.cells[this.state.selectedCellIndex].value : null}
+              selectedCellValue={this.state.cells[this.state.selectedCellIndex] ? this.state.cells[this.state.selectedCellIndex].value : null}
             />
           ) : (
             <CategoryGrid
