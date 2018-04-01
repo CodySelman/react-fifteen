@@ -7,7 +7,6 @@ const Cell = props => {
   const sizeCol = props.sizeCol;
   const width = 100 / sizeCol;
   const height = 100 / sizeRow;
-  const blankCellValue = sizeRow * sizeCol;
 
   const imageUrl = props.currentImage.url;
   const imageWidth = props.currentImage.width;
@@ -22,18 +21,11 @@ const Cell = props => {
   const style = {
     width: width + "%",
     height: height + "%",
-    background:
-      props.value === blankCellValue
-        ? ""
-        : `url(${imageUrl}) ${left}px ${top}px`
+    background: `url(${imageUrl}) ${left}px ${top}px`
   };
   return (
     <button
-      className={
-        props.value === blankCellValue
-          ? "Cell--cell Cell--cell-blank"
-          : "Cell--cell"
-      }
+      className={props.value === props.selectedCellValue ? "Cell--cell Cell-selected" : "Cell--cell"}
       onClick={props.onClick}
       style={style}
     >
@@ -46,7 +38,8 @@ Cell.Proptypes = {
   onClick: Proptypes.func.isRequired,
   sizeRow: Proptypes.number.isRequired,
   sizeCol: Proptypes.number.isRequired,
-  currentImage: Proptypes.object.isRequired
+  currentImage: Proptypes.object.isRequired,
+  selectedCellValue: Proptypes.number
 };
 
 export default Cell;

@@ -39,7 +39,8 @@ class App extends Component {
       },
       isLoading: false,
       viewingFullImage: false,
-      score: 0
+      score: 0,
+      selectedCellIndex: null
     };
     this.randomizeGrid = this.randomizeGrid.bind(this);
     this.winCheck = this.winCheck.bind(this);
@@ -64,152 +65,114 @@ class App extends Component {
       cells: newCells
     });
   }
-  handleClick(index) {
-    //if there is a cell above, below, left, or right of clicked cell, with value 0, swapCell
+  handleClick(index){
     const cells = this.state.cells;
     const sizeCol = this.state.sizeCol;
-    const blankCellValue = this.state.sizeRow * sizeCol;
-    if (this.state.hasStarted === false) {
+    if (this.state.hasStarted === false){
       this.randomizeGrid();
-      this.setState({
-        hasStarted: true
-      });
-    } else if (
-      cells[index - 1] &&
-      index % sizeCol !== 0 &&
-      cells[index - 1].value === blankCellValue
-    ) {
-      this.slideLeft(index);
-    } else if (
-      cells[index - sizeCol] &&
-      cells[index - sizeCol].value === blankCellValue
-    ) {
-      this.slideUp(index);
-    } else if (
-      cells[index + 1] &&
-      index % sizeCol !== sizeCol - 1 &&
-      cells[index + 1].value === blankCellValue
-    ) {
-      this.slideRight(index);
-    } else if (
-      cells[index + sizeCol] &&
-      cells[index + sizeCol].value === blankCellValue
-    ) {
-      this.slideDown(index);
+      this.setState({hasStarted: true});
+    } else if (!this.state.selectedCellIndex) {
+      this.setState({selectedCellIndex: index});
+    } else if (this.state.selectedCellIndex && this.state.selectedCellIndex === index) {
+      this.setState({selectedCellIndex: null});
+    } else if (this.state.selectedCellIndex && this.state.selectedCellIndex !== index){
+      const selectedCellIndex = this.state.selectedCellIndex;
+      if (
+        cells[index - 1] &&
+        (index - 1) === selectedCellIndex &&
+        index % sizeCol !==0
+      ) {
+        this.slideLeft(index);
+      } else if (
+        cells[index + 1] &&
+        (index + 1) === selectedCellIndex &&
+        index % sizeCol !== sizeCol - 1
+      ) {
+        this.slideRight(index);
+      } else if (
+        cells[index - sizeCol] &&
+        index - sizeCol === selectedCellIndex
+      ) {
+        this.slideUp(index);
+      } else if (
+        cells[index + sizeCol] &&
+        index + sizeCol === selectedCellIndex
+      ) {
+        this.slideDown(index);
+      }
+      this.setState({selectedCellIndex: null});
     }
   }
-  slideUp(index) {
-    const sizeCol = this.state.sizeCol;
-    const blankCellValue = this.state.sizeRow * sizeCol;
-    const first = this.state.cells.slice(0, index - sizeCol);
-    const blankCell = this.state.cells[index - sizeCol];
-    const between = this.state.cells.slice(index - sizeCol + 1, index);
-    const clickedCell = this.state.cells[index];
+  slideUp(index){
+    const selectedCellIndex = this.state.selectedCellIndex;
+    const first = this.state.cells.slice( 0, selectedCellIndex);
+    const selectedCell = this.state.cells[selectedCellIndex];
+    const between = this.state.cells.slice( selectedCellIndex + 1, index);
+    const swapCell = this.state.cells[index];
     const last = this.state.cells.slice(index + 1);
     const newCells = [
       ...first,
-      { blankCell, value: this.state.cells[index].value },
+      {swapCell, value: swapCell.value},
       ...between,
-      { clickedCell, value: blankCellValue },
+      {selectedCell, value: selectedCell.value},
       ...last
     ];
-    this.setState({ cells: newCells }, this.winCheck);
+    this.setState({cells: newCells}, this.winCheck);
   }
-  slideDown(index) {
-    const sizeCol = this.state.sizeCol;
-    const blankCellValue = this.state.sizeRow * sizeCol;
+  slideDown(index){
+    const selectedCellIndex = this.state.selectedCellIndex;
     const first = this.state.cells.slice(0, index);
-    const clickedCell = this.state.cells[index];
-    const between = this.state.cells.slice(index + 1, index + sizeCol);
-    const blankCell = this.state.cells[index + sizeCol];
-    const last = this.state.cells.slice(index + sizeCol + 1);
+    const swapCell = this.state.cells[index];
+    const between = this.state.cells.slice(index + 1, selectedCellIndex);
+    const selectedCell = this.state.cells[selectedCellIndex];
+    const last = this.state.cells.slice(selectedCellIndex + 1);
     const newCells = [
       ...first,
-      { clickedCell, value: blankCellValue },
+      {selectedCell, value: selectedCell.value},
       ...between,
-      { blankCell, value: this.state.cells[index].value },
+      {swapCell, value: swapCell.value},
       ...last
     ];
-    this.setState({ cells: newCells }, this.winCheck);
+    this.setState({cells: newCells}, this.winCheck);
   }
-  slideRight(index) {
-    const blankCellValue = this.state.sizeRow * this.state.sizeCol;
-    const first = this.state.cells.slice(0, index);
-    const clickedCell = this.state.cells[index];
-    const blankCell = this.state.cells[index + 1];
-    const last = this.state.cells.slice(index + 2);
-    const newCells = [
-      ...first,
-      { clickedCell, value: blankCellValue },
-      { blankCell, value: this.state.cells[index].value },
-      ...last
-    ];
-    this.setState({ cells: newCells }, this.winCheck);
-  }
-  slideLeft(index) {
-    const blankCellValue = this.state.sizeRow * this.state.sizeCol;
-    const clickedCell = this.state.cells[index];
-    const blankCell = this.state.cells[index - 1];
+  slideLeft(index){
+    const swapCell = this.state.cells[index];
+    const selectedCell = this.state.cells[this.state.selectedCellIndex];
     const first = this.state.cells.slice(0, index - 1);
     const last = this.state.cells.slice(index + 1);
     const newCells = [
       ...first,
-      { blankCell, value: this.state.cells[index].value },
-      { clickedCell, value: blankCellValue },
+      {swapCell, value: this.state.cells[index].value},
+      {selectedCell, value: this.state.cells[index - 1].value},
       ...last
     ];
-    this.setState({ cells: newCells }, this.winCheck);
+    this.setState({cells: newCells}, this.winCheck);
   }
-  randomizeGrid() {
-    const sizeCol = this.state.sizeCol;
-    const gridSize = sizeCol * this.state.sizeRow;
-    let randomCellArray = this.state.cells;
-    let emptyCellIndex = randomCellArray.findIndex(
-      item => item.value === gridSize
-    );
-    for (let i = 0; i < gridSize * 100; i += 1) {
-      const randomSlide = Math.floor(Math.random() * 4);
-      if (
-        randomSlide === 0 &&
-        emptyCellIndex % sizeCol !== sizeCol - 1 &&
-        randomCellArray[emptyCellIndex + 1]
-      ) {
-        const temp = randomCellArray[emptyCellIndex];
-        randomCellArray[emptyCellIndex] = randomCellArray[emptyCellIndex + 1];
-        randomCellArray[emptyCellIndex + 1] = temp;
-        emptyCellIndex += 1;
-      } else if (
-        randomSlide === 1 &&
-        this.state.cells[emptyCellIndex + sizeCol]
-      ) {
-        const temp = randomCellArray[emptyCellIndex];
-        randomCellArray[emptyCellIndex] =
-          randomCellArray[emptyCellIndex + sizeCol];
-        randomCellArray[emptyCellIndex + sizeCol] = temp;
-        emptyCellIndex += sizeCol;
-      } else if (
-        randomSlide === 2 &&
-        emptyCellIndex % sizeCol !== 0 &&
-        this.state.cells[emptyCellIndex - 1]
-      ) {
-        const temp = randomCellArray[emptyCellIndex];
-        randomCellArray[emptyCellIndex] = randomCellArray[emptyCellIndex - 1];
-        randomCellArray[emptyCellIndex - 1] = temp;
-        emptyCellIndex -= 1;
-      } else if (
-        randomSlide === 3 &&
-        this.state.cells[emptyCellIndex - sizeCol]
-      ) {
-        const temp = randomCellArray[emptyCellIndex];
-        randomCellArray[emptyCellIndex] =
-          randomCellArray[emptyCellIndex - sizeCol];
-        randomCellArray[emptyCellIndex - sizeCol] = temp;
-        emptyCellIndex -= sizeCol;
-      }
+  slideRight(index){
+    const swapCell = this.state.cells[index];
+    const selectedCell = this.state.cells[this.state.selectedCellIndex];
+    const first = this.state.cells.slice(0, index);
+    const last = this.state.cells.slice(index + 2);
+    const newCells = [
+      ...first,
+      {selectedCell, value: this.state.cells[index + 1].value},
+      {swapCell, value: this.state.cells[index].value},
+      ...last
+    ];
+    this.setState({cells: newCells}, this.winCheck);
+  }
+  randomizeGrid(){
+    //Fisher-Yates Shuffle
+    const cells = [...this.state.cells];
+    let currentIndex = cells.length, temporaryValue, randomIndex;
+    while(0 !== currentIndex){
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      temporaryValue = cells[currentIndex];
+      cells[currentIndex] = cells[randomIndex];
+      cells[randomIndex] = temporaryValue;
     }
-    this.setState({
-      cells: randomCellArray
-    });
+    this.setState({cells: cells})
   }
   winCheck() {
     const winCheckArray = this.state.cells.map(cell => cell.value - 1);
@@ -329,6 +292,7 @@ class App extends Component {
               currentImage={this.state.currentImage}
               changeImage={this.changeImage}
               viewingFullImage={this.state.viewingFullImage}
+              selectedCellValue={this.state.cells[this.state.selectedCellIndex] ? this.state.cells[this.state.selectedCellIndex].value : null}
             />
           ) : (
             <CategoryGrid
