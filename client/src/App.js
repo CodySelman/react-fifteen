@@ -40,7 +40,7 @@ class App extends Component {
       isLoading: false,
       viewingFullImage: false,
       score: 0,
-      selectedCellIndex: null
+      selectedCellIndex: null,
     };
     this.randomizeGrid = this.randomizeGrid.bind(this);
     this.winCheck = this.winCheck.bind(this);
@@ -50,6 +50,7 @@ class App extends Component {
     this.changeDifficulty = this.changeDifficulty.bind(this);
     this.nextLevel = this.nextLevel.bind(this);
     this.newGame = this.newGame.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
   }
   componentDidMount() {
     this.gameStart();
@@ -65,27 +66,33 @@ class App extends Component {
       cells: newCells
     });
   }
-  handleClick(index){
+  handleClick(index) {
     const cells = this.state.cells;
     const sizeCol = this.state.sizeCol;
-    if (this.state.hasStarted === false){
+    if (this.state.hasStarted === false) {
       this.randomizeGrid();
-      this.setState({hasStarted: true});
+      this.setState({ hasStarted: true });
     } else if (!this.state.selectedCellIndex) {
-      this.setState({selectedCellIndex: index});
-    } else if (this.state.selectedCellIndex && this.state.selectedCellIndex === index) {
-      this.setState({selectedCellIndex: null});
-    } else if (this.state.selectedCellIndex && this.state.selectedCellIndex !== index){
+      this.setState({ selectedCellIndex: index });
+    } else if (
+      this.state.selectedCellIndex &&
+      this.state.selectedCellIndex === index
+    ) {
+      this.setState({ selectedCellIndex: null });
+    } else if (
+      this.state.selectedCellIndex &&
+      this.state.selectedCellIndex !== index
+    ) {
       const selectedCellIndex = this.state.selectedCellIndex;
       if (
         cells[index - 1] &&
-        (index - 1) === selectedCellIndex &&
-        index % sizeCol !==0
+        index - 1 === selectedCellIndex &&
+        index % sizeCol !== 0
       ) {
         this.slideLeft(index);
       } else if (
         cells[index + 1] &&
-        (index + 1) === selectedCellIndex &&
+        index + 1 === selectedCellIndex &&
         index % sizeCol !== sizeCol - 1
       ) {
         this.slideRight(index);
@@ -100,26 +107,53 @@ class App extends Component {
       ) {
         this.slideDown(index);
       }
-      this.setState({selectedCellIndex: null});
+      this.setState({ selectedCellIndex: null });
     }
   }
-  slideUp(index){
+  handleKeyPress(e) {
     const selectedCellIndex = this.state.selectedCellIndex;
-    const first = this.state.cells.slice( 0, selectedCellIndex);
+    const cells = this.state.cells;
+    const sizeCol = this.state.sizeCol;
+    if (this.state.selectedCellIndex === null) {
+      this.setState({ selectedCellIndex: 0 });
+    } else {
+      if (
+        e.key === "ArrowRight" &&
+        cells[selectedCellIndex + 1] &&
+        selectedCellIndex % sizeCol !== sizeCol - 1
+      ) {
+        this.setState({ selectedCellIndex: selectedCellIndex + 1 });
+      } else if (
+        e.key === "ArrowLeft" &&
+        cells[selectedCellIndex - 1] &&
+        selectedCellIndex % sizeCol !== 0
+      ) {
+        this.setState({ selectedCellIndex: selectedCellIndex - 1 });
+      } else if (e.key === "ArrowUp" && cells[selectedCellIndex - sizeCol]) {
+        this.setState({ selectedCellIndex: selectedCellIndex - sizeCol });
+      } else if (e.key === "ArrowDown" && cells[selectedCellIndex + sizeCol]) {
+        this.setState({ selectedCellIndex: selectedCellIndex + sizeCol });
+      } else if (e.key === "Enter") {
+      }
+    }
+  }
+  slideUp(index) {
+    const selectedCellIndex = this.state.selectedCellIndex;
+    const first = this.state.cells.slice(0, selectedCellIndex);
     const selectedCell = this.state.cells[selectedCellIndex];
-    const between = this.state.cells.slice( selectedCellIndex + 1, index);
+    const between = this.state.cells.slice(selectedCellIndex + 1, index);
     const swapCell = this.state.cells[index];
     const last = this.state.cells.slice(index + 1);
     const newCells = [
       ...first,
-      {swapCell, value: swapCell.value},
+      { swapCell, value: swapCell.value },
       ...between,
-      {selectedCell, value: selectedCell.value},
+      { selectedCell, value: selectedCell.value },
       ...last
     ];
-    this.setState({cells: newCells}, this.winCheck);
+    this.setState({ cells: newCells }, this.winCheck);
   }
-  slideDown(index){
+  slideDown(index) {
     const selectedCellIndex = this.state.selectedCellIndex;
     const first = this.state.cells.slice(0, index);
     const swapCell = this.state.cells[index];
@@ -128,51 +162,53 @@ class App extends Component {
     const last = this.state.cells.slice(selectedCellIndex + 1);
     const newCells = [
       ...first,
-      {selectedCell, value: selectedCell.value},
+      { selectedCell, value: selectedCell.value },
       ...between,
-      {swapCell, value: swapCell.value},
+      { swapCell, value: swapCell.value },
       ...last
     ];
-    this.setState({cells: newCells}, this.winCheck);
+    this.setState({ cells: newCells }, this.winCheck);
   }
-  slideLeft(index){
+  slideLeft(index) {
     const swapCell = this.state.cells[index];
     const selectedCell = this.state.cells[this.state.selectedCellIndex];
     const first = this.state.cells.slice(0, index - 1);
     const last = this.state.cells.slice(index + 1);
     const newCells = [
       ...first,
-      {swapCell, value: this.state.cells[index].value},
-      {selectedCell, value: this.state.cells[index - 1].value},
+      { swapCell, value: this.state.cells[index].value },
+      { selectedCell, value: this.state.cells[index - 1].value },
       ...last
     ];
-    this.setState({cells: newCells}, this.winCheck);
+    this.setState({ cells: newCells }, this.winCheck);
   }
-  slideRight(index){
+  slideRight(index) {
     const swapCell = this.state.cells[index];
     const selectedCell = this.state.cells[this.state.selectedCellIndex];
     const first = this.state.cells.slice(0, index);
     const last = this.state.cells.slice(index + 2);
     const newCells = [
       ...first,
-      {selectedCell, value: this.state.cells[index + 1].value},
-      {swapCell, value: this.state.cells[index].value},
+      { selectedCell, value: this.state.cells[index + 1].value },
+      { swapCell, value: this.state.cells[index].value },
       ...last
     ];
-    this.setState({cells: newCells}, this.winCheck);
+    this.setState({ cells: newCells }, this.winCheck);
   }
-  randomizeGrid(){
+  randomizeGrid() {
     //Fisher-Yates Shuffle
     const cells = [...this.state.cells];
-    let currentIndex = cells.length, temporaryValue, randomIndex;
-    while(0 !== currentIndex){
+    let currentIndex = cells.length,
+      temporaryValue,
+      randomIndex;
+    while (0 !== currentIndex) {
       randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex -= 1;
       temporaryValue = cells[currentIndex];
       cells[currentIndex] = cells[randomIndex];
       cells[randomIndex] = temporaryValue;
     }
-    this.setState({cells: cells})
+    this.setState({ cells: cells });
   }
   winCheck() {
     const winCheckArray = this.state.cells.map(cell => cell.value - 1);
@@ -248,35 +284,38 @@ class App extends Component {
     Promise.resolve()
       .then(this.setState({ isLoading: true }))
       .then(this.changeImage())
-      .then(this.setState({hasStarted: false}))
-      .then(this.setState({viewingFullImage: false}))
+      .then(this.setState({ hasStarted: false }))
+      .then(this.setState({ viewingFullImage: false }))
       .then(this.changeDifficulty())
       .catch(err => console.log(err));
   }
-  newGame(){
-    this.setState({
-      ...this.state,
-      sizeRow: 2,
-      sizeCol: 2,
-      cells: [],
-      isSolved: false,
-      hasStarted: false,
-      imageUrls: "",
-      isCategoryChosen: false,
-      currentImage: {
-        url: "",
-        height: 500,
-        width: 500
+  newGame() {
+    this.setState(
+      {
+        ...this.state,
+        sizeRow: 2,
+        sizeCol: 2,
+        cells: [],
+        isSolved: false,
+        hasStarted: false,
+        imageUrls: "",
+        isCategoryChosen: false,
+        currentImage: {
+          url: "",
+          height: 500,
+          width: 500
+        },
+        isLoading: false,
+        viewingFullImage: false,
+        score: 0
       },
-      isLoading: false,
-      viewingFullImage: false,
-      score: 0
-    }, this.gameStart)
+      this.gameStart
+    );
   }
   render() {
     return (
       <div>
-        <Heading 
+        <Heading
           changeImage={this.changeImage}
           score={this.state.score}
           newGame={this.newGame}
@@ -292,7 +331,13 @@ class App extends Component {
               currentImage={this.state.currentImage}
               changeImage={this.changeImage}
               viewingFullImage={this.state.viewingFullImage}
-              selectedCellValue={this.state.cells[this.state.selectedCellIndex] ? this.state.cells[this.state.selectedCellIndex].value : null}
+              selectedCellValue={
+                this.state.cells[this.state.selectedCellIndex]
+                  ? this.state.cells[this.state.selectedCellIndex].value
+                  : null
+              }
+              handleKeyPress={this.handleKeyPress}
+              
             />
           ) : (
             <CategoryGrid
@@ -303,22 +348,35 @@ class App extends Component {
           )}
         </div>
 
-        <div className='App-bottomButtonContainer'>
-            { this.state.isSolved ? 
-              <button className='fadeIn' onClick={this.nextLevel}>Next Level</button>
-              : ''
-            }
-            {this.state.hasStarted ? 
-              <button className='fadeIn' 
-                      onMouseEnter={() => this.setState({viewingFullImage: true})} 
-                      onMouseLeave={() => this.state.isSolved ? '' : this.setState({viewingFullImage: false})}
-                      onClick={() => this.setState({viewingFullImage: !this.state.viewingFullImage})}
-                >View Full Image
-              </button>
-              : '' 
-            }
-            
-          </div>
+        <div className="App-bottomButtonContainer">
+          {this.state.isSolved ? (
+            <button className="fadeIn" onClick={this.nextLevel}>
+              Next Level
+            </button>
+          ) : (
+            ""
+          )}
+          {this.state.hasStarted ? (
+            <button
+              className="fadeIn"
+              onMouseEnter={() => this.setState({ viewingFullImage: true })}
+              onMouseLeave={() =>
+                this.state.isSolved
+                  ? ""
+                  : this.setState({ viewingFullImage: false })
+              }
+              onClick={() =>
+                this.setState({
+                  viewingFullImage: !this.state.viewingFullImage
+                })
+              }
+            >
+              View Full Image
+            </button>
+          ) : (
+            ""
+          )}
+        </div>
       </div>
     );
   }

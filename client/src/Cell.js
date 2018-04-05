@@ -25,7 +25,11 @@ const Cell = props => {
   };
   return (
     <button
-      className={props.value === props.selectedCellValue ? "Cell--cell Cell-selected" : "Cell--cell"}
+      className={props.value === props.selectedCellValue ? 
+        "Cell--cell Cell-selected" 
+        : "Cell--cell"
+        
+      }
       onClick={props.onClick}
       style={style}
     >
@@ -39,7 +43,8 @@ Cell.Proptypes = {
   sizeRow: Proptypes.number.isRequired,
   sizeCol: Proptypes.number.isRequired,
   currentImage: Proptypes.object.isRequired,
-  selectedCellValue: Proptypes.number
+  selectedCellValue: Proptypes.number,
+  swapCellValue: Proptypes.number
 };
 
 export default Cell;
