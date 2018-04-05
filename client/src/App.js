@@ -308,9 +308,16 @@ class App extends Component {
               <button className='fadeIn' onClick={this.nextLevel}>Next Level</button>
               : ''
             }
-            <button className='fadeIn' onMouseEnter={() => this.setState({viewingFullImage: true})} 
-              onMouseLeave={() => this.state.isSolved ? '' : this.setState({viewingFullImage: false})}
-            >View Full Image</button>
+            {this.state.hasStarted ? 
+              <button className='fadeIn' 
+                      onMouseEnter={() => this.setState({viewingFullImage: true})} 
+                      onMouseLeave={() => this.state.isSolved ? '' : this.setState({viewingFullImage: false})}
+                      onClick={() => this.setState({viewingFullImage: !this.state.viewingFullImage})}
+                >View Full Image
+              </button>
+              : '' 
+            }
+            
           </div>
       </div>
     );
