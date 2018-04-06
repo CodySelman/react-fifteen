@@ -41,6 +41,7 @@ class App extends Component {
       viewingFullImage: false,
       score: 0,
       selectedCellIndex: null,
+      isSwapping: false
     };
     this.randomizeGrid = this.randomizeGrid.bind(this);
     this.winCheck = this.winCheck.bind(this);
@@ -114,9 +115,10 @@ class App extends Component {
     const selectedCellIndex = this.state.selectedCellIndex;
     const cells = this.state.cells;
     const sizeCol = this.state.sizeCol;
+    const isSwapping = this.state.isSwapping;
     if (this.state.selectedCellIndex === null) {
       this.setState({ selectedCellIndex: 0 });
-    } else {
+    } else if (!isSwapping){
       if (
         e.key === "ArrowRight" &&
         cells[selectedCellIndex + 1] &&
@@ -129,11 +131,48 @@ class App extends Component {
         selectedCellIndex % sizeCol !== 0
       ) {
         this.setState({ selectedCellIndex: selectedCellIndex - 1 });
-      } else if (e.key === "ArrowUp" && cells[selectedCellIndex - sizeCol]) {
+      } else if (
+        e.key === "ArrowUp" &&
+        cells[selectedCellIndex - sizeCol]
+      ) {
         this.setState({ selectedCellIndex: selectedCellIndex - sizeCol });
-      } else if (e.key === "ArrowDown" && cells[selectedCellIndex + sizeCol]) {
+      } else if (
+        e.key === "ArrowDown" &&
+        cells[selectedCellIndex + sizeCol]
+      ) {
         this.setState({ selectedCellIndex: selectedCellIndex + sizeCol });
       } else if (e.key === "Enter") {
+        this.setState({isSwapping: true});
+      }
+    } else if (isSwapping){
+      if (
+        e.key === "ArrowRight" &&
+        cells[selectedCellIndex + 1] &&
+        selectedCellIndex % sizeCol !== sizeCol - 1
+      ) {
+        this.slideRight(selectedCellIndex)
+        this.setState({isSwapping: false});
+      } else if (
+        e.key === "ArrowLeft" &&
+        cells[selectedCellIndex - 1] &&
+        selectedCellIndex % sizeCol !== 0
+      ) {
+        this.slideLeft(selectedCellIndex);
+        this.setState({isSwapping: false});
+      } else if (
+        e.key === "ArrowUp" &&
+        cells[selectedCellIndex - sizeCol]
+      ) {
+        this.slideDown(selectedCellIndex);
+        this.setState({isSwapping: false});
+      } else if (
+        e.key === "ArrowDown" &&
+        cells[selectedCellIndex + sizeCol]
+      ) {
+        this.slideUp(selectedCellIndex);
+        this.setState({isSwapping: false});
+      } else if (e.key === "Enter") {
+        this.setState({isSwapping: false});
       }
     }
   }
@@ -337,7 +376,6 @@ class App extends Component {
                   : null
               }
               handleKeyPress={this.handleKeyPress}
-              
             />
           ) : (
             <CategoryGrid
