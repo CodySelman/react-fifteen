@@ -118,7 +118,7 @@ class App extends Component {
     const isSwapping = this.state.isSwapping;
     if (this.state.selectedCellIndex === null) {
       this.setState({ selectedCellIndex: 0 });
-    } else if (!isSwapping){
+    } else if (isSwapping === false){
       if (
         e.key === "ArrowRight" &&
         cells[selectedCellIndex + 1] &&
@@ -144,7 +144,7 @@ class App extends Component {
       } else if (e.key === "Enter") {
         this.setState({isSwapping: true});
       }
-    } else if (isSwapping){
+    } else if (isSwapping === true){
       if (
         e.key === "ArrowRight" &&
         cells[selectedCellIndex + 1] &&
@@ -163,13 +163,13 @@ class App extends Component {
         e.key === "ArrowUp" &&
         cells[selectedCellIndex - sizeCol]
       ) {
-        this.slideDown(selectedCellIndex);
+        this.slideUp(selectedCellIndex + sizeCol);
         this.setState({isSwapping: false});
       } else if (
         e.key === "ArrowDown" &&
         cells[selectedCellIndex + sizeCol]
       ) {
-        this.slideUp(selectedCellIndex);
+        this.slideDown(selectedCellIndex - sizeCol);
         this.setState({isSwapping: false});
       } else if (e.key === "Enter") {
         this.setState({isSwapping: false});
