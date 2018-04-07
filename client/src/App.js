@@ -41,7 +41,8 @@ class App extends Component {
       viewingFullImage: false,
       score: 0,
       selectedCellIndex: null,
-      isSwapping: false
+      isSwapping: false,
+      usingMouse: true
     };
     this.randomizeGrid = this.randomizeGrid.bind(this);
     this.winCheck = this.winCheck.bind(this);
@@ -70,45 +71,51 @@ class App extends Component {
   handleClick(index) {
     const cells = this.state.cells;
     const sizeCol = this.state.sizeCol;
-    if (this.state.hasStarted === false) {
-      this.randomizeGrid();
-      this.setState({ hasStarted: true });
-    } else if (!this.state.selectedCellIndex) {
-      this.setState({ selectedCellIndex: index });
-    } else if (
-      this.state.selectedCellIndex &&
-      this.state.selectedCellIndex === index
-    ) {
-      this.setState({ selectedCellIndex: null });
-    } else if (
-      this.state.selectedCellIndex &&
-      this.state.selectedCellIndex !== index
-    ) {
-      const selectedCellIndex = this.state.selectedCellIndex;
-      if (
-        cells[index - 1] &&
-        index - 1 === selectedCellIndex &&
-        index % sizeCol !== 0
-      ) {
-        this.slideLeft(index);
+    if (this.state.usingMouse === true){
+      if (this.state.hasStarted === false) {
+        this.randomizeGrid();
+        this.setState({ hasStarted: true });
+      } else if (!this.state.selectedCellIndex) {
+        this.setState({ selectedCellIndex: index });
       } else if (
-        cells[index + 1] &&
-        index + 1 === selectedCellIndex &&
-        index % sizeCol !== sizeCol - 1
+        this.state.selectedCellIndex &&
+        this.state.selectedCellIndex === index
       ) {
-        this.slideRight(index);
+        this.setState({ selectedCellIndex: null });
       } else if (
-        cells[index - sizeCol] &&
-        index - sizeCol === selectedCellIndex
+        this.state.selectedCellIndex &&
+        this.state.selectedCellIndex !== index
       ) {
-        this.slideUp(index);
-      } else if (
-        cells[index + sizeCol] &&
-        index + sizeCol === selectedCellIndex
-      ) {
-        this.slideDown(index);
+        const selectedCellIndex = this.state.selectedCellIndex;
+        if (
+          cells[index - 1] &&
+          index - 1 === selectedCellIndex &&
+          index % sizeCol !== 0
+        ) {
+          this.slideLeft(index);
+          console.log('click method');
+        } else if (
+          cells[index + 1] &&
+          index + 1 === selectedCellIndex &&
+          index % sizeCol !== sizeCol - 1
+        ) {
+          this.slideRight(index);
+          console.log('click method');
+        } else if (
+          cells[index - sizeCol] &&
+          index - sizeCol === selectedCellIndex
+        ) {
+          this.slideUp(index);
+          console.log('click method');
+        } else if (
+          cells[index + sizeCol] &&
+          index + sizeCol === selectedCellIndex
+        ) {
+          this.slideDown(index);
+          console.log('click method');
+        }
+        this.setState({ selectedCellIndex: null });
       }
-      this.setState({ selectedCellIndex: null });
     }
   }
   handleKeyPress(e) {
@@ -119,30 +126,36 @@ class App extends Component {
     if (this.state.selectedCellIndex === null) {
       this.setState({ selectedCellIndex: 0 });
     } else if (isSwapping === false){
+      this.setState({usingMouse: false})
       if (
         e.key === "ArrowRight" &&
         cells[selectedCellIndex + 1] &&
         selectedCellIndex % sizeCol !== sizeCol - 1
       ) {
         this.setState({ selectedCellIndex: selectedCellIndex + 1 });
+        console.log('move selector right');
       } else if (
         e.key === "ArrowLeft" &&
         cells[selectedCellIndex - 1] &&
         selectedCellIndex % sizeCol !== 0
       ) {
+        console.log('move selector left');
         this.setState({ selectedCellIndex: selectedCellIndex - 1 });
       } else if (
         e.key === "ArrowUp" &&
         cells[selectedCellIndex - sizeCol]
       ) {
         this.setState({ selectedCellIndex: selectedCellIndex - sizeCol });
+        console.log('move selector up');
       } else if (
         e.key === "ArrowDown" &&
         cells[selectedCellIndex + sizeCol]
       ) {
         this.setState({ selectedCellIndex: selectedCellIndex + sizeCol });
-      } else if (e.key === "Enter") {
+        console.log('move selector down');
+      } else if (e.key === "Enter" && selectedCellIndex !== null) {
         this.setState({isSwapping: true});
+        console.log('select tile');
       }
     } else if (isSwapping === true){
       if (
@@ -152,6 +165,7 @@ class App extends Component {
       ) {
         this.slideRight(selectedCellIndex)
         this.setState({isSwapping: false});
+        console.log('slide right');
       } else if (
         e.key === "ArrowLeft" &&
         cells[selectedCellIndex - 1] &&
@@ -159,20 +173,24 @@ class App extends Component {
       ) {
         this.slideLeft(selectedCellIndex);
         this.setState({isSwapping: false});
+        console.log('slide left');
       } else if (
         e.key === "ArrowUp" &&
         cells[selectedCellIndex - sizeCol]
       ) {
-        this.slideUp(selectedCellIndex + sizeCol);
+        this.slideDown(selectedCellIndex - sizeCol);
         this.setState({isSwapping: false});
+        console.log('slide up');
       } else if (
         e.key === "ArrowDown" &&
         cells[selectedCellIndex + sizeCol]
       ) {
-        this.slideDown(selectedCellIndex - sizeCol);
+        this.slideUp(selectedCellIndex + sizeCol);
         this.setState({isSwapping: false});
+        console.log('slide down');
       } else if (e.key === "Enter") {
         this.setState({isSwapping: false});
+        console.log('deselect');
       }
     }
   }
