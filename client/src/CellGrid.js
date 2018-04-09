@@ -14,6 +14,7 @@ const CellGrid = props => {
         currentImage={props.currentImage}
         selectedCellValue={props.selectedCellValue}
         handleKeyPress={props.handleKeyPress}
+        isSwapping={props.isSwapping}
        />
     ));
     const style = {
@@ -40,6 +41,7 @@ CellGrid.propTypes = {
     viewingFullImage: Proptypes.bool.isRequired,
     selectedCellValue: Proptypes.number,
     handleKeyPress: Proptypes.func.isRequired,
+    isSwapping: Proptypes.bool.isRequired
 }
 
 export default CellGrid;

@@ -23,12 +23,27 @@ const Cell = props => {
     height: height + "%",
     background: `url(${imageUrl}) ${left}px ${top}px`
   };
+  const classes = () => { 
+    if (props.value === props.selectedCellValue){
+      if (props.isSwapping === true){
+        "Cell--cell Cell-isSwapping" 
+      } else {
+        "Cell--cell Cell-selected"        
+      }
+    } else {
+      "Cell--cell"      
+    }
+  }
   return (
     <button
-      className={props.value === props.selectedCellValue ? 
-        "Cell--cell Cell-selected" 
-        : "Cell--cell"
-        
+      className={
+        props.value === props.selectedCellValue ?
+          props.isSwapping === true ? 
+          "Cell--cell Cell-isSwapping" 
+          :
+        "Cell--cell Cell-selected"        
+        :
+        "Cell--cell"          
       }
       onClick={props.onClick}
       style={style}
@@ -44,7 +59,8 @@ Cell.Proptypes = {
   sizeCol: Proptypes.number.isRequired,
   currentImage: Proptypes.object.isRequired,
   selectedCellValue: Proptypes.number,
-  swapCellValue: Proptypes.number
+  swapCellValue: Proptypes.number,
+  isSwapping: Proptypes.bool.isRequired
 };
 
 export default Cell;

@@ -400,6 +400,7 @@ class App extends Component {
                   : null
               }
               handleKeyPress={this.handleKeyPress}
+              isSwapping={this.state.isSwapping}
             />
           ) : (
             <CategoryGrid
