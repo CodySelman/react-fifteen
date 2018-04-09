@@ -123,6 +123,12 @@ class App extends Component {
     const cells = this.state.cells;
     const sizeCol = this.state.sizeCol;
     const isSwapping = this.state.isSwapping;
+    if (this.state.hasStarted === false){
+      this.randomizeGrid();
+      this.setState({hasStarted: true});
+    } else if (this.state.isSolved === true && e.key === "Enter"){
+      this.nextLevel();
+    }
     if (this.state.selectedCellIndex === null) {
       this.setState({ selectedCellIndex: 0 });
     } else if (isSwapping === false){
