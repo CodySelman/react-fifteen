@@ -170,7 +170,9 @@ class App extends Component {
         selectedCellIndex % sizeCol !== sizeCol - 1
       ) {
         this.slideRight(selectedCellIndex)
-        this.setState({isSwapping: false});
+        this.setState({isSwapping: false}, 
+          this.setState({selectedCellIndex: selectedCellIndex + 1})
+        );
         console.log('slide right');
       } else if (
         e.key === "ArrowLeft" &&
@@ -178,21 +180,27 @@ class App extends Component {
         selectedCellIndex % sizeCol !== 0
       ) {
         this.slideLeft(selectedCellIndex);
-        this.setState({isSwapping: false});
+        this.setState({isSwapping: false},
+          this.setState({selectedCellIndex: selectedCellIndex - 1})
+        );
         console.log('slide left');
       } else if (
         e.key === "ArrowUp" &&
         cells[selectedCellIndex - sizeCol]
       ) {
         this.slideDown(selectedCellIndex - sizeCol);
-        this.setState({isSwapping: false});
+        this.setState({isSwapping: false},
+          this.setState({selectedCellIndex: selectedCellIndex - sizeCol })
+        );
         console.log('slide up');
       } else if (
         e.key === "ArrowDown" &&
         cells[selectedCellIndex + sizeCol]
       ) {
         this.slideUp(selectedCellIndex + sizeCol);
-        this.setState({isSwapping: false});
+        this.setState({isSwapping: false},
+          this.setState({selectedCellIndex: selectedCellIndex + sizeCol})
+        );
         console.log('slide down');
       } else if (e.key === "Enter") {
         this.setState({isSwapping: false});
