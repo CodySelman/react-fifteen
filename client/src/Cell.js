@@ -23,17 +23,6 @@ const Cell = props => {
     height: height + "%",
     background: `url(${imageUrl}) ${left}px ${top}px`
   };
-  const classes = () => { 
-    if (props.value === props.selectedCellValue){
-      if (props.isSwapping === true){
-        "Cell--cell Cell-isSwapping" 
-      } else {
-        "Cell--cell Cell-selected"        
-      }
-    } else {
-      "Cell--cell"      
-    }
-  }
   return (
     <button
       className={
