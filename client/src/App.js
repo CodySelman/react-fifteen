@@ -6,8 +6,7 @@ import Heading from "./Heading.js";
 import Loader from "./Loader.js";
 import easyPics from './images/puzzlePics/easy/easyPics';
 import intermediatePics from './images/puzzlePics/intermediate/intermediatePics';
-
-import { getImageUrls } from "./services/imageUrls.js";
+import hardPics from './images/puzzlePics/hard/hardPics';
 
 class App extends Component {
   constructor() {
@@ -294,20 +293,20 @@ class App extends Component {
     }
   }
   getImages(searchTerm) {
-    getImageUrls(searchTerm)
-      .then(response => {
-        const imageUrls = response.data;
-        this.setState(
-          {
-            imageUrls: imageUrls
-          },
-          this.changeImage
-        );
-      })
-      .then(this.setState({ isLoading: true }))
-      .catch(error => {
-        console.log(error);
-      });
+    // getImageUrls(searchTerm)
+    //   .then(response => {
+    //     const imageUrls = response.data;
+    //     this.setState(
+    //       {
+    //         imageUrls: imageUrls
+    //       },
+    //       this.changeImage
+    //     );
+    //   })
+    //   .then(this.setState({ isLoading: true }))
+    //   .catch(error => {
+    //     console.log(error);
+    //   });
   }
   changeImage() {
     //Temporary hardcoding width/height and only pulll from easy
