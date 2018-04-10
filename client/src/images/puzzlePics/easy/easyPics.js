@@ -1,5 +1,3 @@
-import React from 'react';
-
 import bird5 from './bird5.jpg';
 import plane2 from './plane2.jpg';
 import car2 from './car2.jpg';
@@ -30,7 +28,7 @@ import bird from './bird.jpg';
 import dog2 from './dog2.jpg';
 import dog3 from './dog3.jpg';
 
- export const easyPics = [
+const easyPics = [
     bird5,
     plane2,
     car2,
@@ -61,3 +59,5 @@ import dog3 from './dog3.jpg';
     dog2,
     dog3
     ];
+
+export default easyPics;

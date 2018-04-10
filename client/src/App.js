@@ -4,6 +4,7 @@ import CellGrid from "./CellGrid.js";
 import CategoryGrid from "./CategoryGrid.js";
 import Heading from "./Heading.js";
 import Loader from "./Loader.js";
+import easyPics from './images/puzzlePics/easy/easyPics';
 
 import { getImageUrls } from "./services/imageUrls.js";
 
@@ -308,12 +309,14 @@ class App extends Component {
       });
   }
   changeImage() {
-    const imageUrls = this.state.imageUrls;
-    const newImageIndex = Math.floor(Math.random() * imageUrls.hits.length);
-    const newImageData = imageUrls.hits[newImageIndex];
-    const newImageUrl = newImageData.webformatURL;
-    const newImageWidth = newImageData.webformatWidth;
-    const newImageHeight = newImageData.webformatHeight;
+    //Temporary hardcoding width/height and only pulll from easy
+    //rewrite later
+    const imageUrls = easyPics;
+    const newImageIndex = Math.floor(Math.random() * easyPics.length);
+    const newImageData = easyPics[newImageIndex];
+    const newImageUrl = newImageData;
+    const newImageWidth = 640;
+    const newImageHeight = 420;
     const img = new Image();
     img.onload = () => {
       const newImage = {
