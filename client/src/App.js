@@ -5,6 +5,7 @@ import CategoryGrid from "./CategoryGrid.js";
 import Heading from "./Heading.js";
 import Loader from "./Loader.js";
 import easyPics from './images/puzzlePics/easy/easyPics';
+import intermediatePics from './images/puzzlePics/intermediate/intermediatePics';
 
 import { getImageUrls } from "./services/imageUrls.js";
 
