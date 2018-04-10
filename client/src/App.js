@@ -17,21 +17,6 @@ class App extends Component {
       isSolved: false,
       hasStarted: false,
       imageUrls: "",
-      categories: [
-        "Puppies",
-        "Kittens",
-        "Dogs",
-        "Cats",
-        "Snails",
-        "Bugs",
-        "Birds",
-        "Dinosaurs",
-        "Sculptures",
-        "Paintings",
-        "Architecture",
-        "Sailboats"
-      ],
-      isCategoryChosen: false,
       currentImage: {
         url: "",
         height: 500,
@@ -66,7 +51,7 @@ class App extends Component {
     }
     this.setState({
       cells: newCells
-    });
+    }, this.changeImage);
   }
   handleClick(index) {
     const cells = this.state.cells;
@@ -328,10 +313,7 @@ class App extends Component {
           currentImage: newImage,
           isSolved: false
         },
-        this.setState(
-          { isCategoryChosen: true },
-          this.setState({ isLoading: false })
-        )
+        this.setState({ isLoading: false })
       );
     };
     img.src = newImageUrl;
@@ -395,7 +377,6 @@ class App extends Component {
         />
         <div className="App--CellGrid-container">
           {this.state.isLoading ? <Loader /> : ""}
-          {this.state.isCategoryChosen ? (
             <CellGrid
               cells={this.state.cells}
               handleClick={this.handleClick}
@@ -412,9 +393,6 @@ class App extends Component {
               handleKeyPress={this.handleKeyPress}
               isSwapping={this.state.isSwapping}
             />
-          ) : (
-            ''
-          )}
         </div>
 
         <div className="App-bottomButtonContainer">
