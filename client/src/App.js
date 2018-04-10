@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
 import CellGrid from "./CellGrid.js";
-import CategoryGrid from "./CategoryGrid.js";
 import Heading from "./Heading.js";
 import Loader from "./Loader.js";
 import easyPics from './images/puzzlePics/easy/easyPics';
@@ -414,11 +413,7 @@ class App extends Component {
               isSwapping={this.state.isSwapping}
             />
           ) : (
-            <CategoryGrid
-              categories={this.state.categories}
-              getImages={this.getImages}
-              isLoading={this.state.isLoading}
-            />
+            ''
           )}
         </div>
 
