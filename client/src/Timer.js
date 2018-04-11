@@ -8,7 +8,12 @@ const Timer = props => {
         width: width + '%'
     }
     return(
-        <div className='timer' style={style}></div>
+        <div className='timer-container'>
+            <div className='timer-background'>
+                <div className='timer' style={style}></div>            
+            </div>
+        </div>
+        
     )
 }
 
