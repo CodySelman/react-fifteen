@@ -9,31 +9,17 @@ const Cell = props => {
   const height = 100 / sizeRow;
 
   const imageUrl = props.currentImage.url;
-  const imageWidth = props.currentImage.width;
-  const imageHeight = props.currentImage.height;
-  
 
   const columnNum = (props.value - 1) % sizeCol;
   const rowNum = Math.floor((props.value - 1) / sizeCol);
-  const left = columnNum * -imageWidth / sizeCol;
-  const top = rowNum * -imageHeight / sizeRow;
+  const left = columnNum * -640 / sizeCol;
+  const top = rowNum * -420 / sizeRow;
 
   const style = {
     width: width + "%",
     height: height + "%",
     background: `url(${imageUrl}) ${left}px ${top}px`
   };
-  const classes = () => { 
-    if (props.value === props.selectedCellValue){
-      if (props.isSwapping === true){
-        "Cell--cell Cell-isSwapping" 
-      } else {
-        "Cell--cell Cell-selected"        
-      }
-    } else {
-      "Cell--cell"      
-    }
-  }
   return (
     <button
       className={

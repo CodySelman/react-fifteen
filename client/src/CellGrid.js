@@ -17,15 +17,11 @@ const CellGrid = props => {
         isSwapping={props.isSwapping}
        />
     ));
-    const style = {
-        width: props.currentImage.width + 'px',
-        height: props.currentImage.height + 'px'
-    };
     return (
-        <div className='CellGrid--container fadeIn' style={style} onKeyDown={e=>props.handleKeyPress(e)}>
+        <div className='CellGrid--container fadeIn' onKeyDown={e=>props.handleKeyPress(e)}>
             {cellGrid}
             {props.viewingFullImage ? 
-                <img  className='CellGrid-fullImage' style={style} src={props.currentImage.url} alt="Puzzle Solution" />
+                <img  className='CellGrid-fullImage' src={props.currentImage.url} alt="Puzzle Solution" />
                 : ''
             }
         </div>

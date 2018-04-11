@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import "./App.css";
 import CellGrid from "./CellGrid.js";
-import CategoryGrid from "./CategoryGrid.js";
 import Heading from "./Heading.js";
 import Loader from "./Loader.js";
-
-import { getImageUrls } from "./services/imageUrls.js";
+import easyPics from './images/puzzlePics/easy/easyPics';
+import intermediatePics from './images/puzzlePics/intermediate/intermediatePics';
+import hardPics from './images/puzzlePics/hard/hardPics';
 
 class App extends Component {
   constructor() {
@@ -16,26 +16,8 @@ class App extends Component {
       cells: [],
       isSolved: false,
       hasStarted: false,
-      imageUrls: "",
-      categories: [
-        "Puppies",
-        "Kittens",
-        "Dogs",
-        "Cats",
-        "Snails",
-        "Bugs",
-        "Birds",
-        "Dinosaurs",
-        "Sculptures",
-        "Paintings",
-        "Architecture",
-        "Sailboats"
-      ],
-      isCategoryChosen: false,
       currentImage: {
         url: "",
-        height: 500,
-        width: 500
       },
       isLoading: false,
       viewingFullImage: false,
@@ -47,7 +29,6 @@ class App extends Component {
     this.randomizeGrid = this.randomizeGrid.bind(this);
     this.winCheck = this.winCheck.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    this.getImages = this.getImages.bind(this);
     this.changeImage = this.changeImage.bind(this);
     this.changeDifficulty = this.changeDifficulty.bind(this);
     this.nextLevel = this.nextLevel.bind(this);
@@ -66,7 +47,7 @@ class App extends Component {
     }
     this.setState({
       cells: newCells
-    });
+    }, this.changeImage);
   }
   handleClick(index) {
     const cells = this.state.cells;
@@ -291,45 +272,24 @@ class App extends Component {
       });
     }
   }
-  getImages(searchTerm) {
-    getImageUrls(searchTerm)
-      .then(response => {
-        const imageUrls = response.data;
-        this.setState(
-          {
-            imageUrls: imageUrls
-          },
-          this.changeImage
-        );
-      })
-      .then(this.setState({ isLoading: true }))
-      .catch(error => {
-        console.log(error);
-      });
-  }
   changeImage() {
-    const imageUrls = this.state.imageUrls;
-    const newImageIndex = Math.floor(Math.random() * imageUrls.hits.length);
-    const newImageData = imageUrls.hits[newImageIndex];
-    const newImageUrl = newImageData.webformatURL;
-    const newImageWidth = newImageData.webformatWidth;
-    const newImageHeight = newImageData.webformatHeight;
+    //Temporary hardcoding width/height and only pulll from easy
+    //rewrite later
+    const imageUrls = easyPics;
+    const newImageIndex = Math.floor(Math.random() * easyPics.length);
+    const newImageData = easyPics[newImageIndex];
+    const newImageUrl = newImageData;
     const img = new Image();
     img.onload = () => {
       const newImage = {
-        url: newImageUrl,
-        width: newImageWidth,
-        height: newImageHeight
+        url: newImageUrl
       };
       this.setState(
         {
           currentImage: newImage,
           isSolved: false
         },
-        this.setState(
-          { isCategoryChosen: true },
-          this.setState({ isLoading: false })
-        )
+        this.setState({ isLoading: false })
       );
     };
     img.src = newImageUrl;
@@ -369,12 +329,10 @@ class App extends Component {
         cells: [],
         isSolved: false,
         hasStarted: false,
-        imageUrls: "",
-        isCategoryChosen: false,
         currentImage: {
           url: "",
-          height: 500,
-          width: 500
+          height: 640,
+          width: 420
         },
         isLoading: false,
         viewingFullImage: false,
@@ -393,7 +351,6 @@ class App extends Component {
         />
         <div className="App--CellGrid-container">
           {this.state.isLoading ? <Loader /> : ""}
-          {this.state.isCategoryChosen ? (
             <CellGrid
               cells={this.state.cells}
               handleClick={this.handleClick}
@@ -410,13 +367,6 @@ class App extends Component {
               handleKeyPress={this.handleKeyPress}
               isSwapping={this.state.isSwapping}
             />
-          ) : (
-            <CategoryGrid
-              categories={this.state.categories}
-              getImages={this.getImages}
-              isLoading={this.state.isLoading}
-            />
-          )}
         </div>
 
         <div className="App-bottomButtonContainer">
