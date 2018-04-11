@@ -5,13 +5,17 @@ import Timer from './Timer';
 
 const Heading = props => {
     return(
-        <div className='heading fadeIn'>
-            <h1>mix-img</h1>
-            <div>
-                <button onClick={props.newGame}>New Game</button>
-                <p>Score: {props.score}</p>
+        <div>
+            <div className='heading fadeIn'>
+                <h1>mix-img</h1>
+                <div>
+                    <button onClick={props.newGame}>New Game</button>
+                    <p>Score: {props.score}</p>
+                </div>
             </div>
-            <Timer timeRemaining={props.timeRemaining}/>
+            <div className='timer-container'>
+                <Timer />
+            </div>
         </div>
     );
 };

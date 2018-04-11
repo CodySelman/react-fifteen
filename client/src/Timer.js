@@ -2,11 +2,13 @@ import React from 'react';
 import Proptypes from 'prop-types';
 import './Timer.css';
 
-const Timer = () => {
+const Timer = props => {
+    const width = props.timeRemaining / 6000 * 100;
+    const style = {
+        width: width + '%'
+    }
     return(
-        <div>
-            hello
-        </div>
+        <div className='timer' style={style}></div>
     )
 }
 
