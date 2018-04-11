@@ -322,7 +322,7 @@ class App extends Component {
   nextLevel() {
     Promise.resolve()
       .then(this.setState({ isLoading: true }))
-      .then(this.changeImage())
+      .then(this.changeDifficulty())
       .then(this.setState({ hasStarted: false }))
       .then(this.setState({ viewingFullImage: false }))
       .then(this.changeGridSize())
@@ -332,6 +332,7 @@ class App extends Component {
     this.setState(
       {
         ...this.state,
+        currentPics: easyPics,
         sizeRow: 2,
         sizeCol: 2,
         cells: [],
@@ -339,12 +340,13 @@ class App extends Component {
         hasStarted: false,
         currentImage: {
           url: "",
-          height: 640,
-          width: 420
         },
         isLoading: false,
         viewingFullImage: false,
-        score: 0
+        score: 0,
+        selectedCellIndex: null,
+        isSwapping: false,
+        usingMouse: true
       },
       this.gameStart
     );
