@@ -17,11 +17,9 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "concurrently 'nodemon server/index.js' 'cd client && npm start'",
-    "dev": "nodemon server/index.js",
     "prod": "cd client && npm run build && cd .. && node server",
     "heroku-postbuild": "cd client/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
-    "start": "node server/"
+    "start": "cd client && npm start"
   },
   "proxy": "http://localhost:5000",
   "repository": {
