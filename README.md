@@ -1,5 +1,8 @@
 Fifteen
 
+4/10
+Refactored App to use internal images instead of pixabay API. Currently added logic to change image sets based on score. however, difficulty isnt changing until score is one higher than my current logic calls for. This needs to be fixed.
+
 3/31
 Puzzle has been refactored so that any two adjacent pieces can be swapped, rather than the 15 model that was being used before. The next two important features to be worked on are mobile responsiveness, fixing the few remaining visual bugs, and then adding a timer. After all of that is done and polished, perhaps I can curate the image selection to only accept images of certain sizes, or at least to ensure that the player doesn't have to solve duplicate images.
 
