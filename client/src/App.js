@@ -25,7 +25,8 @@ class App extends Component {
       score: 0,
       selectedCellIndex: null,
       isSwapping: false,
-      usingMouse: true
+      usingMouse: true,
+      timeRemaining: 6000
     };
     this.randomizeGrid = this.randomizeGrid.bind(this);
     this.winCheck = this.winCheck.bind(this);
@@ -346,7 +347,8 @@ class App extends Component {
         score: 0,
         selectedCellIndex: null,
         isSwapping: false,
-        usingMouse: true
+        usingMouse: true,
+        timeRemaining: 6000
       },
       this.gameStart
     );
@@ -358,6 +360,7 @@ class App extends Component {
           changeImage={this.changeImage}
           score={this.state.score}
           newGame={this.newGame}
+          timeRemaining={this.state.timeRemaining}
         />
         <div className="App--CellGrid-container">
           {this.state.isLoading ? <Loader /> : ""}
