@@ -18,8 +18,6 @@ class App extends Component {
       hasStarted: false,
       currentImage: {
         url: "",
-        height: 640,
-        width: 420
       },
       isLoading: false,
       viewingFullImage: false,
