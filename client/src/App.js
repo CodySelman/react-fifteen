@@ -11,6 +11,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+      currentPics: easyPics,
       sizeRow: 2,
       sizeCol: 2,
       cells: [],
@@ -30,7 +31,7 @@ class App extends Component {
     this.winCheck = this.winCheck.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.changeImage = this.changeImage.bind(this);
-    this.changeDifficulty = this.changeDifficulty.bind(this);
+    this.changeGridSize = this.changeGridSize.bind(this);
     this.nextLevel = this.nextLevel.bind(this);
     this.newGame = this.newGame.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
@@ -47,7 +48,7 @@ class App extends Component {
     }
     this.setState({
       cells: newCells
-    }, this.changeImage);
+    }, this.changeDifficulty);
   }
   handleClick(index) {
     const cells = this.state.cells;
@@ -272,17 +273,24 @@ class App extends Component {
       });
     }
   }
+  changeDifficulty(){
+    const score = this.state.score;
+    if (score < 3){
+      this.setState({currentPics: easyPics}, this.changeImage());
+    } else if (score >= 3 && score < 6){
+      this.setState({currentPics: intermediatePics}, this.changeImage());
+    } else if (score >=6){
+      this.setState({currentPics: hardPics}, this.changeImage());
+    }
+  }
   changeImage() {
-    //Temporary hardcoding width/height and only pulll from easy
-    //rewrite later
-    const imageUrls = easyPics;
-    const newImageIndex = Math.floor(Math.random() * easyPics.length);
-    const newImageData = easyPics[newImageIndex];
-    const newImageUrl = newImageData;
+    const currentPics = this.state.currentPics;
+    const randomImageIndex = Math.floor(Math.random() * currentPics.length);
+    const randomImage = currentPics[randomImageIndex];
     const img = new Image();
     img.onload = () => {
       const newImage = {
-        url: newImageUrl
+        url: randomImage
       };
       this.setState(
         {
@@ -292,9 +300,9 @@ class App extends Component {
         this.setState({ isLoading: false })
       );
     };
-    img.src = newImageUrl;
+    img.src = randomImage;
   }
-  changeDifficulty() {
+  changeGridSize() {
     if (this.state.sizeCol > this.state.sizeRow) {
       this.setState(
         {
@@ -317,7 +325,7 @@ class App extends Component {
       .then(this.changeImage())
       .then(this.setState({ hasStarted: false }))
       .then(this.setState({ viewingFullImage: false }))
-      .then(this.changeDifficulty())
+      .then(this.changeGridSize())
       .catch(err => console.log(err));
   }
   newGame() {
