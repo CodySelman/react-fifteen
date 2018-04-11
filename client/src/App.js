@@ -16,11 +16,10 @@ class App extends Component {
       cells: [],
       isSolved: false,
       hasStarted: false,
-      imageUrls: "",
       currentImage: {
         url: "",
-        height: 500,
-        width: 500
+        height: 640,
+        width: 420
       },
       isLoading: false,
       viewingFullImage: false,
@@ -32,7 +31,6 @@ class App extends Component {
     this.randomizeGrid = this.randomizeGrid.bind(this);
     this.winCheck = this.winCheck.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    this.getImages = this.getImages.bind(this);
     this.changeImage = this.changeImage.bind(this);
     this.changeDifficulty = this.changeDifficulty.bind(this);
     this.nextLevel = this.nextLevel.bind(this);
@@ -276,22 +274,6 @@ class App extends Component {
       });
     }
   }
-  getImages(searchTerm) {
-    // getImageUrls(searchTerm)
-    //   .then(response => {
-    //     const imageUrls = response.data;
-    //     this.setState(
-    //       {
-    //         imageUrls: imageUrls
-    //       },
-    //       this.changeImage
-    //     );
-    //   })
-    //   .then(this.setState({ isLoading: true }))
-    //   .catch(error => {
-    //     console.log(error);
-    //   });
-  }
   changeImage() {
     //Temporary hardcoding width/height and only pulll from easy
     //rewrite later
@@ -299,14 +281,10 @@ class App extends Component {
     const newImageIndex = Math.floor(Math.random() * easyPics.length);
     const newImageData = easyPics[newImageIndex];
     const newImageUrl = newImageData;
-    const newImageWidth = 640;
-    const newImageHeight = 420;
     const img = new Image();
     img.onload = () => {
       const newImage = {
-        url: newImageUrl,
-        width: newImageWidth,
-        height: newImageHeight
+        url: newImageUrl
       };
       this.setState(
         {
@@ -353,12 +331,10 @@ class App extends Component {
         cells: [],
         isSolved: false,
         hasStarted: false,
-        imageUrls: "",
-        isCategoryChosen: false,
         currentImage: {
           url: "",
-          height: 500,
-          width: 500
+          height: 640,
+          width: 420
         },
         isLoading: false,
         viewingFullImage: false,

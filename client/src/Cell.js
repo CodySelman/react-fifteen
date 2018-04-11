@@ -9,14 +9,11 @@ const Cell = props => {
   const height = 100 / sizeRow;
 
   const imageUrl = props.currentImage.url;
-  const imageWidth = props.currentImage.width;
-  const imageHeight = props.currentImage.height;
-  
 
   const columnNum = (props.value - 1) % sizeCol;
   const rowNum = Math.floor((props.value - 1) / sizeCol);
-  const left = columnNum * -imageWidth / sizeCol;
-  const top = rowNum * -imageHeight / sizeRow;
+  const left = columnNum * -640 / sizeCol;
+  const top = rowNum * -420 / sizeRow;
 
   const style = {
     width: width + "%",
