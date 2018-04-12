@@ -41,6 +41,16 @@ class App extends Component {
   componentDidMount() {
     this.gameStart();
   }
+
+  //gamecontroller methods
+  // gamestart(){}
+  // startPuzzle(){}
+  // solvingPuzzle(){}
+  // puzzleSolved(){}
+  // nextLevel(){}
+  // puzzleFailed(){}
+  // newGame(){}
+  
   gameStart() {
     const newCells = [];
     const gridSize = this.state.sizeCol * this.state.sizeRow;
