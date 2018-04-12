@@ -39,7 +39,7 @@ class App extends Component {
     this.timer = this.timer.bind(this);
   }
   componentDidMount() {
-    this.gameStart();
+    this.createCells();
   }
 
   //gamecontroller methods
@@ -50,8 +50,8 @@ class App extends Component {
   // nextLevel(){}
   // puzzleFailed(){}
   // newGame(){}
-  
-  gameStart() {
+
+  createCells() {
     const newCells = [];
     const gridSize = this.state.sizeCol * this.state.sizeRow;
     for (let i = 1; i < gridSize + 1; i += 1) {
@@ -320,14 +320,14 @@ class App extends Component {
         {
           sizeRow: this.state.sizeRow + 1
         },
-        this.gameStart
+        this.createCells
       );
     } else {
       this.setState(
         {
           sizeCol: this.state.sizeCol + 1
         },
-        this.gameStart
+        this.createCells
       );
     }
   }
@@ -361,7 +361,7 @@ class App extends Component {
         usingMouse: true,
         timeRemaining: 6000
       },
-      this.gameStart
+      this.createCells
     );
   }
   startTimer(){
