@@ -26,7 +26,7 @@ class App extends Component {
       selectedCellIndex: null,
       isSwapping: false,
       usingMouse: true,
-      timeRemaining: 6000
+      timeRemaining: 60000
     };
     this.randomizeGrid = this.randomizeGrid.bind(this);
     this.winCheck = this.winCheck.bind(this);
@@ -36,6 +36,7 @@ class App extends Component {
     this.nextLevel = this.nextLevel.bind(this);
     this.newGame = this.newGame.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.timer = this.timer.bind(this);
   }
   componentDidMount() {
     this.gameStart();
@@ -262,7 +263,7 @@ class App extends Component {
       cells[currentIndex] = cells[randomIndex];
       cells[randomIndex] = temporaryValue;
     }
-    this.setState({ cells: cells });
+    this.setState({ cells: cells }, this.startTimer);
   }
   winCheck() {
     const winCheckArray = this.state.cells.map(cell => cell.value - 1);
@@ -352,6 +353,18 @@ class App extends Component {
       },
       this.gameStart
     );
+  }
+  startTimer(){
+    const timerId = setInterval(this.timer, 10);
+    this.setState({timerId: timerId});
+  }
+  timer(){
+    const newTimeRemaining = this.state.timeRemaining - 10;
+    if (newTimeRemaining >= 0){
+      this.setState({timeRemaining: newTimeRemaining});
+    } else {
+      clearInterval(this.state.timerId);
+    }
   }
   render() {
     return (

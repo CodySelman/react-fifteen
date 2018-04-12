@@ -3,9 +3,9 @@ import Proptypes from 'prop-types';
 import './Timer.css';
 
 const Timer = props => {
-    const width = props.timeRemaining / 6000 * 100;
+    const width = props.timeRemaining / 60000 * 660;
     const style = {
-        width: width + '%'
+        width: width + 'px'
     }
     return(
         <div className='timer-container'>
