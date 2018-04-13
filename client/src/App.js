@@ -34,16 +34,19 @@ class App extends Component {
     this.changeImage = this.changeImage.bind(this);
     this.changeGridSize = this.changeGridSize.bind(this);
     this.nextLevel = this.nextLevel.bind(this);
-    this.newGame = this.newGame.bind(this);
+    this.initializeState = this.initializeState.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.timer = this.timer.bind(this);
   }
   componentDidMount() {
-    this.createCells();
+    this.gameStart();
   }
 
   //gamecontroller methods
-  // gamestart(){}
+  gameStart(){
+    this.createCells();
+  }
+  
   // startPuzzle(){}
   // solvingPuzzle(){}
   // puzzleSolved(){}
@@ -340,7 +343,7 @@ class App extends Component {
       .then(this.changeGridSize())
       .catch(err => console.log(err));
   }
-  newGame() {
+  initializeState() {
     this.setState(
       {
         ...this.state,
@@ -382,7 +385,7 @@ class App extends Component {
         <Heading
           changeImage={this.changeImage}
           score={this.state.score}
-          newGame={this.newGame}
+          initializeState={this.initializeState}
           timeRemaining={this.state.timeRemaining}
         />
         <div className="App--CellGrid-container">

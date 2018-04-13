@@ -9,11 +9,11 @@ const Heading = props => {
       <div className="heading fadeIn">
         <h1>mix-img</h1>
         <div>
-          <button onClick={props.newGame}>New Game</button>
+          <button onClick={props.initializeState}>New Game</button>
           <p>Score: {props.score}</p>
         </div>
       </div>
-      <div className="timer-container">
+      <div className="timer-container fadeIn">
         <Timer timeRemaining={props.timeRemaining} />
       </div>
     </div>
@@ -23,7 +23,7 @@ const Heading = props => {
 Heading.propTypes = {
   changeImage: Proptypes.func.isRequired,
   score: Proptypes.number.isRequired,
-  newGame: Proptypes.func.isRequired,
+  initializeState: Proptypes.func.isRequired,
   timeRemaining: Proptypes.number.isRequired
 };
 
