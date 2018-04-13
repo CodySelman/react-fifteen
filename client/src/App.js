@@ -46,6 +46,7 @@ class App extends Component {
   gameStart(){
     this.initializeState();
     this.createCells();
+    this.changeImage();
   }
   
   // startPuzzle(){}
@@ -55,6 +56,29 @@ class App extends Component {
   // puzzleFailed(){}
   // newGame(){}
 
+  initializeState() {
+    this.setState(
+      {
+        ...this.state,
+        currentPics: easyPics,
+        sizeRow: 2,
+        sizeCol: 2,
+        cells: [],
+        isSolved: false,
+        hasStarted: false,
+        currentImage: {
+          url: "",
+        },
+        isLoading: false,
+        viewingFullImage: false,
+        score: 0,
+        selectedCellIndex: null,
+        isSwapping: false,
+        usingMouse: true,
+        timeRemaining: 60000
+      },
+    );
+  }
   createCells() {
     const newCells = [];
     const gridSize = this.state.sizeCol * this.state.sizeRow;
@@ -64,7 +88,7 @@ class App extends Component {
     }
     this.setState({
       cells: newCells
-    }, this.changeDifficulty);
+    });
   }
   handleClick(index) {
     const cells = this.state.cells;
@@ -292,11 +316,11 @@ class App extends Component {
   changeDifficulty(){
     const score = this.state.score;
     if (score < 3){
-      this.setState({currentPics: easyPics}, this.changeImage());
+      this.setState({currentPics: easyPics});
     } else if (score >= 3 && score < 6){
-      this.setState({currentPics: intermediatePics}, this.changeImage());
+      this.setState({currentPics: intermediatePics});
     } else if (score >=6){
-      this.setState({currentPics: hardPics}, this.changeImage());
+      this.setState({currentPics: hardPics});
     }
   }
   changeImage() {
@@ -343,29 +367,6 @@ class App extends Component {
       .then(this.setState({ viewingFullImage: false }))
       .then(this.changeGridSize())
       .catch(err => console.log(err));
-  }
-  initializeState() {
-    this.setState(
-      {
-        ...this.state,
-        currentPics: easyPics,
-        sizeRow: 2,
-        sizeCol: 2,
-        cells: [],
-        isSolved: false,
-        hasStarted: false,
-        currentImage: {
-          url: "",
-        },
-        isLoading: false,
-        viewingFullImage: false,
-        score: 0,
-        selectedCellIndex: null,
-        isSwapping: false,
-        usingMouse: true,
-        timeRemaining: 60000
-      },
-    );
   }
   startTimer(){
     const timerId = setInterval(this.timer, 10);
