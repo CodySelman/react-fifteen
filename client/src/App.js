@@ -56,11 +56,14 @@ class App extends Component {
   // puzzleSolved(){}
   nextLevel() {
     Promise.resolve()
-      .then(this.setState({ isLoading: true }))
+      .then(this.setState({ 
+        isLoading: true,
+        hasStarted: false,
+        viewingFullImage: false,
+        timeRemaining: 60000,
+      }))
       .then(this.changeDifficulty())
       .then(this.changeImage())
-      .then(this.setState({ hasStarted: false }))
-      .then(this.setState({ viewingFullImage: false }))
       .then(this.changeGridSize())
       .catch(err => console.log(err));
   }
@@ -303,6 +306,7 @@ class App extends Component {
   winCheck() {
     const winCheckArray = this.state.cells.map(cell => cell.value - 1);
     if (winCheckArray.every((index, element) => index === element)) {
+      this.stopTimer();
       this.setState({
         isSolved: true,
         viewingFullImage: true,
@@ -365,8 +369,11 @@ class App extends Component {
     if (newTimeRemaining >= 0){
       this.setState({timeRemaining: newTimeRemaining});
     } else {
-      clearInterval(this.state.timerId);
+      this.stopTimer();
     }
+  }
+  stopTimer(){
+    clearInterval(this.state.timerId);
   }
   render() {
     return (
