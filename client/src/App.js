@@ -44,6 +44,7 @@ class App extends Component {
 
   //gamecontroller methods
   gameStart(){
+    this.initializeState();
     this.createCells();
   }
   
@@ -362,9 +363,8 @@ class App extends Component {
         selectedCellIndex: null,
         isSwapping: false,
         usingMouse: true,
-        timeRemaining: 6000
+        timeRemaining: 60000
       },
-      this.createCells
     );
   }
   startTimer(){
@@ -385,7 +385,7 @@ class App extends Component {
         <Heading
           changeImage={this.changeImage}
           score={this.state.score}
-          initializeState={this.initializeState}
+          gameStart={this.gameStart}
           timeRemaining={this.state.timeRemaining}
         />
         <div className="App--CellGrid-container">
