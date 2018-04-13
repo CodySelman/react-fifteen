@@ -48,8 +48,10 @@ class App extends Component {
     this.createCells();
     this.changeImage();
   }
-  
-  // startPuzzle(){}
+  startPuzzle(){
+    this.randomizeGrid();
+    this.startTimer();
+  }
   // solvingPuzzle(){}
   // puzzleSolved(){}
   // nextLevel(){}
@@ -95,7 +97,7 @@ class App extends Component {
     const sizeCol = this.state.sizeCol;
     if (this.state.usingMouse === true){
       if (this.state.hasStarted === false) {
-        this.randomizeGrid();
+        this.startPuzzle();
         this.setState({ hasStarted: true });
       } else if (!this.state.selectedCellIndex) {
         this.setState({ selectedCellIndex: index });
@@ -146,7 +148,7 @@ class App extends Component {
     const sizeCol = this.state.sizeCol;
     const isSwapping = this.state.isSwapping;
     if (this.state.hasStarted === false){
-      this.randomizeGrid();
+      this.gameStart();
       this.setState({hasStarted: true});
     } else if (this.state.isSolved === true && e.key === "Enter"){
       this.nextLevel();
@@ -301,7 +303,7 @@ class App extends Component {
       cells[currentIndex] = cells[randomIndex];
       cells[randomIndex] = temporaryValue;
     }
-    this.setState({ cells: cells }, this.startTimer);
+    this.setState({ cells: cells });
   }
   winCheck() {
     const winCheckArray = this.state.cells.map(cell => cell.value - 1);
