@@ -67,8 +67,10 @@ class App extends Component {
       .then(this.changeGridSize())
       .catch(err => console.log(err));
   }
-  // puzzleFailed(){}
-  // newGame(){}
+  gameOver(){
+    console.log('game over');
+  }
+  // newGame(){}?
 
   initializeState() {
     this.setState(
@@ -370,6 +372,7 @@ class App extends Component {
       this.setState({timeRemaining: newTimeRemaining});
     } else {
       this.stopTimer();
+      this.gameOver();
     }
   }
   stopTimer(){
