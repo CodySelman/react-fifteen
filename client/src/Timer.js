@@ -3,7 +3,7 @@ import Proptypes from 'prop-types';
 import './Timer.css';
 
 const Timer = props => {
-    const width = props.timeRemaining / 60000 * 660;
+    const width = props.timeRemaining / 30000 * 660;
     const style = {
         width: width + 'px'
     }

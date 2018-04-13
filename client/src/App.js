@@ -26,7 +26,7 @@ class App extends Component {
       selectedCellIndex: null,
       isSwapping: false,
       usingMouse: true,
-      timeRemaining: 60000
+      timeRemaining: 0
     };
     this.randomizeGrid = this.randomizeGrid.bind(this);
     this.winCheck = this.winCheck.bind(this);
@@ -37,6 +37,7 @@ class App extends Component {
     this.initializeState = this.initializeState.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.timer = this.timer.bind(this);
+    this.gameStart = this.gameStart.bind(this);
   }
   componentDidMount() {
     this.gameStart();
@@ -45,6 +46,7 @@ class App extends Component {
   //gamecontroller methods
   gameStart(){
     this.initializeState();
+    this.setTimer();
     this.createCells();
     this.changeImage();
   }
@@ -60,11 +62,12 @@ class App extends Component {
         isLoading: true,
         hasStarted: false,
         viewingFullImage: false,
-        timeRemaining: 60000,
+        timeRemaining: 0,
       }))
       .then(this.changeDifficulty())
       .then(this.changeImage())
       .then(this.changeGridSize())
+      .then(this.setTimer())
       .catch(err => console.log(err));
   }
   gameOver(){
@@ -91,7 +94,7 @@ class App extends Component {
         selectedCellIndex: null,
         isSwapping: false,
         usingMouse: true,
-        timeRemaining: 60000
+        timeRemaining: 0
       },
     );
   }
@@ -377,6 +380,11 @@ class App extends Component {
   }
   stopTimer(){
     clearInterval(this.state.timerId);
+  }
+  setTimer(){
+    const timeRemaining = this.state.timeRemaining;
+    const newTimeRemaining = timeRemaining + 30000;
+    this.setState({ timeRemaining: newTimeRemaining});
   }
   render() {
     return (
