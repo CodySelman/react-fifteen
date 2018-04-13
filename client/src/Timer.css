@@ -10,7 +10,6 @@
 }
 .timer {
     height: 10px;
-    background-color: rgb(75,75,75);
     border-radius: 10px;
     position: absolute;
     max-width: 660px;
