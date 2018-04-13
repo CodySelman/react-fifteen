@@ -54,7 +54,16 @@ class App extends Component {
   }
   // solvingPuzzle(){}
   // puzzleSolved(){}
-  // nextLevel(){}
+  nextLevel() {
+    Promise.resolve()
+      .then(this.setState({ isLoading: true }))
+      .then(this.changeDifficulty())
+      .then(this.changeImage())
+      .then(this.setState({ hasStarted: false }))
+      .then(this.setState({ viewingFullImage: false }))
+      .then(this.changeGridSize())
+      .catch(err => console.log(err));
+  }
   // puzzleFailed(){}
   // newGame(){}
 
@@ -117,26 +126,22 @@ class App extends Component {
           index % sizeCol !== 0
         ) {
           this.slideLeft(index);
-          console.log('click method');
         } else if (
           cells[index + 1] &&
           index + 1 === selectedCellIndex &&
           index % sizeCol !== sizeCol - 1
         ) {
           this.slideRight(index);
-          console.log('click method');
         } else if (
           cells[index - sizeCol] &&
           index - sizeCol === selectedCellIndex
         ) {
           this.slideUp(index);
-          console.log('click method');
         } else if (
           cells[index + sizeCol] &&
           index + sizeCol === selectedCellIndex
         ) {
           this.slideDown(index);
-          console.log('click method');
         }
         this.setState({ selectedCellIndex: null });
       }
@@ -148,7 +153,7 @@ class App extends Component {
     const sizeCol = this.state.sizeCol;
     const isSwapping = this.state.isSwapping;
     if (this.state.hasStarted === false){
-      this.gameStart();
+      this.startPuzzle();
       this.setState({hasStarted: true});
     } else if (this.state.isSolved === true && e.key === "Enter"){
       this.nextLevel();
@@ -163,29 +168,24 @@ class App extends Component {
         selectedCellIndex % sizeCol !== sizeCol - 1
       ) {
         this.setState({ selectedCellIndex: selectedCellIndex + 1 });
-        console.log('move selector right');
       } else if (
         e.key === "ArrowLeft" &&
         cells[selectedCellIndex - 1] &&
         selectedCellIndex % sizeCol !== 0
       ) {
-        console.log('move selector left');
         this.setState({ selectedCellIndex: selectedCellIndex - 1 });
       } else if (
         e.key === "ArrowUp" &&
         cells[selectedCellIndex - sizeCol]
       ) {
         this.setState({ selectedCellIndex: selectedCellIndex - sizeCol });
-        console.log('move selector up');
       } else if (
         e.key === "ArrowDown" &&
         cells[selectedCellIndex + sizeCol]
       ) {
         this.setState({ selectedCellIndex: selectedCellIndex + sizeCol });
-        console.log('move selector down');
       } else if (e.key === "Enter" && selectedCellIndex !== null) {
         this.setState({isSwapping: true});
-        console.log('select tile');
       }
     } else if (isSwapping === true){
       if (
@@ -197,7 +197,6 @@ class App extends Component {
         this.setState({isSwapping: false}, 
           this.setState({selectedCellIndex: selectedCellIndex + 1})
         );
-        console.log('slide right');
       } else if (
         e.key === "ArrowLeft" &&
         cells[selectedCellIndex - 1] &&
@@ -207,7 +206,6 @@ class App extends Component {
         this.setState({isSwapping: false},
           this.setState({selectedCellIndex: selectedCellIndex - 1})
         );
-        console.log('slide left');
       } else if (
         e.key === "ArrowUp" &&
         cells[selectedCellIndex - sizeCol]
@@ -216,7 +214,6 @@ class App extends Component {
         this.setState({isSwapping: false},
           this.setState({selectedCellIndex: selectedCellIndex - sizeCol })
         );
-        console.log('slide up');
       } else if (
         e.key === "ArrowDown" &&
         cells[selectedCellIndex + sizeCol]
@@ -225,10 +222,8 @@ class App extends Component {
         this.setState({isSwapping: false},
           this.setState({selectedCellIndex: selectedCellIndex + sizeCol})
         );
-        console.log('slide down');
       } else if (e.key === "Enter") {
         this.setState({isSwapping: false});
-        console.log('deselect');
       }
     }
   }
@@ -360,15 +355,6 @@ class App extends Component {
         this.createCells
       );
     }
-  }
-  nextLevel() {
-    Promise.resolve()
-      .then(this.setState({ isLoading: true }))
-      .then(this.changeDifficulty())
-      .then(this.setState({ hasStarted: false }))
-      .then(this.setState({ viewingFullImage: false }))
-      .then(this.changeGridSize())
-      .catch(err => console.log(err));
   }
   startTimer(){
     const timerId = setInterval(this.timer, 10);
