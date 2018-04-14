@@ -356,20 +356,24 @@ class App extends Component {
     img.src = randomImage;
   }
   changeGridSize() {
-    if (this.state.sizeCol > this.state.sizeRow) {
-      this.setState(
-        {
-          sizeRow: this.state.sizeRow + 1
-        },
-        this.createCells
-      );
-    } else {
-      this.setState(
-        {
-          sizeCol: this.state.sizeCol + 1
-        },
-        this.createCells
-      );
+    const sizeCol = this.state.sizeCol;
+    const sizeRow = this.state.sizeRow;
+    if ((sizeRow + sizeCol) < 10){
+      if (sizeCol > sizeRow) {
+        this.setState(
+          {
+            sizeRow: sizeRow + 1
+          },
+          this.createCells
+        );
+      } else {
+        this.setState(
+          {
+            sizeCol: sizeCol + 1
+          },
+          this.createCells
+        );
+      }
     }
   }
   startTimer(){
