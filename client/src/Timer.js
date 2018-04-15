@@ -4,8 +4,9 @@ import './Timer.css';
 
 const Timer = props => {
     const barColors = [
-        'rgb(75,75,75)',
         'red',
+        'rgb(75,75,75)',
+        'rgb(150,150,150)',
         'orange',
         'yellow',
         'green',
@@ -28,23 +29,23 @@ const Timer = props => {
         backgroundColor: barColors[2]        
     }
     const barStyle3 = {
-        width: numberOfBars > 2 ? 660 : numberOfBars === 3 ? width : 0,
+        width: numberOfBars > 3 ? 660 : numberOfBars === 3 ? width : 0,
         backgroundColor: barColors[3]        
     }
     const barStyle4 = {
-        width: numberOfBars > 2 ? 660 : numberOfBars === 4 ? width : 0,
+        width: numberOfBars > 4 ? 660 : numberOfBars === 4 ? width : 0,
         backgroundColor: barColors[4]        
     }
     const barStyle5 = {
-        width: numberOfBars > 2 ? 660 : numberOfBars === 5 ? width : 0,
+        width: numberOfBars > 5 ? 660 : numberOfBars === 5 ? width : 0,
         backgroundColor: barColors[5]        
     }
     const barStyle6 = {
-        width: numberOfBars > 2 ? 660 : numberOfBars === 6 ? width : 0,
+        width: numberOfBars > 6 ? 660 : numberOfBars === 6 ? width : 0,
         backgroundColor: barColors[6]        
     }
     const barStyle7 = {
-        width: numberOfBars > 2 ? 660 : numberOfBars === 7 ? width : 0,
+        width: numberOfBars > 7 ? 660 : numberOfBars === 7 ? width : 0,
         backgroundColor: barColors[7]        
     }
 

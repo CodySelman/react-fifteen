@@ -319,8 +319,6 @@ class App extends Component {
     }
   }
   updateScore(){
-    //update difficulty will aslo hae to be updated
-    console.log('update score');
     const score = this.state.score;
     const levelScore = this.state.sizeCol * this.state.sizeRow + Math.floor(this.state.timeRemaining / 5000);
     const newScore = score + levelScore;
