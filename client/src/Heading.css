@@ -35,3 +35,8 @@
     margin: 0.5rem;
     box-shadow: 0 0.5rem 1rem 0 rgba(0,0,0,0.2), 0 0.5rem 1.25rem 0 rgba(0,0,0,0.19);
 }
+.timer-container {
+    width: 660px;
+    margin: auto;
+    margin-bottom: 1rem;
+}

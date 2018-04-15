@@ -1,5 +1,8 @@
 Fifteen
 
+4/11
+Created basic logic for timer. Currently, there are no consequences for the timer running out, and the timer does not restart at any point. These issues will be resolved, and also score needs to be made dynamic based upon timeRemaining. I am stopping work on the timer for the time being because there are some poor project architecture solutions currently implemented. Before moving forward, i'd like to redo the project architecture by creating some methods for each meta state of the game that run all the appropriate methods using promises or async await, rather than my current system of running methods as the callback to setting state inside of other methods. This will greatly improve clarity and speed up debugging as the project moves forward. 
+
 4/10
 Refactored App to use internal images instead of pixabay API. Currently added logic to change image sets based on score. however, difficulty isnt changing until score is one higher than my current logic calls for. This needs to be fixed.
 

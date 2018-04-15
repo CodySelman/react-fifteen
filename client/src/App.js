@@ -25,7 +25,8 @@ class App extends Component {
       score: 0,
       selectedCellIndex: null,
       isSwapping: false,
-      usingMouse: true
+      usingMouse: true,
+      timeRemaining: 0
     };
     this.randomizeGrid = this.randomizeGrid.bind(this);
     this.winCheck = this.winCheck.bind(this);
@@ -33,13 +34,71 @@ class App extends Component {
     this.changeImage = this.changeImage.bind(this);
     this.changeGridSize = this.changeGridSize.bind(this);
     this.nextLevel = this.nextLevel.bind(this);
-    this.newGame = this.newGame.bind(this);
+    this.initializeState = this.initializeState.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.timer = this.timer.bind(this);
+    this.gameStart = this.gameStart.bind(this);
   }
   componentDidMount() {
     this.gameStart();
   }
-  gameStart() {
+
+  //gamecontroller methods
+  gameStart(){
+    this.initializeState();
+    this.setTimer();
+    this.createCells();
+    this.changeImage();
+  }
+  startPuzzle(){
+    this.randomizeGrid();
+    this.startTimer();
+  }
+  // solvingPuzzle(){}
+  // puzzleSolved(){}
+  nextLevel() {
+    Promise.resolve()
+      .then(this.setState({ 
+        isLoading: true,
+        hasStarted: false,
+        viewingFullImage: false,
+        timeRemaining: 0,
+      }))
+      .then(this.changeDifficulty())
+      .then(this.changeImage())
+      .then(this.changeGridSize())
+      .then(this.setTimer())
+      .catch(err => console.log(err));
+  }
+  gameOver(){
+    console.log('game over');
+  }
+  // newGame(){}?
+
+  initializeState() {
+    this.setState(
+      {
+        ...this.state,
+        currentPics: easyPics,
+        sizeRow: 2,
+        sizeCol: 2,
+        cells: [],
+        isSolved: false,
+        hasStarted: false,
+        currentImage: {
+          url: "",
+        },
+        isLoading: false,
+        viewingFullImage: false,
+        score: 0,
+        selectedCellIndex: null,
+        isSwapping: false,
+        usingMouse: true,
+        timeRemaining: 0
+      },
+    );
+  }
+  createCells() {
     const newCells = [];
     const gridSize = this.state.sizeCol * this.state.sizeRow;
     for (let i = 1; i < gridSize + 1; i += 1) {
@@ -48,14 +107,14 @@ class App extends Component {
     }
     this.setState({
       cells: newCells
-    }, this.changeDifficulty);
+    });
   }
   handleClick(index) {
     const cells = this.state.cells;
     const sizeCol = this.state.sizeCol;
     if (this.state.usingMouse === true){
       if (this.state.hasStarted === false) {
-        this.randomizeGrid();
+        this.startPuzzle();
         this.setState({ hasStarted: true });
       } else if (!this.state.selectedCellIndex) {
         this.setState({ selectedCellIndex: index });
@@ -75,26 +134,22 @@ class App extends Component {
           index % sizeCol !== 0
         ) {
           this.slideLeft(index);
-          console.log('click method');
         } else if (
           cells[index + 1] &&
           index + 1 === selectedCellIndex &&
           index % sizeCol !== sizeCol - 1
         ) {
           this.slideRight(index);
-          console.log('click method');
         } else if (
           cells[index - sizeCol] &&
           index - sizeCol === selectedCellIndex
         ) {
           this.slideUp(index);
-          console.log('click method');
         } else if (
           cells[index + sizeCol] &&
           index + sizeCol === selectedCellIndex
         ) {
           this.slideDown(index);
-          console.log('click method');
         }
         this.setState({ selectedCellIndex: null });
       }
@@ -106,7 +161,7 @@ class App extends Component {
     const sizeCol = this.state.sizeCol;
     const isSwapping = this.state.isSwapping;
     if (this.state.hasStarted === false){
-      this.randomizeGrid();
+      this.startPuzzle();
       this.setState({hasStarted: true});
     } else if (this.state.isSolved === true && e.key === "Enter"){
       this.nextLevel();
@@ -121,29 +176,24 @@ class App extends Component {
         selectedCellIndex % sizeCol !== sizeCol - 1
       ) {
         this.setState({ selectedCellIndex: selectedCellIndex + 1 });
-        console.log('move selector right');
       } else if (
         e.key === "ArrowLeft" &&
         cells[selectedCellIndex - 1] &&
         selectedCellIndex % sizeCol !== 0
       ) {
-        console.log('move selector left');
         this.setState({ selectedCellIndex: selectedCellIndex - 1 });
       } else if (
         e.key === "ArrowUp" &&
         cells[selectedCellIndex - sizeCol]
       ) {
         this.setState({ selectedCellIndex: selectedCellIndex - sizeCol });
-        console.log('move selector up');
       } else if (
         e.key === "ArrowDown" &&
         cells[selectedCellIndex + sizeCol]
       ) {
         this.setState({ selectedCellIndex: selectedCellIndex + sizeCol });
-        console.log('move selector down');
       } else if (e.key === "Enter" && selectedCellIndex !== null) {
         this.setState({isSwapping: true});
-        console.log('select tile');
       }
     } else if (isSwapping === true){
       if (
@@ -155,7 +205,6 @@ class App extends Component {
         this.setState({isSwapping: false}, 
           this.setState({selectedCellIndex: selectedCellIndex + 1})
         );
-        console.log('slide right');
       } else if (
         e.key === "ArrowLeft" &&
         cells[selectedCellIndex - 1] &&
@@ -165,7 +214,6 @@ class App extends Component {
         this.setState({isSwapping: false},
           this.setState({selectedCellIndex: selectedCellIndex - 1})
         );
-        console.log('slide left');
       } else if (
         e.key === "ArrowUp" &&
         cells[selectedCellIndex - sizeCol]
@@ -174,7 +222,6 @@ class App extends Component {
         this.setState({isSwapping: false},
           this.setState({selectedCellIndex: selectedCellIndex - sizeCol })
         );
-        console.log('slide up');
       } else if (
         e.key === "ArrowDown" &&
         cells[selectedCellIndex + sizeCol]
@@ -183,10 +230,8 @@ class App extends Component {
         this.setState({isSwapping: false},
           this.setState({selectedCellIndex: selectedCellIndex + sizeCol})
         );
-        console.log('slide down');
       } else if (e.key === "Enter") {
         this.setState({isSwapping: false});
-        console.log('deselect');
       }
     }
   }
@@ -266,21 +311,27 @@ class App extends Component {
   winCheck() {
     const winCheckArray = this.state.cells.map(cell => cell.value - 1);
     if (winCheckArray.every((index, element) => index === element)) {
+      this.stopTimer();
       this.setState({
         isSolved: true,
-        viewingFullImage: true,
-        score: this.state.score + 1
-      });
+        viewingFullImage: true
+      }, this.updateScore());
     }
+  }
+  updateScore(){
+    const score = this.state.score;
+    const levelScore = this.state.sizeCol * this.state.sizeRow + Math.floor(this.state.timeRemaining / 5000);
+    const newScore = score + levelScore;
+    this.setState({ score: newScore});
   }
   changeDifficulty(){
     const score = this.state.score;
-    if (score < 3){
-      this.setState({currentPics: easyPics}, this.changeImage());
-    } else if (score >= 3 && score < 6){
-      this.setState({currentPics: intermediatePics}, this.changeImage());
-    } else if (score >=6){
-      this.setState({currentPics: hardPics}, this.changeImage());
+    if (score < 50){
+      this.setState({currentPics: easyPics});
+    } else if (score >= 50 && score < 100){
+      this.setState({currentPics: intermediatePics});
+    } else if (score >= 100){
+      this.setState({currentPics: hardPics});
     }
   }
   changeImage() {
@@ -303,51 +354,46 @@ class App extends Component {
     img.src = randomImage;
   }
   changeGridSize() {
-    if (this.state.sizeCol > this.state.sizeRow) {
-      this.setState(
-        {
-          sizeRow: this.state.sizeRow + 1
-        },
-        this.gameStart
-      );
-    } else {
-      this.setState(
-        {
-          sizeCol: this.state.sizeCol + 1
-        },
-        this.gameStart
-      );
+    const sizeCol = this.state.sizeCol;
+    const sizeRow = this.state.sizeRow;
+    if ((sizeRow + sizeCol) < 10){
+      if (sizeCol > sizeRow) {
+        this.setState(
+          {
+            sizeRow: sizeRow + 1
+          },
+          this.createCells
+        );
+      } else {
+        this.setState(
+          {
+            sizeCol: sizeCol + 1
+          },
+          this.createCells
+        );
+      }
     }
   }
-  nextLevel() {
-    Promise.resolve()
-      .then(this.setState({ isLoading: true }))
-      .then(this.changeImage())
-      .then(this.setState({ hasStarted: false }))
-      .then(this.setState({ viewingFullImage: false }))
-      .then(this.changeGridSize())
-      .catch(err => console.log(err));
+  startTimer(){
+    const timerId = setInterval(this.timer, 10);
+    this.setState({timerId: timerId});
   }
-  newGame() {
-    this.setState(
-      {
-        ...this.state,
-        sizeRow: 2,
-        sizeCol: 2,
-        cells: [],
-        isSolved: false,
-        hasStarted: false,
-        currentImage: {
-          url: "",
-          height: 640,
-          width: 420
-        },
-        isLoading: false,
-        viewingFullImage: false,
-        score: 0
-      },
-      this.gameStart
-    );
+  timer(){
+    const newTimeRemaining = this.state.timeRemaining - 10;
+    if (newTimeRemaining >= 0){
+      this.setState({timeRemaining: newTimeRemaining});
+    } else {
+      this.stopTimer();
+      this.gameOver();
+    }
+  }
+  stopTimer(){
+    clearInterval(this.state.timerId);
+  }
+  setTimer(){
+    const timeRemaining = this.state.timeRemaining;
+    const newTimeRemaining = timeRemaining + 30000;
+    this.setState({ timeRemaining: newTimeRemaining});
   }
   render() {
     return (
@@ -355,7 +401,8 @@ class App extends Component {
         <Heading
           changeImage={this.changeImage}
           score={this.state.score}
-          newGame={this.newGame}
+          gameStart={this.gameStart}
+          timeRemaining={this.state.timeRemaining}
         />
         <div className="App--CellGrid-container">
           {this.state.isLoading ? <Loader /> : ""}

@@ -16,7 +16,6 @@ import rocks from './rocks.jpg';
 import snail from './snail.jpg';
 import microscope from './microscope.jpg';
 import architecture5 from './architecture5.jpg';
-import lime from './lime.jpg';
 import architecture from './architecture.jpg';
 import sashimi from './sashimi.jpg';
 import architecture2 from './architecture2.jpg';
@@ -44,7 +43,6 @@ const intermediatePics = [
     snail,
     microscope,
     architecture5,
-    lime,
     architecture,
     sashimi,
     architecture2,
