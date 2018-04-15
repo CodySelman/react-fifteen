@@ -328,11 +328,11 @@ class App extends Component {
   }
   changeDifficulty(){
     const score = this.state.score;
-    if (score < 3){
+    if (score < 50){
       this.setState({currentPics: easyPics});
-    } else if (score >= 3 && score < 6){
+    } else if (score >= 50 && score < 100){
       this.setState({currentPics: intermediatePics});
-    } else if (score >=6){
+    } else if (score >= 100){
       this.setState({currentPics: hardPics});
     }
   }
