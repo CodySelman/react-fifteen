@@ -9,7 +9,7 @@ const Heading = props => {
       <div className="heading fadeIn">
         <h1>mix-img</h1>
         <div>
-          <button onClick={props.gameStart}>New Game</button>
+          {/* <button onClick={props.gameStart}>New Game</button> */}
           <p>Score: {props.score}</p>
         </div>
       </div>

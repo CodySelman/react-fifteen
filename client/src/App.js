@@ -27,7 +27,8 @@ class App extends Component {
       selectedCellIndex: null,
       isSwapping: false,
       usingMouse: true,
-      timeRemaining: 0
+      timeRemaining: 30000,
+      gameOver: false
     };
     this.randomizeGrid = this.randomizeGrid.bind(this);
     this.winCheck = this.winCheck.bind(this);
@@ -46,10 +47,11 @@ class App extends Component {
 
   //gamecontroller methods
   gameStart(){
-    this.initializeState();
-    this.setTimer();
-    this.createCells();
-    this.changeImage();
+    Promise.resolve()
+    .then(this.initializeState())
+    .then(this.createCells())
+    .then(this.changeImage())
+    .catch(err => console.log(err));
   }
   startPuzzle(){
     this.randomizeGrid();
@@ -95,7 +97,8 @@ class App extends Component {
         selectedCellIndex: null,
         isSwapping: false,
         usingMouse: true,
-        timeRemaining: 0
+        timeRemaining: 30000,
+        gameOver: false
       },
     );
   }
@@ -424,7 +427,8 @@ class App extends Component {
               isSwapping={this.state.isSwapping}
             />
         </div>
-
+        
+        {/* Buttons below should be exported to thier own component. */}
         <div className="App-bottomButtonContainer">
           {this.state.isSolved ? (
             <button className="fadeIn" onClick={this.nextLevel}>
@@ -454,9 +458,7 @@ class App extends Component {
             ""
           )}
         </div>
-        <div>
-          <HowToPlay />
-        </div>
+        <HowToPlay />
       </div>
     );
   }

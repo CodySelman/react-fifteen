@@ -24,6 +24,7 @@ const CellGrid = props => {
                 <img  className='CellGrid-fullImage' src={props.currentImage.url} alt="Puzzle Solution" />
                 : ''
             }
+            
         </div>
     );
 };
