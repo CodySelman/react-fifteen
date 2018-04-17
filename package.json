@@ -1,34 +1,21 @@
 {
   "name": "react-fifteen",
-  "version": "1.0.0",
-  "description": "Fifteen",
-  "main": "index.js",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "concurrently": "^3.5.1",
-    "dotenv": "^5.0.1",
+    "axios": "^0.18.0",
+    "normalize.css": "^8.0.0",
     "npm": "^5.7.1",
+    "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-scripts": "^1.1.1"
-  },
-  "devDependencies": {
-    "concurrently": "^3.5.1",
-    "nodemon": "^1.17.2"
+    "react-scripts": "1.1.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "prod": "cd client && npm run build && cd .. && node server",
-    "heroku-postbuild": "cd client/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
-    "start": "cd client && npm start"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/CodySelman/react-fifteen.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/CodySelman/react-fifteen/issues"
-  },
-  "homepage": "https://github.com/CodySelman/react-fifteen#readme"
+  "devDependencies": {}
 }
