@@ -15,7 +15,12 @@ class App extends Component {
       currentPics: easyPics,
       sizeRow: 2,
       sizeCol: 2,
-      cells: [],
+      cells: [
+        {value: 1},
+        {value: 2},
+        {value: 3},
+        {value: 4}
+      ],
       isSolved: false,
       hasStarted: false,
       currentImage: {
@@ -28,7 +33,7 @@ class App extends Component {
       isSwapping: false,
       usingMouse: true,
       timeRemaining: 30000,
-      gameOver: false
+      gameOver: true
     };
     this.randomizeGrid = this.randomizeGrid.bind(this);
     this.winCheck = this.winCheck.bind(this);
@@ -49,7 +54,6 @@ class App extends Component {
   gameStart(){
     Promise.resolve()
     .then(this.initializeState())
-    .then(this.createCells())
     .then(this.changeImage())
     .catch(err => console.log(err));
   }
@@ -85,7 +89,12 @@ class App extends Component {
         currentPics: easyPics,
         sizeRow: 2,
         sizeCol: 2,
-        cells: [],
+        cells: [
+          {value: 1},
+          {value: 2},
+          {value: 3},
+          {value: 4}
+        ],
         isSolved: false,
         hasStarted: false,
         currentImage: {
@@ -98,7 +107,7 @@ class App extends Component {
         isSwapping: false,
         usingMouse: true,
         timeRemaining: 30000,
-        gameOver: false
+        gameOver: true
       },
     );
   }
@@ -425,6 +434,7 @@ class App extends Component {
               }
               handleKeyPress={this.handleKeyPress}
               isSwapping={this.state.isSwapping}
+              gameOver={this.state.gameOver}
             />
         </div>
         

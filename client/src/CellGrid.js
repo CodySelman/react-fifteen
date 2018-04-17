@@ -24,7 +24,10 @@ const CellGrid = props => {
                 <img  className='CellGrid-fullImage' src={props.currentImage.url} alt="Puzzle Solution" />
                 : ''
             }
-            
+            {props.gameOver ?
+                <div>Game Over</div>
+                : ''    
+            }
         </div>
     );
 };
@@ -38,7 +41,8 @@ CellGrid.propTypes = {
     viewingFullImage: Proptypes.bool.isRequired,
     selectedCellValue: Proptypes.number,
     handleKeyPress: Proptypes.func.isRequired,
-    isSwapping: Proptypes.bool.isRequired
+    isSwapping: Proptypes.bool.isRequired,
+    gameOver: Proptypes.bool.isRequired
 }
 
 export default CellGrid;
