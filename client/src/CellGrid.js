@@ -25,7 +25,9 @@ const CellGrid = props => {
                 : ''
             }
             {props.gameOver ?
-                <div>Game Over</div>
+                <div className='gameOver fadeIn'>
+                    <p>Game Over</p>
+                </div>
                 : ''    
             }
         </div>

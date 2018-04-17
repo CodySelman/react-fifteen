@@ -18,3 +18,20 @@
     animation-name: fadeIn;
     animation-timing-function: ease-in;
 }
+.gameOver {
+    width: 640px;
+    height: 420px;
+    position: absolute;
+    animation-duration: 0.25s;
+    animation-name: fadeIn;
+    animation-timing-function: ease-in;
+    background-color: rgb(75,75,75);
+}
+.gameOver p {
+    font-size: 3rem;
+    color: rgb(211,211,211);
+    font-weight: bold;
+    text-align: center;
+    position: relative;
+    top: 120px;
+}

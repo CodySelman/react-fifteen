@@ -33,7 +33,7 @@ class App extends Component {
       isSwapping: false,
       usingMouse: true,
       timeRemaining: 30000,
-      gameOver: true
+      gameOver: false
     };
     this.randomizeGrid = this.randomizeGrid.bind(this);
     this.winCheck = this.winCheck.bind(this);
@@ -61,8 +61,6 @@ class App extends Component {
     this.randomizeGrid();
     this.startTimer();
   }
-  // solvingPuzzle(){}
-  // puzzleSolved(){}
   nextLevel() {
     Promise.resolve()
       .then(this.setState({ 
@@ -78,7 +76,12 @@ class App extends Component {
       .catch(err => console.log(err));
   }
   gameOver(){
-    console.log('game over');
+    if (this.state.timeRemaining <= 0){
+      this.setState({
+        gameOver: true,
+        hasStarted: false
+      })
+    }
   }
   // newGame(){}?
 
@@ -107,7 +110,7 @@ class App extends Component {
         isSwapping: false,
         usingMouse: true,
         timeRemaining: 30000,
-        gameOver: true
+        gameOver: false
       },
     );
   }
