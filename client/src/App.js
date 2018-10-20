@@ -41,7 +41,6 @@ class App extends Component {
     this.changeGridSize = this.changeGridSize.bind(this);
     this.nextLevel = this.nextLevel.bind(this);
     this.initializeState = this.initializeState.bind(this);
-    this.handleKeyPress = this.handleKeyPress.bind(this);
     this.timer = this.timer.bind(this);
     this.gameStart = this.gameStart.bind(this);
   }
@@ -82,7 +81,6 @@ class App extends Component {
       })
     }
   }
-  // newGame(){}?
 
   initializeState() {
     this.setState(
@@ -170,86 +168,7 @@ class App extends Component {
       }
     }
   }
-  handleKeyPress(e) {
-    const selectedCellIndex = this.state.selectedCellIndex;
-    const cells = this.state.cells;
-    const sizeCol = this.state.sizeCol;
-    const isSwapping = this.state.isSwapping;
-    if (this.state.hasStarted === false){
-      this.startPuzzle();
-      this.setState({hasStarted: true});
-    } else if (this.state.isSolved === true && e.key === "Enter"){
-      this.nextLevel();
-    }
-    if (this.state.selectedCellIndex === null) {
-      this.setState({ selectedCellIndex: 0 });
-    } else if (isSwapping === false){
-      this.setState({usingMouse: false})
-      if (
-        e.key === "ArrowRight" &&
-        cells[selectedCellIndex + 1] &&
-        selectedCellIndex % sizeCol !== sizeCol - 1
-      ) {
-        this.setState({ selectedCellIndex: selectedCellIndex + 1 });
-      } else if (
-        e.key === "ArrowLeft" &&
-        cells[selectedCellIndex - 1] &&
-        selectedCellIndex % sizeCol !== 0
-      ) {
-        this.setState({ selectedCellIndex: selectedCellIndex - 1 });
-      } else if (
-        e.key === "ArrowUp" &&
-        cells[selectedCellIndex - sizeCol]
-      ) {
-        this.setState({ selectedCellIndex: selectedCellIndex - sizeCol });
-      } else if (
-        e.key === "ArrowDown" &&
-        cells[selectedCellIndex + sizeCol]
-      ) {
-        this.setState({ selectedCellIndex: selectedCellIndex + sizeCol });
-      } else if (e.key === "Enter" && selectedCellIndex !== null) {
-        this.setState({isSwapping: true});
-      }
-    } else if (isSwapping === true){
-      if (
-        e.key === "ArrowRight" &&
-        cells[selectedCellIndex + 1] &&
-        selectedCellIndex % sizeCol !== sizeCol - 1
-      ) {
-        this.slideRight(selectedCellIndex)
-        this.setState({isSwapping: false}, 
-          this.setState({selectedCellIndex: selectedCellIndex + 1})
-        );
-      } else if (
-        e.key === "ArrowLeft" &&
-        cells[selectedCellIndex - 1] &&
-        selectedCellIndex % sizeCol !== 0
-      ) {
-        this.slideLeft(selectedCellIndex);
-        this.setState({isSwapping: false},
-          this.setState({selectedCellIndex: selectedCellIndex - 1})
-        );
-      } else if (
-        e.key === "ArrowUp" &&
-        cells[selectedCellIndex - sizeCol]
-      ) {
-        this.slideDown(selectedCellIndex - sizeCol);
-        this.setState({isSwapping: false},
-          this.setState({selectedCellIndex: selectedCellIndex - sizeCol })
-        );
-      } else if (
-        e.key === "ArrowDown" &&
-        cells[selectedCellIndex + sizeCol]
-      ) {
-        this.slideUp(selectedCellIndex + sizeCol);
-        this.setState({isSwapping: false},
-          this.setState({selectedCellIndex: selectedCellIndex + sizeCol})
-        );
-      } else if (e.key === "Enter") {
-        this.setState({isSwapping: false});
-      }
-    }
-  }
+  
   slideUp(index) {
     const selectedCellIndex = this.state.selectedCellIndex;
     const first = this.state.cells.slice(0, selectedCellIndex);
