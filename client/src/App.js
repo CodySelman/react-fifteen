@@ -344,7 +344,6 @@ class App extends Component {
                 ? this.state.cells[this.state.selectedCellIndex].value
                 : null
             }
-            handleKeyPress={this.handleKeyPress}
             isSwapping={this.state.isSwapping}
             gameOver={this.state.gameOver}
           />

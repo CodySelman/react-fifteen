@@ -13,12 +13,11 @@ const CellGrid = props => {
         sizeCol={props.sizeCol}
         currentImage={props.currentImage}
         selectedCellValue={props.selectedCellValue}
-        handleKeyPress={props.handleKeyPress}
         isSwapping={props.isSwapping}
        />
     ));
     return (
-        <div className='CellGrid--container fadeIn' onKeyDown={e=>props.handleKeyPress(e)}>
+        <div className='CellGrid--container fadeIn'>
             {cellGrid}
             {props.viewingFullImage ? 
                 <img  className='CellGrid-fullImage' src={props.currentImage.url} alt="Puzzle Solution" />
@@ -42,7 +41,6 @@ CellGrid.propTypes = {
     currentImage: Proptypes.object.isRequired,
     viewingFullImage: Proptypes.bool.isRequired,
     selectedCellValue: Proptypes.number,
-    handleKeyPress: Proptypes.func.isRequired,
     isSwapping: Proptypes.bool.isRequired,
     gameOver: Proptypes.bool.isRequired
 }
