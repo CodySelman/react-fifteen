@@ -3,9 +3,9 @@ import "./App.css";
 import CellGrid from "./CellGrid.js";
 import Heading from "./Heading.js";
 import Loader from "./Loader.js";
-import easyPics from './images/puzzlePics/easy/easyPics';
-import intermediatePics from './images/puzzlePics/intermediate/intermediatePics';
-import hardPics from './images/puzzlePics/hard/hardPics';
+import easyPics from "./images/puzzlePics/easy/easyPics";
+import intermediatePics from "./images/puzzlePics/intermediate/intermediatePics";
+import hardPics from "./images/puzzlePics/hard/hardPics";
 
 class App extends Component {
   constructor() {
@@ -14,23 +14,17 @@ class App extends Component {
       currentPics: easyPics,
       sizeRow: 2,
       sizeCol: 2,
-      cells: [
-        {value: 1},
-        {value: 2},
-        {value: 3},
-        {value: 4}
-      ],
+      cells: [{ value: 1 }, { value: 2 }, { value: 3 }, { value: 4 }],
       isSolved: false,
       hasStarted: false,
       currentImage: {
-        url: "",
+        url: ""
       },
       isLoading: false,
       viewingFullImage: false,
       score: 0,
       selectedCellIndex: null,
       isSwapping: false,
-      usingMouse: true,
       timeRemaining: 30000,
       gameOver: false
     };
@@ -49,67 +43,61 @@ class App extends Component {
   }
 
   //gamecontroller methods
-  gameStart(){
+  gameStart() {
     Promise.resolve()
-    .then(this.initializeState())
-    .then(this.changeImage())
-    .catch(err => console.log(err));
+      .then(this.initializeState())
+      .then(this.changeImage())
+      .catch(err => console.log(err));
   }
-  startPuzzle(){
+  startPuzzle() {
     this.randomizeGrid();
     this.startTimer();
   }
   nextLevel() {
     Promise.resolve()
-      .then(this.setState({ 
-        isLoading: true,
-        hasStarted: false,
-        viewingFullImage: false,
-        timeRemaining: 0,
-      }))
+      .then(
+        this.setState({
+          isLoading: true,
+          hasStarted: false,
+          viewingFullImage: false,
+          timeRemaining: 0
+        })
+      )
       .then(this.changeDifficulty())
       .then(this.changeImage())
       .then(this.changeGridSize())
       .then(this.setTimer())
       .catch(err => console.log(err));
   }
-  gameOver(){
-    if (this.state.timeRemaining <= 0){
+  gameOver() {
+    if (this.state.timeRemaining <= 0) {
       this.setState({
         gameOver: true,
         hasStarted: false
-      })
+      });
     }
   }
 
   initializeState() {
-    this.setState(
-      {
-        ...this.state,
-        currentPics: easyPics,
-        sizeRow: 2,
-        sizeCol: 2,
-        cells: [
-          {value: 1},
-          {value: 2},
-          {value: 3},
-          {value: 4}
-        ],
-        isSolved: false,
-        hasStarted: false,
-        currentImage: {
-          url: "",
-        },
-        isLoading: false,
-        viewingFullImage: false,
-        score: 0,
-        selectedCellIndex: null,
-        isSwapping: false,
-        usingMouse: true,
-        timeRemaining: 30000,
-        gameOver: false
+    this.setState({
+      ...this.state,
+      currentPics: easyPics,
+      sizeRow: 2,
+      sizeCol: 2,
+      cells: [{ value: 1 }, { value: 2 }, { value: 3 }, { value: 4 }],
+      isSolved: false,
+      hasStarted: false,
+      currentImage: {
+        url: ""
       },
-    );
+      isLoading: false,
+      viewingFullImage: false,
+      score: 0,
+      selectedCellIndex: null,
+      isSwapping: false,
+      timeRemaining: 30000,
+      gameOver: false
+    });
   }
   createCells() {
     const newCells = [];
@@ -125,50 +113,48 @@ class App extends Component {
   handleClick(index) {
     const cells = this.state.cells;
     const sizeCol = this.state.sizeCol;
-    if (this.state.usingMouse === true){
-      if (this.state.hasStarted === false) {
-        this.startPuzzle();
-        this.setState({ hasStarted: true });
-      } else if (!this.state.selectedCellIndex) {
-        this.setState({ selectedCellIndex: index });
-      } else if (
-        this.state.selectedCellIndex &&
-        this.state.selectedCellIndex === index
+    if (this.state.hasStarted === false) {
+      this.startPuzzle();
+      this.setState({ hasStarted: true });
+    } else if (!this.state.selectedCellIndex) {
+      this.setState({ selectedCellIndex: index });
+    } else if (
+      this.state.selectedCellIndex &&
+      this.state.selectedCellIndex === index
+    ) {
+      this.setState({ selectedCellIndex: null });
+    } else if (
+      this.state.selectedCellIndex &&
+      this.state.selectedCellIndex !== index
+    ) {
+      const selectedCellIndex = this.state.selectedCellIndex;
+      if (
+        cells[index - 1] &&
+        index - 1 === selectedCellIndex &&
+        index % sizeCol !== 0
       ) {
-        this.setState({ selectedCellIndex: null });
+        this.slideLeft(index);
       } else if (
-        this.state.selectedCellIndex &&
-        this.state.selectedCellIndex !== index
+        cells[index + 1] &&
+        index + 1 === selectedCellIndex &&
+        index % sizeCol !== sizeCol - 1
       ) {
-        const selectedCellIndex = this.state.selectedCellIndex;
-        if (
-          cells[index - 1] &&
-          index - 1 === selectedCellIndex &&
-          index % sizeCol !== 0
-        ) {
-          this.slideLeft(index);
-        } else if (
-          cells[index + 1] &&
-          index + 1 === selectedCellIndex &&
-          index % sizeCol !== sizeCol - 1
-        ) {
-          this.slideRight(index);
-        } else if (
-          cells[index - sizeCol] &&
-          index - sizeCol === selectedCellIndex
-        ) {
-          this.slideUp(index);
-        } else if (
-          cells[index + sizeCol] &&
-          index + sizeCol === selectedCellIndex
-        ) {
-          this.slideDown(index);
-        }
-        this.setState({ selectedCellIndex: null });
+        this.slideRight(index);
+      } else if (
+        cells[index - sizeCol] &&
+        index - sizeCol === selectedCellIndex
+      ) {
+        this.slideUp(index);
+      } else if (
+        cells[index + sizeCol] &&
+        index + sizeCol === selectedCellIndex
+      ) {
+        this.slideDown(index);
       }
+      this.setState({ selectedCellIndex: null });
     }
   }
-  
+
   slideUp(index) {
     const selectedCellIndex = this.state.selectedCellIndex;
     const first = this.state.cells.slice(0, selectedCellIndex);
@@ -246,26 +232,31 @@ class App extends Component {
     const winCheckArray = this.state.cells.map(cell => cell.value - 1);
     if (winCheckArray.every((index, element) => index === element)) {
       this.stopTimer();
-      this.setState({
-        isSolved: true,
-        viewingFullImage: true
-      }, this.updateScore());
+      this.setState(
+        {
+          isSolved: true,
+          viewingFullImage: true
+        },
+        this.updateScore()
+      );
     }
   }
-  updateScore(){
+  updateScore() {
     const score = this.state.score;
-    const levelScore = this.state.sizeCol * this.state.sizeRow + Math.floor(this.state.timeRemaining / 5000);
+    const levelScore =
+      this.state.sizeCol * this.state.sizeRow +
+      Math.floor(this.state.timeRemaining / 5000);
     const newScore = score + levelScore;
-    this.setState({ score: newScore});
+    this.setState({ score: newScore });
   }
-  changeDifficulty(){
+  changeDifficulty() {
     const score = this.state.score;
-    if (score < 50){
-      this.setState({currentPics: easyPics});
-    } else if (score >= 50 && score < 100){
-      this.setState({currentPics: intermediatePics});
-    } else if (score >= 100){
-      this.setState({currentPics: hardPics});
+    if (score < 50) {
+      this.setState({ currentPics: easyPics });
+    } else if (score >= 50 && score < 100) {
+      this.setState({ currentPics: intermediatePics });
+    } else if (score >= 100) {
+      this.setState({ currentPics: hardPics });
     }
   }
   changeImage() {
@@ -290,7 +281,7 @@ class App extends Component {
   changeGridSize() {
     const sizeCol = this.state.sizeCol;
     const sizeRow = this.state.sizeRow;
-    if ((sizeRow + sizeCol) < 10){
+    if (sizeRow + sizeCol < 10) {
       if (sizeCol > sizeRow) {
         this.setState(
           {
@@ -308,26 +299,26 @@ class App extends Component {
       }
     }
   }
-  startTimer(){
+  startTimer() {
     const timerId = setInterval(this.timer, 10);
-    this.setState({timerId: timerId});
+    this.setState({ timerId: timerId });
   }
-  timer(){
+  timer() {
     const newTimeRemaining = this.state.timeRemaining - 10;
-    if (newTimeRemaining >= 0){
-      this.setState({timeRemaining: newTimeRemaining});
+    if (newTimeRemaining >= 0) {
+      this.setState({ timeRemaining: newTimeRemaining });
     } else {
       this.stopTimer();
       this.gameOver();
     }
   }
-  stopTimer(){
+  stopTimer() {
     clearInterval(this.state.timerId);
   }
-  setTimer(){
+  setTimer() {
     const timeRemaining = this.state.timeRemaining;
     const newTimeRemaining = timeRemaining + 30000;
-    this.setState({ timeRemaining: newTimeRemaining});
+    this.setState({ timeRemaining: newTimeRemaining });
   }
   render() {
     return (
@@ -340,25 +331,25 @@ class App extends Component {
         />
         <div className="App--CellGrid-container">
           {this.state.isLoading ? <Loader /> : ""}
-            <CellGrid
-              cells={this.state.cells}
-              handleClick={this.handleClick}
-              sizeRow={this.state.sizeRow}
-              sizeCol={this.state.sizeCol}
-              currentImage={this.state.currentImage}
-              changeImage={this.changeImage}
-              viewingFullImage={this.state.viewingFullImage}
-              selectedCellValue={
-                this.state.cells[this.state.selectedCellIndex]
-                  ? this.state.cells[this.state.selectedCellIndex].value
-                  : null
-              }
-              handleKeyPress={this.handleKeyPress}
-              isSwapping={this.state.isSwapping}
-              gameOver={this.state.gameOver}
-            />
+          <CellGrid
+            cells={this.state.cells}
+            handleClick={this.handleClick}
+            sizeRow={this.state.sizeRow}
+            sizeCol={this.state.sizeCol}
+            currentImage={this.state.currentImage}
+            changeImage={this.changeImage}
+            viewingFullImage={this.state.viewingFullImage}
+            selectedCellValue={
+              this.state.cells[this.state.selectedCellIndex]
+                ? this.state.cells[this.state.selectedCellIndex].value
+                : null
+            }
+            handleKeyPress={this.handleKeyPress}
+            isSwapping={this.state.isSwapping}
+            gameOver={this.state.gameOver}
+          />
         </div>
-        
+
         {/* Buttons below should be exported to thier own component. */}
         <div className="App-bottomButtonContainer">
           {this.state.isSolved ? (
