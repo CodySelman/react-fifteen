@@ -3,7 +3,6 @@ import "./App.css";
 import CellGrid from "./CellGrid.js";
 import Heading from "./Heading.js";
 import Loader from "./Loader.js";
-import HowToPlay from './HowToPlay.js';
 import easyPics from './images/puzzlePics/easy/easyPics';
 import intermediatePics from './images/puzzlePics/intermediate/intermediatePics';
 import hardPics from './images/puzzlePics/hard/hardPics';
@@ -471,7 +470,6 @@ class App extends Component {
             ""
           )}
         </div>
-        <HowToPlay />
       </div>
     );
   }
