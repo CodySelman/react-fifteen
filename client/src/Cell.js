@@ -24,9 +24,6 @@ const Cell = props => {
     <button
       className={
         props.value === props.selectedCellValue ?
-          props.isSwapping === true ? 
-          "Cell--cell Cell-isSwapping" 
-          :
         "Cell--cell Cell-selected"        
         :
         "Cell--cell"          
@@ -45,8 +42,7 @@ Cell.Proptypes = {
   sizeCol: Proptypes.number.isRequired,
   currentImage: Proptypes.object.isRequired,
   selectedCellValue: Proptypes.number,
-  swapCellValue: Proptypes.number,
-  isSwapping: Proptypes.bool.isRequired
+  swapCellValue: Proptypes.number
 };
 
 export default Cell;
