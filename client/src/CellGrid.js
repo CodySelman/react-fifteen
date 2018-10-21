@@ -13,7 +13,6 @@ const CellGrid = props => {
         sizeCol={props.sizeCol}
         currentImage={props.currentImage}
         selectedCellValue={props.selectedCellValue}
-        isSwapping={props.isSwapping}
        />
     ));
     return (
@@ -41,7 +40,6 @@ CellGrid.propTypes = {
     currentImage: Proptypes.object.isRequired,
     viewingFullImage: Proptypes.bool.isRequired,
     selectedCellValue: Proptypes.number,
-    isSwapping: Proptypes.bool.isRequired,
     gameOver: Proptypes.bool.isRequired
 }
 

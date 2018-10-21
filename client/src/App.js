@@ -24,7 +24,6 @@ class App extends Component {
       viewingFullImage: false,
       score: 0,
       selectedCellIndex: null,
-      isSwapping: false,
       timeRemaining: 30000,
       gameOver: false
     };
@@ -70,7 +69,6 @@ class App extends Component {
       viewingFullImage: false,
       score: 0,
       selectedCellIndex: null,
-      isSwapping: false,
       timeRemaining: 30000,
       gameOver: false
     });
@@ -351,7 +349,6 @@ class App extends Component {
                 ? this.state.cells[this.state.selectedCellIndex].value
                 : null
             }
-            isSwapping={this.state.isSwapping}
             gameOver={this.state.gameOver}
           />
         </div>
