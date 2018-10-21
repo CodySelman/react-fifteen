@@ -96,7 +96,7 @@ class App extends Component {
   // beginning game round
   startPuzzle() {
     this.randomizeGrid();
-    this.startTimer();
+    this.setState({ hasStarted: true }, this.startTimer());
   }
   randomizeGrid() {
     //Fisher-Yates Shuffle
@@ -220,51 +220,47 @@ class App extends Component {
       });
     }
   }
-  
-  // tile logic
+
+  // game logic
   handleClick(index) {
-    const cells = this.state.cells;
-    const sizeCol = this.state.sizeCol;
     if (this.state.hasStarted === false) {
       this.startPuzzle();
-      this.setState({ hasStarted: true });
-    } else if (!this.state.selectedCellIndex) {
+    } else if (this.state.selectedCellIndex === null) {
       this.setState({ selectedCellIndex: index });
-    } else if (
-      this.state.selectedCellIndex &&
-      this.state.selectedCellIndex === index
-    ) {
+    } else if (this.state.selectedCellIndex === index) {
       this.setState({ selectedCellIndex: null });
-    } else if (
-      this.state.selectedCellIndex &&
-      this.state.selectedCellIndex !== index
-    ) {
-      const selectedCellIndex = this.state.selectedCellIndex;
-      if (
-        cells[index - 1] &&
-        index - 1 === selectedCellIndex &&
-        index % sizeCol !== 0
-      ) {
-        this.slideLeft(index);
-      } else if (
-        cells[index + 1] &&
-        index + 1 === selectedCellIndex &&
-        index % sizeCol !== sizeCol - 1
-      ) {
-        this.slideRight(index);
-      } else if (
-        cells[index - sizeCol] &&
-        index - sizeCol === selectedCellIndex
-      ) {
-        this.slideUp(index);
-      } else if (
-        cells[index + sizeCol] &&
-        index + sizeCol === selectedCellIndex
-      ) {
-        this.slideDown(index);
-      }
-      this.setState({ selectedCellIndex: null });
+    } else {
+      this.moveTiles(index);
     }
+  }
+  moveTiles(index) {
+    const cells = this.state.cells;
+    const sizeCol = this.state.sizeCol;
+    const selectedCellIndex = this.state.selectedCellIndex;
+    if (
+      cells[index - 1] &&
+      index - 1 === selectedCellIndex &&
+      index % sizeCol !== 0
+    ) {
+      this.slideLeft(index);
+    } else if (
+      cells[index + 1] &&
+      index + 1 === selectedCellIndex &&
+      index % sizeCol !== sizeCol - 1
+    ) {
+      this.slideRight(index);
+    } else if (
+      cells[index - sizeCol] &&
+      index - sizeCol === selectedCellIndex
+    ) {
+      this.slideUp(index);
+    } else if (
+      cells[index + sizeCol] &&
+      index + sizeCol === selectedCellIndex
+    ) {
+      this.slideDown(index);
+    }
+    this.setState({ selectedCellIndex: null });
   }
   slideUp(index) {
     const selectedCellIndex = this.state.selectedCellIndex;
@@ -324,7 +320,7 @@ class App extends Component {
     ];
     this.setState({ cells: newCells }, this.winCheck);
   }
-  
+
   render() {
     return (
       <div>
@@ -353,7 +349,6 @@ class App extends Component {
           />
         </div>
 
-        {/* Buttons below should be exported to thier own component. */}
         <div className="App-bottomButtonContainer">
           {this.state.isSolved ? (
             <button className="fadeIn" onClick={this.nextLevel}>
